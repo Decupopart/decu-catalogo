@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decu — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1C1A17;
+    --panel: #24211D;
+    --panel-2: #2C2822;
+    --wood: #B5652D;
+    --wood-dim: #7A4720;
+    --sage: #6E7C5C;
+    --cream: #EDE6DA;
+    --muted: #948A7B;
+    --line: #3A362F;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    padding:56px 32px 40px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--wood);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(34px, 6vw, 58px);
+    line-height:1.02;
+    margin:0 0 12px;
+    letter-spacing:-.01em;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--wood);
+  }
+  .sub{
+    max-width:480px;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.55;
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:0;
+  }
+  @media (max-width: 860px){
+    .wrap{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Filters (la "sala") ---------- */
+  .sala{
+    border-right:1px solid var(--line);
+    padding:32px 24px;
+    align-self:start;
+    position:sticky;
+    top:0;
+  }
+  @media (max-width: 860px){
+    .sala{position:static; border-right:none; border-bottom:1px solid var(--line);}
+  }
+  .sala h2{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 18px;
+  }
+  .buscador{
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--cream);
+    padding:11px 12px;
+    font-family:'IBM Plex Sans';
+    font-size:14px;
+    border-radius:2px;
+    margin-bottom:28px;
+  }
+  .buscador::placeholder{color:var(--muted);}
+  .buscador:focus{outline:none; border-color:var(--wood);}
+
+  .grupo-filtro{margin-bottom:26px;}
+  .grupo-filtro h3{
+    font-size:12px;
+    font-weight:600;
+    color:var(--cream);
+    margin:0 0 10px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 11px;
+    margin:0 6px 6px 0;
+    border:1px solid var(--line);
+    border-radius:20px;
+    font-size:12.5px;
+    color:var(--muted);
+    cursor:pointer;
+    background:transparent;
+    font-family:'IBM Plex Sans';
+    transition:all .15s ease;
+  }
+  .chip:hover{border-color:var(--wood-dim); color:var(--cream);}
+  .chip.activo{
+    background:var(--wood);
+    border-color:var(--wood);
+    color:#1C1A17;
+    font-weight:500;
+  }
+  .swatch{
+    width:9px; height:9px; border-radius:50%;
+    display:inline-block;
+    border:1px solid rgba(0,0,0,.2);
+  }
+  .limpiar{
+    background:none;
+    border:none;
+    color:var(--wood);
+    font-size:12.5px;
+    cursor:pointer;
+    padding:0;
+    font-family:'IBM Plex Mono', monospace;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+
+  /* ---------- Galería ---------- */
+  .galeria-header{
+    padding:28px 32px 8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid var(--line);
+  }
+  .conteo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .conteo b{color:var(--wood);}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:28px;
+    padding:32px;
+  }
+
+  .cuadro{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease;
+  }
+  .cuadro:hover{
+    transform:translateY(-3px);
+    border-color:var(--wood-dim);
+  }
+
+  /* efecto bastidor: doble marco que imita el borde espejado de la lienzo */
+  .lienzo-marco{
+    position:relative;
+    padding:14px;
+    background:
+      repeating-linear-gradient(115deg, rgba(0,0,0,.08) 0 2px, transparent 2px 6px),
+      linear-gradient(160deg, #3a2c1d, #241a10);
+  }
+  .lienzo{
+    position:relative;
+    width:100%;
+    aspect-ratio: var(--ar, 1/1);
+    border:3px solid rgba(0,0,0,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .lienzo svg{width:100%; height:100%; display:block;}
+
+  .placa{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:8px;
+    padding:14px 16px 16px;
+  }
+  .placa-nombre{
+    font-family:'Fraunces', serif;
+    font-size:16px;
+    line-height:1.25;
+  }
+  .placa-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--muted);
+    margin-top:5px;
+    letter-spacing:.03em;
+  }
+  .tag-tono{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    padding:3px 7px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+
+  .vacio{
+    grid-column:1/-1;
+    text-align:center;
+    padding:70px 20px;
+    color:var(--muted);
+  }
+  .vacio p{font-family:'Fraunces', serif; font-size:20px; color:var(--cream); margin-bottom:6px;}
+
+  footer{
+    padding:26px 32px 50px;
+    color:var(--muted);
+    font-size:12px;
+    font-family:'IBM Plex Mono', monospace;
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Decu · Cuadros en lienzo sobre bastidor</div>
+  <h1>Cada pared<br><em>tiene su tono.</em></h1>
+  <p class="sub">Filtrá por categoría, tonalidad, color u orientación y encontrá el modelo exacto para el espacio del cliente.</p>
+</header>
+
+<div class="wrap">
+  <aside class="sala">
+    <h2>Buscar en la sala</h2>
+    <input class="buscador" id="buscador" type="text" placeholder="Nombre o código…">
+
+    <div class="grupo-filtro">
+      <h3>Categoría</h3>
+      <div id="filtro-categoria"></div>
+    </div>
+
+    <div class="grupo-filtro">
+      <h3>Tonalidad</h3>
+      <div id="filtro-tonalidad"></div>
+    </div>
+
+    <div class="grupo-filtro">
+      <h3>Color</h3>
+      <div id="filtro-color"></div>
+    </div>
+
+    <div class="grupo-filtro">
+      <h3>Orientación</h3>
+      <div id="filtro-orientacion"></div>
+    </div>
+
+    <button class="limpiar" id="limpiar">Limpiar filtros</button>
+  </aside>
+
+  <main>
+    <div class="galeria-header">
+      <span></span>
+      <span class="conteo"><b id="cant">0</b> modelos encontrados</span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+
+<footer>
+  Prototipo — los lienzos se generan como patrón SVG a partir de la tonalidad/color. Reemplazar por imágenes reales del catálogo.
+</footer>
+
+<script>
+/* ============================================================
+   DATOS DE MUESTRA
+   Reemplazar este array por el que generes desde catalogo_procesado.csv
+   Estructura sugerida por producto:
+   { codigo, nombre, categoria, subcategoria, tonalidad, colores:[hex,hex], orientacion }
+   orientacion: "horizontal" | "vertical" | "cuadrado"
+   ============================================================ */
+const PRODUCTOS = [
+  {codigo:"DC-0142", nombre:"Silencio de Bambú", categoria:"Zen", tonalidad:"Cálida", colores:["#B5652D","#6E7C5C"], orientacion:"vertical"},
+  {codigo:"DC-0198", nombre:"Loto en Calma", categoria:"Zen", tonalidad:"Neutra", colores:["#948A7B","#EDE6DA"], orientacion:"cuadrado"},
+  {codigo:"DC-0201", nombre:"Piedra y Musgo", categoria:"Zen", tonalidad:"Fría", colores:["#6E7C5C","#3A362F"], orientacion:"horizontal"},
+  {codigo:"DC-0233", nombre:"Trazo Nórdico", categoria:"Moderno", tonalidad:"Fría", colores:["#3A362F","#EDE6DA"], orientacion:"vertical"},
+  {codigo:"DC-0255", nombre:"Geometría Cobre", categoria:"Moderno", tonalidad:"Cálida", colores:["#B5652D","#1C1A17"], orientacion:"cuadrado"},
+  {codigo:"DC-0267", nombre:"Bloques Ocre", categoria:"Moderno", tonalidad:"Cálida", colores:["#B5652D","#948A7B"], orientacion:"horizontal"},
+  {codigo:"DC-0301", nombre:"Jardín de Otoño", categoria:"Floral", tonalidad:"Cálida", colores:["#B5652D","#6E7C5C"], orientacion:"vertical"},
+  {codigo:"DC-0318", nombre:"Peonías Pálidas", categoria:"Floral", tonalidad:"Neutra", colores:["#EDE6DA","#948A7B"], orientacion:"cuadrado"},
+  {codigo:"DC-0344", nombre:"Rama de Invierno", categoria:"Floral", tonalidad:"Fría", colores:["#3A362F","#948A7B"], orientacion:"vertical"},
+  {codigo:"DC-0367", nombre:"Marea Abstracta", categoria:"Abstracto", tonalidad:"Fría", colores:["#3A362F","#6E7C5C"], orientacion:"horizontal"},
+  {codigo:"DC-0389", nombre:"Fuego Lento", categoria:"Abstracto", tonalidad:"Cálida", colores:["#B5652D","#7A4720"], orientacion:"cuadrado"},
+  {codigo:"DC-0402", nombre:"Bruma Gris", categoria:"Abstracto", tonalidad:"Neutra", colores:["#948A7B","#3A362F"], orientacion:"vertical"},
+  {codigo:"DC-0420", nombre:"Cordillera al Alba", categoria:"Paisaje", tonalidad:"Fría", colores:["#3A362F","#6E7C5C"], orientacion:"horizontal"},
+  {codigo:"DC-0455", nombre:"Duna Dorada", categoria:"Paisaje", tonalidad:"Cálida", colores:["#B5652D","#EDE6DA"], orientacion:"horizontal"},
+  {codigo:"DC-0471", nombre:"Bosque Sereno", categoria:"Paisaje", tonalidad:"Neutra", colores:["#6E7C5C","#948A7B"], orientacion:"vertical"},
+  {codigo:"DC-0490", nombre:"Camino de Piedra", categoria:"Zen", tonalidad:"Cálida", colores:["#948A7B","#B5652D"], orientacion:"horizontal"},
+];
+
+const AR = {horizontal:"4/3", vertical:"3/4", cuadrado:"1/1"};
+
+/* estado de filtros */
+const estado = { categoria:null, tonalidad:null, color:null, orientacion:null, texto:"" };
+
+function valoresUnicos(campo){
+  return [...new Set(PRODUCTOS.map(p=>p[campo]))];
+}
+function coloresUnicos(){
+  const set = new Map();
+  PRODUCTOS.forEach(p=>p.colores.forEach(c=>set.set(c,c)));
+  return [...set.keys()];
+}
+
+function renderFiltros(){
+  const grupos = [
+    {id:"filtro-categoria", campo:"categoria", valores:valoresUnicos("categoria")},
+    {id:"filtro-tonalidad", campo:"tonalidad", valores:valoresUnicos("tonalidad")},
+    {id:"filtro-orientacion", campo:"orientacion", valores:valoresUnicos("orientacion")},
+  ];
+  grupos.forEach(g=>{
+    const cont = document.getElementById(g.id);
+    cont.innerHTML = g.valores.map(v=>
+      `<button class="chip ${estado[g.campo]===v?'activo':''}" data-campo="${g.campo}" data-valor="${v}">${v}</button>`
+    ).join("");
+  });
+
+  const contColor = document.getElementById("filtro-color");
+  contColor.innerHTML = coloresUnicos().map(c=>
+    `<button class="chip ${estado.color===c?'activo':''}" data-campo="color" data-valor="${c}">
+       <span class="swatch" style="background:${c}"></span>${c}
+     </button>`
+  ).join("");
+
+  document.querySelectorAll(".chip").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const campo = btn.dataset.campo;
+      const valor = btn.dataset.valor;
+      estado[campo] = estado[campo]===valor ? null : valor;
+      renderFiltros();
+      renderGrid();
+    });
+  });
+}
+
+function svgLienzo(p){
+  const [c1,c2] = p.colores;
+  return `
+  <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="g-${p.codigo}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}"/>
+      </linearGradient>
+    </defs>
+    <rect width="200" height="200" fill="url(#g-${p.codigo})"/>
+    <circle cx="145" cy="55" r="34" fill="${c2}" opacity="0.35"/>
+    <rect x="20" y="120" width="90" height="50" fill="${c1}" opacity="0.25"/>
+  </svg>`;
+}
+
+function renderGrid(){
+  const grid = document.getElementById("grid");
+  const filtrados = PRODUCTOS.filter(p=>{
+    if(estado.categoria && p.categoria!==estado.categoria) return false;
+    if(estado.tonalidad && p.tonalidad!==estado.tonalidad) return false;
+    if(estado.orientacion && p.orientacion!==estado.orientacion) return false;
+    if(estado.color && !p.colores.includes(estado.color)) return false;
+    if(estado.texto){
+      const q = estado.texto.toLowerCase();
+      if(!p.nombre.toLowerCase().includes(q) && !p.codigo.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById("cant").textContent = filtrados.length;
+
+  if(filtrados.length===0){
+    grid.innerHTML = `<div class="vacio"><p>Ningún modelo coincide</p>Probá con otra combinación de filtros.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtrados.map(p=>`
+    <div class="cuadro">
+      <div class="lienzo-marco">
+        <div class="lienzo" style="--ar:${AR[p.orientacion]}">${svgLienzo(p)}</div>
+      </div>
+      <div class="placa">
+        <div>
+          <div class="placa-nombre">${p.nombre}</div>
+          <div class="placa-meta">${p.codigo} · ${p.categoria} · ${p.orientacion}</div>
+        </div>
+        <span class="tag-tono">${p.tonalidad}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+document.getElementById("buscador").addEventListener("input", e=>{
+  estado.texto = e.target.value;
+  renderGrid();
+});
+document.getElementById("limpiar").addEventListener("click", ()=>{
+  estado.categoria=null; estado.tonalidad=null; estado.color=null; estado.orientacion=null; estado.texto="";
+  document.getElementById("buscador").value="";
+  renderFiltros();
+  renderGrid();
+});
+
+renderFiltros();
+renderGrid();
+</script>
+</body>
+</html>
