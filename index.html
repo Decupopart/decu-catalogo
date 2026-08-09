@@ -256,13 +256,13 @@
 
 <header>
   <div class="eyebrow">Decu · Cuadros en lienzo sobre bastidor</div>
-  <h1>Cada pared<br><em>tiene su tono.</em></h1>
-  <p class="sub">Filtrá por categoría, tonalidad, color u orientación y encontrá el modelo exacto para el espacio del cliente.</p>
+  <h1>Cada pared<br><em>tiene su estilo.</em></h1>
+  <p class="sub">Filtrá por categoría, tonalidad, color u orientación y encontrá el modelo exacto tu espacio.</p>
 </header>
 
 <div class="wrap">
   <aside class="sala">
-    <h2>Buscar en la sala</h2>
+    <h2>Buscar en el catálogo</h2>
     <input class="buscador" id="buscador" type="text" placeholder="Nombre o código…">
 
     <div class="grupo-filtro">
@@ -309,29 +309,50 @@
    { codigo, nombre, categoria, subcategoria, tonalidad, colores:[hex,hex], orientacion }
    orientacion: "horizontal" | "vertical" | "cuadrado"
    ============================================================ */
+/* Nombre de color -> hex, solo para pintar el swatch. El filtro se hace por nombre. */
+const HEX_COLOR = {
+  "marron":"#7B4B2A", "ocre":"#C08A3E", "beige":"#D9C9A3", "naranja":"#E07B39",
+  "azul":"#3B5BA5", "amarillo":"#E8C547", "magenta":"#C2408A", "violeta":"#6B4FA0",
+  "verde":"#5B7B4F", "rojo":"#B23A2E", "blanco":"#EDE6DA", "negro":"#201C18",
+  "gris":"#8C8478", "dorado":"#C9A227", "plateado":"#B0B0B0", "celeste":"#7FB3D5",
+  "turquesa":"#3FA9A0", "rosa":"#D98BA5", "sepia":"#7A5230",
+};
+
 const PRODUCTOS = [
-  {codigo:"DC-0142", nombre:"Silencio de Bambú", categoria:"Zen", tonalidad:"Cálida", colores:["#B5652D","#6E7C5C"], orientacion:"vertical"},
-  {codigo:"DC-0198", nombre:"Loto en Calma", categoria:"Zen", tonalidad:"Neutra", colores:["#948A7B","#EDE6DA"], orientacion:"cuadrado"},
-  {codigo:"DC-0201", nombre:"Piedra y Musgo", categoria:"Zen", tonalidad:"Fría", colores:["#6E7C5C","#3A362F"], orientacion:"horizontal"},
-  {codigo:"DC-0233", nombre:"Trazo Nórdico", categoria:"Moderno", tonalidad:"Fría", colores:["#3A362F","#EDE6DA"], orientacion:"vertical"},
-  {codigo:"DC-0255", nombre:"Geometría Cobre", categoria:"Moderno", tonalidad:"Cálida", colores:["#B5652D","#1C1A17"], orientacion:"cuadrado"},
-  {codigo:"DC-0267", nombre:"Bloques Ocre", categoria:"Moderno", tonalidad:"Cálida", colores:["#B5652D","#948A7B"], orientacion:"horizontal"},
-  {codigo:"DC-0301", nombre:"Jardín de Otoño", categoria:"Floral", tonalidad:"Cálida", colores:["#B5652D","#6E7C5C"], orientacion:"vertical"},
-  {codigo:"DC-0318", nombre:"Peonías Pálidas", categoria:"Floral", tonalidad:"Neutra", colores:["#EDE6DA","#948A7B"], orientacion:"cuadrado"},
-  {codigo:"DC-0344", nombre:"Rama de Invierno", categoria:"Floral", tonalidad:"Fría", colores:["#3A362F","#948A7B"], orientacion:"vertical"},
-  {codigo:"DC-0367", nombre:"Marea Abstracta", categoria:"Abstracto", tonalidad:"Fría", colores:["#3A362F","#6E7C5C"], orientacion:"horizontal"},
-  {codigo:"DC-0389", nombre:"Fuego Lento", categoria:"Abstracto", tonalidad:"Cálida", colores:["#B5652D","#7A4720"], orientacion:"cuadrado"},
-  {codigo:"DC-0402", nombre:"Bruma Gris", categoria:"Abstracto", tonalidad:"Neutra", colores:["#948A7B","#3A362F"], orientacion:"vertical"},
-  {codigo:"DC-0420", nombre:"Cordillera al Alba", categoria:"Paisaje", tonalidad:"Fría", colores:["#3A362F","#6E7C5C"], orientacion:"horizontal"},
-  {codigo:"DC-0455", nombre:"Duna Dorada", categoria:"Paisaje", tonalidad:"Cálida", colores:["#B5652D","#EDE6DA"], orientacion:"horizontal"},
-  {codigo:"DC-0471", nombre:"Bosque Sereno", categoria:"Paisaje", tonalidad:"Neutra", colores:["#6E7C5C","#948A7B"], orientacion:"vertical"},
-  {codigo:"DC-0490", nombre:"Camino de Piedra", categoria:"Zen", tonalidad:"Cálida", colores:["#948A7B","#B5652D"], orientacion:"horizontal"},
+  {codigo:"520", nombre:"Choque de Fuerzas", categoria:"Animales", tonalidad:"Madera", colores:["marron","ocre","negro"], orientacion:"horizontal"},
+  {codigo:"817", nombre:"El Resplandor", categoria:"Paisajes", tonalidad:"Natural", colores:["azul","amarillo","naranja"], orientacion:"horizontal"},
+  {codigo:"855", nombre:"Campo de Girasoles", categoria:"Botanica", tonalidad:"Natural", colores:["azul","amarillo","naranja"], orientacion:"horizontal"},
+  {codigo:"874", nombre:"La Venganza", categoria:"Personas", tonalidad:"Frío", colores:["magenta","azul","beige"], orientacion:"horizontal"},
+  {codigo:"990", nombre:"Abundancia", categoria:"Comida", tonalidad:"Madera", colores:["naranja","violeta","verde"], orientacion:"vertical"},
+  {codigo:"1010", nombre:"Luna Surrealista", categoria:"Paisajes", tonalidad:"Oscuro", colores:["negro","amarillo","azul"], orientacion:"vertical"},
+  {codigo:"1045", nombre:"Princesa del Sur", categoria:"Mujer", tonalidad:"Cálido", colores:["beige","rojo","naranja"], orientacion:"vertical"},
+  {codigo:"1065", nombre:"Explosión Floral", categoria:"Botanica", tonalidad:"Vibrante", colores:["magenta","naranja","dorado"], orientacion:"horizontal"},
+  {codigo:"1082", nombre:"Espíritu Viajero", categoria:"Mapamundi", tonalidad:"Cálido", colores:["marron","ocre","negro"], orientacion:"horizontal"},
+  {codigo:"1150", nombre:"Camino al Nirvana", categoria:"Budismo", tonalidad:"Tierra", colores:["marron","dorado"], orientacion:"vertical"},
+  {codigo:"1188", nombre:"Fe Renovada", categoria:"Cristianismo", tonalidad:"Pastel", colores:["blanco","dorado"], orientacion:"vertical"},
+  {codigo:"1215", nombre:"Cuero y Acero", categoria:"Deporte", tonalidad:"Blanco y Negro", colores:["negro","blanco","gris"], orientacion:"horizontal"},
+  {codigo:"1240", nombre:"Vuelo Infinito", categoria:"Alas", tonalidad:"Metálico", colores:["plateado","celeste"], orientacion:"vertical"},
+  {codigo:"1260", nombre:"Cuenta Regresiva", categoria:"Infantiles", tonalidad:"Pastel", colores:["celeste","rosa","amarillo"], orientacion:"horizontal"},
+  {codigo:"1280", nombre:"Notas al Viento", categoria:"Musical", tonalidad:"Vibrante", colores:["violeta","turquesa"], orientacion:"vertical"},
+  {codigo:"1295", nombre:"Liberación", categoria:"Personas", tonalidad:"Vibrante", colores:["violeta","magenta"], orientacion:"vertical"},
+  {codigo:"1310", nombre:"Bodegón de Otoño", categoria:"Bodegas", tonalidad:"Tierra", colores:["marron","rojo","ocre"], orientacion:"horizontal"},
+  {codigo:"1330", nombre:"Palabras Propias", categoria:"Frases", tonalidad:"Neutro", colores:["gris","blanco"], orientacion:"horizontal"},
+  {codigo:"1350", nombre:"Roble Silente", categoria:"Hombre", tonalidad:"Frío", colores:["gris","azul"], orientacion:"vertical"},
+  {codigo:"1370", nombre:"Postal del Ayer", categoria:"Vintage", tonalidad:"Sepia", colores:["sepia","beige"], orientacion:"horizontal"},
+  {codigo:"1390", nombre:"Formas Puras", categoria:"Abstracto", tonalidad:"Vibrante", colores:["turquesa","naranja"], orientacion:"vertical"},
+  {codigo:"1410", nombre:"Bajo el Mismo Cielo", categoria:"Romantico", tonalidad:"Pastel", colores:["rosa","beige"], orientacion:"vertical"},
+  {codigo:"1430", nombre:"Colección Temática", categoria:"Tematico", tonalidad:"Dorado", colores:["dorado","negro"], orientacion:"horizontal"},
+  {codigo:"1450", nombre:"Pluma al Viento", categoria:"Plumas", tonalidad:"Natural", colores:["blanco","marron"], orientacion:"vertical"},
 ];
 
-const AR = {horizontal:"4/3", vertical:"3/4", cuadrado:"1/1"};
+const AR = {horizontal:"4/3", vertical:"3/4"};
 
 /* estado de filtros */
 const estado = { categoria:null, tonalidad:null, color:null, orientacion:null, texto:"" };
+
+function capitalizar(s){
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 function valoresUnicos(campo){
   return [...new Set(PRODUCTOS.map(p=>p[campo]))];
@@ -358,7 +379,7 @@ function renderFiltros(){
   const contColor = document.getElementById("filtro-color");
   contColor.innerHTML = coloresUnicos().map(c=>
     `<button class="chip ${estado.color===c?'activo':''}" data-campo="color" data-valor="${c}">
-       <span class="swatch" style="background:${c}"></span>${c}
+       <span class="swatch" style="background:${HEX_COLOR[c] || '#888'}"></span>${capitalizar(c)}
      </button>`
   ).join("");
 
@@ -374,7 +395,8 @@ function renderFiltros(){
 }
 
 function svgLienzo(p){
-  const [c1,c2] = p.colores;
+  const c1 = HEX_COLOR[p.colores[0]] || "#8C8478";
+  const c2 = HEX_COLOR[p.colores[1]] || HEX_COLOR[p.colores[0]] || "#3A362F";
   return `
   <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
     <defs>
