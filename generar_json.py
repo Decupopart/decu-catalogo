@@ -17,13 +17,34 @@ import re
 # ============================================================
 # CONFIGURACIÓN — ajustar estas 3 líneas según tu proyecto
 # ============================================================
-CSV_PATH = "catalogo_procesado.csv"
-JSON_SALIDA = "productos.json"
+import os
 
-# Patrón de la ruta/URL de cada imagen. {codigo} se reemplaza por el
-# código del producto. Ajustar según dónde vayan a vivir tus mockups
-# dentro del repositorio (ej: carpeta "imagenes/" subida junto al index.html).
-PATRON_IMAGEN = "imagenes/{codigo}.jpg"
+# Carpeta donde vive este script — así funciona sin importar desde dónde lo corras
+CARPETA_BASE = os.path.dirname(os.path.abspath(__file__))
+
+CSV_PATH = os.path.join(CARPETA_BASE, "catalogo_procesado.csv")
+JSON_SALIDA = os.path.join(CARPETA_BASE, "productos.json")
+
+# Carpeta con los mockups reales (deben estar acá cuando corras el script).
+# Tus archivos ya tienen el código al principio del nombre, ej:
+#   3064-Rugido_Silencioso-Animales-Felinos-Cálido-naranja__plateado-Vertical.jpg
+# El script los detecta automáticamente, no hace falta renombrar nada.
+CARPETA_IMAGENES = os.path.join(CARPETA_BASE, "Imagenes")
+RUTA_WEB_IMAGENES = "Imagenes"  # tiene que coincidir EXACTO con el nombre de la carpeta subida al repo
+
+
+def mapear_imagenes():
+    """Escanea CARPETA_IMAGENES y arma {codigo: nombre_de_archivo_real}."""
+    mapa = {}
+    if not os.path.isdir(CARPETA_IMAGENES):
+        return mapa
+    for nombre_archivo in os.listdir(CARPETA_IMAGENES):
+        if not nombre_archivo.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
+            continue
+        codigo = nombre_archivo.split("-")[0].strip()
+        if codigo.isdigit():
+            mapa[codigo] = nombre_archivo
+    return mapa
 
 
 # ============================================================
@@ -94,9 +115,12 @@ def convertir():
         lector = csv.DictReader(f, delimiter=";")
         filas = list(lector)
 
+    mapa_imagenes = mapear_imagenes()
+
     productos = []
     cambios_categoria = set()
     cambios_tonalidad = set()
+    sin_imagen = []
 
     for fila in filas:
         categoria_original = fila["CATEGORIA"].strip()
@@ -113,6 +137,13 @@ def convertir():
         colores = [normalizar_color(c) for c in fila["COLORES"].split(",") if c.strip()]
         codigo = fila["CODIGO"].strip()
 
+        nombre_imagen = mapa_imagenes.get(codigo)
+        if nombre_imagen:
+            imagen = f"{RUTA_WEB_IMAGENES}/{nombre_imagen}"
+        else:
+            imagen = None
+            sin_imagen.append(codigo)
+
         productos.append({
             "codigo": codigo,
             "nombre": fila["NOMBRE"].strip(),
@@ -121,7 +152,7 @@ def convertir():
             "tonalidad": tonalidad,
             "colores": colores,
             "orientacion": normalizar_orientacion(fila["FORMATO"]),
-            "imagen": PATRON_IMAGEN.format(codigo=codigo),
+            "imagen": imagen,
         })
 
     with open(JSON_SALIDA, "w", encoding="utf-8") as f:
@@ -129,6 +160,9 @@ def convertir():
 
     # ---- resumen para revisar ----
     print(f"✔ {len(productos)} productos convertidos -> {JSON_SALIDA}")
+    print(f"  Imágenes encontradas en '{CARPETA_IMAGENES}/': {len(productos) - len(sin_imagen)}")
+    if sin_imagen:
+        print(f"  ⚠ Sin imagen todavía: {len(sin_imagen)} productos (se muestra ilustración de color como respaldo)")
     print(f"  Categorías distintas: {len(set(p['categoria'] for p in productos))}")
     print(f"  Tonalidades distintas: {len(set(p['tonalidad'] for p in productos))}")
     print(f"  Colores distintos: {len(set(c for p in productos for c in p['colores']))}")

@@ -203,7 +203,7 @@
     overflow:hidden;
   }
   .lienzo svg{width:100%; height:100%; display:block;}
-  .lienzo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .lienzo img{width:100%; height:100%; object-fit:contain; display:block;}
 
   .placa{
     display:flex;
@@ -299,7 +299,7 @@
 </div>
 
 <footer>
-  Datos cargados desde productos.json. Si una imagen todavía no existe en /imagenes, se muestra una ilustración de color como respaldo.
+  Datos cargados desde productos.json. Los productos sin imagen todavía no se muestran en el catálogo.
 </footer>
 
 <script>
@@ -310,15 +310,6 @@
    { codigo, nombre, categoria, subcategoria, tonalidad, colores:[hex,hex], orientacion }
    orientacion: "horizontal" | "vertical" | "cuadrado"
    ============================================================ */
-/* Nombre de color -> hex, solo para pintar el swatch. El filtro se hace por nombre. */
-const HEX_COLOR = {
-  "marron":"#7B4B2A", "ocre":"#C08A3E", "beige":"#D9C9A3", "naranja":"#E07B39",
-  "azul":"#3B5BA5", "amarillo":"#E8C547", "magenta":"#C2408A", "violeta":"#6B4FA0",
-  "verde":"#5B7B4F", "rojo":"#B23A2E", "blanco":"#EDE6DA", "negro":"#201C18",
-  "gris":"#8C8478", "dorado":"#C9A227", "plateado":"#B0B0B0", "celeste":"#7FB3D5",
-  "turquesa":"#3FA9A0", "rosa":"#D98BA5", "sepia":"#7A5230",
-};
-
 /* Nombre de color -> hex, solo para pintar el swatch. El filtro se hace por nombre. */
 const HEX_COLOR = {
   "marron":"#7B4B2A", "ocre":"#C08A3E", "beige":"#D9C9A3", "naranja":"#E07B39",
@@ -419,6 +410,7 @@ function svgLienzo(p){
 function renderGrid(){
   const grid = document.getElementById("grid");
   const filtrados = PRODUCTOS.filter(p=>{
+    if(!p.imagen) return false; // sin imagen todavía -> no se muestra en el catálogo
     if(estado.categoria && p.categoria!==estado.categoria) return false;
     if(estado.tonalidad && p.tonalidad!==estado.tonalidad) return false;
     if(estado.orientacion && p.orientacion!==estado.orientacion) return false;
@@ -437,16 +429,12 @@ function renderGrid(){
     return;
   }
 
-  grid.innerHTML = filtrados.map(p=>{
-    const svgId = `svg-${p.codigo}`;
-    return `
-    <div class="cuadro">
+  grid.innerHTML = filtrados.map(p=>`
+    <div class="cuadro" data-codigo="${p.codigo}">
       <div class="lienzo-marco">
         <div class="lienzo" style="--ar:${AR[p.orientacion] || '1/1'}">
-          ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" loading="lazy"
-                onerror="this.replaceWith(document.getElementById('${svgId}').content.cloneNode(true))">` : ''}
-          <template id="${svgId}">${svgLienzo(p)}</template>
-          ${!p.imagen ? svgLienzo(p) : ''}
+          <img src="${p.imagen}" alt="${p.nombre}" loading="lazy"
+               onerror="this.closest('.cuadro').remove()">
         </div>
       </div>
       <div class="placa">
@@ -457,7 +445,7 @@ function renderGrid(){
         <span class="tag-tono">${p.tonalidad}</span>
       </div>
     </div>
-  `;}).join("");
+  `).join("");
 }
 
 document.getElementById("buscador").addEventListener("input", e=>{
