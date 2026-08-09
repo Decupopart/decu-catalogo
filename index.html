@@ -203,6 +203,7 @@
     overflow:hidden;
   }
   .lienzo svg{width:100%; height:100%; display:block;}
+  .lienzo img{width:100%; height:100%; object-fit:cover; display:block;}
 
   .placa{
     display:flex;
@@ -298,7 +299,7 @@
 </div>
 
 <footer>
-  Prototipo — los lienzos se generan como patrón SVG a partir de la tonalidad/color. Reemplazar por imágenes reales del catálogo.
+  Datos cargados desde productos.json. Si una imagen todavía no existe en /imagenes, se muestra una ilustración de color como respaldo.
 </footer>
 
 <script>
@@ -318,34 +319,38 @@ const HEX_COLOR = {
   "turquesa":"#3FA9A0", "rosa":"#D98BA5", "sepia":"#7A5230",
 };
 
-const PRODUCTOS = [
-  {codigo:"520", nombre:"Choque de Fuerzas", categoria:"Animales", tonalidad:"Madera", colores:["marron","ocre","negro"], orientacion:"horizontal"},
-  {codigo:"817", nombre:"El Resplandor", categoria:"Paisajes", tonalidad:"Natural", colores:["azul","amarillo","naranja"], orientacion:"horizontal"},
-  {codigo:"855", nombre:"Campo de Girasoles", categoria:"Botanica", tonalidad:"Natural", colores:["azul","amarillo","naranja"], orientacion:"horizontal"},
-  {codigo:"874", nombre:"La Venganza", categoria:"Personas", tonalidad:"Frío", colores:["magenta","azul","beige"], orientacion:"horizontal"},
-  {codigo:"990", nombre:"Abundancia", categoria:"Comida", tonalidad:"Madera", colores:["naranja","violeta","verde"], orientacion:"vertical"},
-  {codigo:"1010", nombre:"Luna Surrealista", categoria:"Paisajes", tonalidad:"Oscuro", colores:["negro","amarillo","azul"], orientacion:"vertical"},
-  {codigo:"1045", nombre:"Princesa del Sur", categoria:"Mujer", tonalidad:"Cálido", colores:["beige","rojo","naranja"], orientacion:"vertical"},
-  {codigo:"1065", nombre:"Explosión Floral", categoria:"Botanica", tonalidad:"Vibrante", colores:["magenta","naranja","dorado"], orientacion:"horizontal"},
-  {codigo:"1082", nombre:"Espíritu Viajero", categoria:"Mapamundi", tonalidad:"Cálido", colores:["marron","ocre","negro"], orientacion:"horizontal"},
-  {codigo:"1150", nombre:"Camino al Nirvana", categoria:"Budismo", tonalidad:"Tierra", colores:["marron","dorado"], orientacion:"vertical"},
-  {codigo:"1188", nombre:"Fe Renovada", categoria:"Cristianismo", tonalidad:"Pastel", colores:["blanco","dorado"], orientacion:"vertical"},
-  {codigo:"1215", nombre:"Cuero y Acero", categoria:"Deporte", tonalidad:"Blanco y Negro", colores:["negro","blanco","gris"], orientacion:"horizontal"},
-  {codigo:"1240", nombre:"Vuelo Infinito", categoria:"Alas", tonalidad:"Metálico", colores:["plateado","celeste"], orientacion:"vertical"},
-  {codigo:"1260", nombre:"Cuenta Regresiva", categoria:"Infantiles", tonalidad:"Pastel", colores:["celeste","rosa","amarillo"], orientacion:"horizontal"},
-  {codigo:"1280", nombre:"Notas al Viento", categoria:"Musical", tonalidad:"Vibrante", colores:["violeta","turquesa"], orientacion:"vertical"},
-  {codigo:"1295", nombre:"Liberación", categoria:"Personas", tonalidad:"Vibrante", colores:["violeta","magenta"], orientacion:"vertical"},
-  {codigo:"1310", nombre:"Bodegón de Otoño", categoria:"Bodegas", tonalidad:"Tierra", colores:["marron","rojo","ocre"], orientacion:"horizontal"},
-  {codigo:"1330", nombre:"Palabras Propias", categoria:"Frases", tonalidad:"Neutro", colores:["gris","blanco"], orientacion:"horizontal"},
-  {codigo:"1350", nombre:"Roble Silente", categoria:"Hombre", tonalidad:"Frío", colores:["gris","azul"], orientacion:"vertical"},
-  {codigo:"1370", nombre:"Postal del Ayer", categoria:"Vintage", tonalidad:"Sepia", colores:["sepia","beige"], orientacion:"horizontal"},
-  {codigo:"1390", nombre:"Formas Puras", categoria:"Abstracto", tonalidad:"Vibrante", colores:["turquesa","naranja"], orientacion:"vertical"},
-  {codigo:"1410", nombre:"Bajo el Mismo Cielo", categoria:"Romantico", tonalidad:"Pastel", colores:["rosa","beige"], orientacion:"vertical"},
-  {codigo:"1430", nombre:"Colección Temática", categoria:"Tematico", tonalidad:"Dorado", colores:["dorado","negro"], orientacion:"horizontal"},
-  {codigo:"1450", nombre:"Pluma al Viento", categoria:"Plumas", tonalidad:"Natural", colores:["blanco","marron"], orientacion:"vertical"},
-];
+/* Nombre de color -> hex, solo para pintar el swatch. El filtro se hace por nombre. */
+const HEX_COLOR = {
+  "marron":"#7B4B2A", "ocre":"#C08A3E", "beige":"#D9C9A3", "naranja":"#E07B39",
+  "azul":"#3B5BA5", "amarillo":"#E8C547", "magenta":"#C2408A", "violeta":"#6B4FA0",
+  "verde":"#5B7B4F", "rojo":"#B23A2E", "blanco":"#EDE6DA", "negro":"#201C18",
+  "gris":"#8C8478", "dorado":"#C9A227", "plateado":"#B0B0B0", "celeste":"#7FB3D5",
+  "turquesa":"#3FA9A0", "rosa":"#D98BA5", "sepia":"#7A5230",
+};
 
-const AR = {horizontal:"4/3", vertical:"3/4"};
+const AR = {horizontal:"4/3", vertical:"3/4", triptico:"21/9"};
+/* Solo estos dos aparecen como chips de filtro (aunque haya trípticos en los datos) */
+const ORIENTACIONES_FILTRO = ["horizontal", "vertical"];
+
+let PRODUCTOS = [];
+
+async function cargarProductos(){
+  const grid = document.getElementById("grid");
+  try{
+    const resp = await fetch("productos.json");
+    if(!resp.ok) throw new Error("No se pudo leer productos.json");
+    PRODUCTOS = await resp.json();
+  }catch(err){
+    grid.innerHTML = `<div class="vacio">
+      <p>No se pudo cargar productos.json</p>
+      Si abriste este archivo con doble clic, los navegadores bloquean la carga de datos locales.
+      Probalo subiéndolo a GitHub Pages, o corriendo un servidor local (ej: <code>python -m http.server</code>) en esta carpeta.
+    </div>`;
+    return;
+  }
+  renderFiltros();
+  renderGrid();
+}
 
 /* estado de filtros */
 const estado = { categoria:null, tonalidad:null, color:null, orientacion:null, texto:"" };
@@ -367,7 +372,7 @@ function renderFiltros(){
   const grupos = [
     {id:"filtro-categoria", campo:"categoria", valores:valoresUnicos("categoria")},
     {id:"filtro-tonalidad", campo:"tonalidad", valores:valoresUnicos("tonalidad")},
-    {id:"filtro-orientacion", campo:"orientacion", valores:valoresUnicos("orientacion")},
+    {id:"filtro-orientacion", campo:"orientacion", valores:ORIENTACIONES_FILTRO},
   ];
   grupos.forEach(g=>{
     const cont = document.getElementById(g.id);
@@ -432,10 +437,17 @@ function renderGrid(){
     return;
   }
 
-  grid.innerHTML = filtrados.map(p=>`
+  grid.innerHTML = filtrados.map(p=>{
+    const svgId = `svg-${p.codigo}`;
+    return `
     <div class="cuadro">
       <div class="lienzo-marco">
-        <div class="lienzo" style="--ar:${AR[p.orientacion]}">${svgLienzo(p)}</div>
+        <div class="lienzo" style="--ar:${AR[p.orientacion] || '1/1'}">
+          ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" loading="lazy"
+                onerror="this.replaceWith(document.getElementById('${svgId}').content.cloneNode(true))">` : ''}
+          <template id="${svgId}">${svgLienzo(p)}</template>
+          ${!p.imagen ? svgLienzo(p) : ''}
+        </div>
       </div>
       <div class="placa">
         <div>
@@ -445,7 +457,7 @@ function renderGrid(){
         <span class="tag-tono">${p.tonalidad}</span>
       </div>
     </div>
-  `).join("");
+  `;}).join("");
 }
 
 document.getElementById("buscador").addEventListener("input", e=>{
@@ -459,8 +471,7 @@ document.getElementById("limpiar").addEventListener("click", ()=>{
   renderGrid();
 });
 
-renderFiltros();
-renderGrid();
+cargarProductos();
 </script>
 </body>
 </html>
