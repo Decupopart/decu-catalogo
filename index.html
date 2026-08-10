@@ -184,7 +184,7 @@
     border-color:var(--wood-dim);
   }
 
-  /* efecto bastidor: doble marco que imita el borde espejado de la lienzo */
+  /* efecto bastidor: doble marco que imita el borde espejado del lienzo */
   .lienzo-marco{
     position:relative;
     padding:14px;
@@ -192,10 +192,11 @@
       repeating-linear-gradient(115deg, rgba(0,0,0,.08) 0 2px, transparent 2px 6px),
       linear-gradient(160deg, #3a2c1d, #241a10);
   }
+  
   .lienzo{
     position:relative;
     width:100%;
-    aspect-ratio: var(--ar, 1/1);
+    aspect-ratio: 1/1; /* Forzado a formato cuadrado siempre */
     border:3px solid rgba(0,0,0,.25);
     display:flex;
     align-items:center;
@@ -203,37 +204,11 @@
     overflow:hidden;
   }
   .lienzo svg{width:100%; height:100%; display:block;}
-  .lienzo img{width:100%; height:100%; object-fit:contain; display:block;}
-
-  .placa{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:8px;
-    padding:14px 16px 16px;
-  }
-  .placa-nombre{
-    font-family:'Fraunces', serif;
-    font-size:16px;
-    line-height:1.25;
-  }
-  .placa-meta{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10.5px;
-    color:var(--muted);
-    margin-top:5px;
-    letter-spacing:.03em;
-  }
-  .tag-tono{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:9.5px;
-    text-transform:uppercase;
-    letter-spacing:.08em;
-    padding:3px 7px;
-    border:1px solid var(--line);
-    border-radius:12px;
-    color:var(--muted);
-    white-space:nowrap;
+  .lienzo img{
+    width:100%; 
+    height:100%; 
+    object-fit:cover; /* Asegura que la imagen cubra todo el cuadrado */
+    display:block;
   }
 
   .vacio{
@@ -303,14 +278,6 @@
 </footer>
 
 <script>
-/* ============================================================
-   DATOS DE MUESTRA
-   Reemplazar este array por el que generes desde catalogo_procesado.csv
-   Estructura sugerida por producto:
-   { codigo, nombre, categoria, subcategoria, tonalidad, colores:[hex,hex], orientacion }
-   orientacion: "horizontal" | "vertical" | "cuadrado"
-   ============================================================ */
-/* Nombre de color -> hex, solo para pintar el swatch. El filtro se hace por nombre. */
 const HEX_COLOR = {
   "marron":"#7B4B2A", "ocre":"#C08A3E", "beige":"#D9C9A3", "naranja":"#E07B39",
   "azul":"#3B5BA5", "amarillo":"#E8C547", "magenta":"#C2408A", "violeta":"#6B4FA0",
@@ -319,8 +286,6 @@ const HEX_COLOR = {
   "turquesa":"#3FA9A0", "rosa":"#D98BA5", "sepia":"#7A5230",
 };
 
-const AR = {horizontal:"4/3", vertical:"3/4", triptico:"21/9"};
-/* Solo estos dos aparecen como chips de filtro (aunque haya trípticos en los datos) */
 const ORIENTACIONES_FILTRO = ["horizontal", "vertical"];
 
 let PRODUCTOS = [];
@@ -390,27 +355,14 @@ function renderFiltros(){
   });
 }
 
-function svgLienzo(p){
-  const c1 = HEX_COLOR[p.colores[0]] || "#8C8478";
-  const c2 = HEX_COLOR[p.colores[1]] || HEX_COLOR[p.colores[0]] || "#3A362F";
-  return `
-  <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="g-${p.codigo}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="${c1}"/>
-        <stop offset="100%" stop-color="${c2}"/>
-      </linearGradient>
-    </defs>
-    <rect width="200" height="200" fill="url(#g-${p.codigo})"/>
-    <circle cx="145" cy="55" r="34" fill="${c2}" opacity="0.35"/>
-    <rect x="20" y="120" width="90" height="50" fill="${c1}" opacity="0.25"/>
-  </svg>`;
-}
-
 function renderGrid(){
   const grid = document.getElementById("grid");
   const filtrados = PRODUCTOS.filter(p=>{
-    if(!p.imagen) return false; // sin imagen todavía -> no se muestra en el catálogo
+    if(!p.imagen) return false; 
+    
+    // Filtrar para que no se muestren los trípticos
+    if(p.orientacion === "triptico" || p.orientacion === "tríptico") return false;
+    
     if(estado.categoria && p.categoria!==estado.categoria) return false;
     if(estado.tonalidad && p.tonalidad!==estado.tonalidad) return false;
     if(estado.orientacion && p.orientacion!==estado.orientacion) return false;
@@ -429,20 +381,14 @@ function renderGrid(){
     return;
   }
 
+  // Generación del HTML sin la sección del texto debajo
   grid.innerHTML = filtrados.map(p=>`
     <div class="cuadro" data-codigo="${p.codigo}">
       <div class="lienzo-marco">
-        <div class="lienzo" style="--ar:${AR[p.orientacion] || '1/1'}">
+        <div class="lienzo">
           <img src="${p.imagen}" alt="${p.nombre}" loading="lazy"
                onerror="this.closest('.cuadro').remove()">
         </div>
-      </div>
-      <div class="placa">
-        <div>
-          <div class="placa-nombre">${p.nombre}</div>
-          <div class="placa-meta">${p.codigo} · ${p.categoria} · ${p.orientacion}</div>
-        </div>
-        <span class="tag-tono">${p.tonalidad}</span>
       </div>
     </div>
   `).join("");
