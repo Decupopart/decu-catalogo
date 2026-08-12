@@ -214,6 +214,57 @@ h1 em{
   object-fit:cover; /* Asegura que la imagen cubra todo el cuadrado */
   display:block;
 }
+
+/* Ícono de compartir, esquina superior derecha de cada imagen */
+.btn-compartir{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(28,26,23,.7);
+  border:1px solid rgba(237,230,218,.25);
+  color:var(--cream);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  backdrop-filter:blur(2px);
+  transition:background .15s ease, transform .15s ease;
+  z-index:2;
+}
+.btn-compartir:hover{
+  background:var(--wood);
+  transform:scale(1.06);
+}
+.btn-compartir svg{width:16px; height:16px;}
+
+/* Botón "Consultar" debajo de cada cuadro */
+.btn-consultar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  width:100%;
+  padding:11px 10px;
+  background:var(--panel-2);
+  border:none;
+  border-top:1px solid var(--line);
+  color:var(--cream);
+  font-family:'IBM Plex Sans';
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.02em;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background .15s ease, color .15s ease;
+}
+.btn-consultar:hover{
+  background:#25D366;
+  color:#122;
+}
+.btn-consultar svg{width:15px; height:15px; flex-shrink:0;}
 .vacio{
   grid-column:1/-1;
   text-align:center;
@@ -315,6 +366,24 @@ const SUBCATEGORIAS_INDEPENDIENTES = [
 ];
 
 const ORIENTACIONES_FILTRO = ["horizontal", "vertical"];
+
+/* ============================================================
+   NÚMERO DE WHATSAPP SEGÚN EL LOCAL (parámetro ?local= en la URL)
+   ============================================================ */
+
+// Mapa de locales: código en la URL (?local=xxx) -> número de WhatsApp (con código de país, sin +, sin espacios ni guiones)
+const LOCALES = {
+  "home":   "5491130588896",  // catálogo para redes sociales (tu número)
+  "local1": "5491127577883",  // Local1 — +54 9 11 2757-7883
+  // Para sumar un local nuevo, agregá una línea así:
+  // "local2": "54911XXXXXXX",
+};
+
+const NUMERO_DEFAULT = "5491130588896"; // si no viene ?local= en la URL, usa este
+
+const paramsLocal = new URLSearchParams(window.location.search);
+const localActivo = paramsLocal.get("local");
+const numeroWhatsappActivo = (localActivo && LOCALES[localActivo]) ? LOCALES[localActivo] : NUMERO_DEFAULT;
 
 let PRODUCTOS = [];
 
@@ -454,17 +523,58 @@ function renderGrid(){
     return;
   }
 
-  // Generación del HTML sin la sección del texto debajo
   grid.innerHTML = filtrados.map(p=>`
     <div class="cuadro" data-codigo="${p.codigo}">
       <div class="lienzo-marco">
         <div class="lienzo">
           <img src="${p.imagen}" alt="${p.nombre}" loading="lazy"
                onerror="this.closest('.cuadro').remove()">
+          <button class="btn-compartir" title="Compartir imagen" onclick="compartirCuadro('${p.codigo}', '${p.nombre.replace(/'/g,"\\'")}', '${p.imagen}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
         </div>
       </div>
+      <a class="btn-consultar" href="${linkConsulta(p)}" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Consultar
+      </a>
     </div>
   `).join("");
+}
+
+/* Arma el link de WhatsApp para consultar/encargar un cuadro puntual,
+   usando el número de local vigente (numeroWhatsappActivo, definido más abajo) */
+function linkConsulta(p){
+  const texto = `Hola!%20Quer%C3%ADa%20consultarte%20sobre%20este%20cuadro%3A%20${encodeURIComponent(p.nombre)}%20(c%C3%B3digo%20${p.codigo})`;
+  return `https://wa.me/${numeroWhatsappActivo}?text=${texto}`;
+}
+
+/* Comparte la imagen del cuadro usando el menú nativo del celular (Web Share API).
+   Si el navegador no lo soporta (típico en desktop), cae de nuevo en el botón de Consultar. */
+async function compartirCuadro(codigo, nombre, rutaImagen){
+  const mensaje = `Me gustaría encargarte este cuadro: ${nombre} (código ${codigo})`;
+  try{
+    if(navigator.canShare){
+      const resp = await fetch(rutaImagen);
+      const blob = await resp.blob();
+      const archivo = new File([blob], `${codigo}.jpg`, { type: blob.type || "image/jpeg" });
+      if(navigator.canShare({ files: [archivo] })){
+        await navigator.share({ files: [archivo], text: mensaje });
+        return;
+      }
+    }
+    throw new Error("Share de archivos no soportado");
+  }catch(err){
+    // Fallback: abre WhatsApp con el texto (sin imagen adjunta)
+    const texto = encodeURIComponent(mensaje);
+    window.open(`https://wa.me/${numeroWhatsappActivo}?text=${texto}`, "_blank");
+  }
 }
 
 document.getElementById("buscador").addEventListener("input", e=>{
@@ -491,25 +601,12 @@ cargarProductos();
 </a>
 
 <script>
-  // Mapa de locales: código en la URL (?local=xxx) -> número de WhatsApp (con código de país, sin +, sin espacios ni guiones)
-  const LOCALES = {
-    "home":   "5491130588896",  // catálogo para redes sociales (tu número)
-    "local1": "5491127577883",  // Local1 — +54 9 11 2757-7883
-    // Para sumar un local nuevo, agregá una línea así:
-    // "local2": "54911XXXXXXX",
-  };
-
-  const NUMERO_DEFAULT = "5491130588896"; // si no viene ?local= en la URL, usa este
-
-  const params = new URLSearchParams(window.location.search);
-  const local = params.get("local");
-  const numero = (local && LOCALES[local]) ? LOCALES[local] : NUMERO_DEFAULT;
-
-  const mensaje = (local && LOCALES[local])
+  // El número ya fue resuelto arriba en numeroWhatsappActivo (según ?local=)
+  const mensajeGeneral = (localActivo && LOCALES[localActivo])
     ? `Hola!%20Vi%20el%20cat%C3%A1logo%20y%20quiero%20hacer%20un%20pedido:`
     : `Hola!%20Estoy%20viendo%20el%20cat%C3%A1logo%20y%20tengo%20una%20consulta:`;
 
-  document.getElementById("btn-whatsapp").href = `https://wa.me/${numero}?text=${mensaje}`;
+  document.getElementById("btn-whatsapp").href = `https://wa.me/${numeroWhatsappActivo}?text=${mensajeGeneral}`;
 </script>
 
 </body>
