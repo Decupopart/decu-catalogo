@@ -367,6 +367,11 @@ const SUBCATEGORIAS_INDEPENDIENTES = [
 
 const ORIENTACIONES_FILTRO = ["horizontal", "vertical"];
 
+// Chip especial para los productos marcados como más vendidos (campo MAS_VENDIDO del CSV).
+// A diferencia de SUBCATEGORIAS_INDEPENDIENTES, este chip cruza todas las categorías,
+// por eso tiene su propio manejo en chipsCategoria() y coincideCategoria().
+const CHIP_MAS_VENDIDOS = "Más Vendidos";
+
 /* ============================================================
    NÚMERO DE WHATSAPP SEGÚN EL LOCAL (parámetro ?local= en la URL)
    ============================================================ */
@@ -418,6 +423,8 @@ function chipsCategoria(){
   const excluidas = new Set(CATEGORIAS_EXCLUIDAS);
   const base = valoresUnicos("categoria").filter(c => !excluidas.has(c));
   const resultado = [];
+  // "Más Vendidos" va primero, y solo aparece si hay al menos un producto marcado
+  if (PRODUCTOS.some(p => p.mas_vendido)) resultado.push(CHIP_MAS_VENDIDOS);
   base.forEach(c=>{
     resultado.push(c);
     SUBCATEGORIAS_INDEPENDIENTES
@@ -431,6 +438,8 @@ function chipsCategoria(){
    contemplando las subcategorías independizadas */
 function coincideCategoria(p, catSeleccionada){
   if(!catSeleccionada) return true;
+
+  if(catSeleccionada === CHIP_MAS_VENDIDOS) return !!p.mas_vendido;
 
   const especial = SUBCATEGORIAS_INDEPENDIENTES.find(s=>s.id===catSeleccionada);
   if(especial){

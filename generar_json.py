@@ -153,6 +153,7 @@ def convertir():
             "colores": colores,
             "orientacion": normalizar_orientacion(fila["FORMATO"]),
             "imagen": imagen,
+            "mas_vendido": fila.get("MAS_VENDIDO", "").strip().upper() == "SI",
         })
 
     with open(JSON_SALIDA, "w", encoding="utf-8") as f:
