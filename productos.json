@@ -72,7 +72,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/990-Abundancia-Comida-Frutas-Madera-naranja, violeta, verde-Horizontal.jpg",
-    "mas_vendido": true
+    "mas_vendido": false
   },
   {
     "codigo": "1010",
@@ -102,7 +102,7 @@
     ],
     "orientacion": "vertical",
     "imagen": "Imagenes/1045-Princesa del sur-Mujer-General-Calido-beige, rojo, naranja-Vertical.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1065",
@@ -1314,7 +1314,7 @@
     ],
     "orientacion": "vertical",
     "imagen": "Imagenes/1258-Donde Florece el Alma-Mujer-General-Pastel-gris, rosa-Vertical.jpg",
-    "mas_vendido": true
+    "mas_vendido": false
   },
   {
     "codigo": "1260",
@@ -1428,7 +1428,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1268-Primavera Interior-Mujer-General-Pastel-rosa, gris-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1270",
@@ -1653,7 +1653,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1287-Corazón Salvaje-Animales-Felinos-Cálido-naranja, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1288",
@@ -2199,7 +2199,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1331-Horizonte Alpino-Paisajes-Montañas-Metálico-naranja, dorado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1332",
@@ -2801,7 +2801,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1393-Hojas al Atardecer-Botanica-Hojas-Metálico-plateado, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1395",
@@ -3011,7 +3011,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1410-Hojas del Bosque-Botanica-Hojas-Metálico-verde, dorado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1411",
@@ -3179,7 +3179,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1423-Horizonte Infinito-Paisajes-Playa-Pastel-azul, blanco-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1424",
@@ -3571,7 +3571,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1452-Alas de Luz-Alas-General-Pastel-rosa, dorado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1453",
@@ -3585,7 +3585,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1453-Esperanza Infinita-Alas-General-Metálico-dorado, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1454",
@@ -3669,7 +3669,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1460-El Reflejo Rosado-Animales-Flamenco-Pastel-rosa, dorado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1461",
@@ -4103,7 +4103,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1491-El Sabor Dorado-Comida-Frutas-Vibrante-naranja, violeta-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1492",
@@ -4789,7 +4789,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1541-Jardín Dorado-Botanica-Flores-Cálido-amarillo, naranja-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1542",
@@ -5209,7 +5209,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1572-El Aroma del Jardín-Botanica-Flores-Blanco y Negro-blanco, verde-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1573",
@@ -5951,7 +5951,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1652-El Aullido Eterno-Animales-Lobos-Oscuro-gris, plateado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1653",
@@ -6847,7 +6847,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1721-El Arte del Vino-Bodegas-General-Cálido-rojo, violeta-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1722",
@@ -9843,7 +9843,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/1967-El Guardián de la Sabana-Animales-Elefantes-Vibrante-naranja, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "1968",
@@ -11075,7 +11075,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2086-Eterno Florecer-Botanica-Flores-Cálido-rojo, rosa-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2087",
@@ -11593,7 +11593,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2124-Paso Firme y Libre-Animales-Caballos-Vibrante-naranja, marrón-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2125",
@@ -12027,7 +12027,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2187-Brote Primaveral-Botanica-Flores-Frío-azul, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2188",
@@ -12825,7 +12825,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2234-El Acecho-Animales-Felinos-Frío-violeta, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2235",
@@ -13413,7 +13413,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2282-Horizonte Coral-Paisajes-Playa-Cálido-naranja, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2283",
@@ -13637,7 +13637,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2302-Promesa Cumplida-Cristianismo-General-Metálico-dorado, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2303",
@@ -13875,7 +13875,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2335-Impulso Creativo-Abstracto-General-Frío-azul, dorado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2336",
@@ -14029,7 +14029,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2351-El Susurro de la Marea-Paisajes-Playa-Cálido-naranja, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2353",
@@ -14659,7 +14659,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2402-Color y Fragancia-Botanica-Flores-Cálido-amarillo, naranja-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2403",
@@ -15261,7 +15261,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2447-El Guardián Peludo-Animales-Osos-Cálido-naranja, marrón-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2448",
@@ -15401,7 +15401,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2457-Alma Libre-Mujer-General-Frío-azul, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2458",
@@ -16871,7 +16871,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2563-Encanto Sereno-Mujer-General-Cálido-amarillo, dorado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2564",
@@ -17277,7 +17277,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2593-Equilibrio Interior-Budismo-General-Frío-azul, dorado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2595",
@@ -18705,7 +18705,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2699-Identidad Propia-Mujer-Frida Khalo-Cálido-rosa, violeta-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2700",
@@ -21743,7 +21743,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/2920-Travesía Profunda-Animales-Delfines-Pastel-naranja, azul-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "2921",
@@ -23003,7 +23003,7 @@
     ],
     "orientacion": "vertical",
     "imagen": "Imagenes/3013-El Rostro Milenario-Mujer-Rostros étnicos-Tierra-marrón, dorado-Vertical.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "3014",
@@ -23101,7 +23101,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/3020-Ola Serena-Paisajes-Playa-Cálido-naranja, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "3021",
@@ -23759,7 +23759,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/3071-Tierra Eterna-Mujer-Rostros étnicos-Cálido-naranja, marrón-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "3072",
@@ -24851,7 +24851,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/3164-Brío Salvaje-Animales-Caballos-Metálico-negro, plateado-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "3166",
@@ -27175,7 +27175,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/3347-Rocío Sereno-Botanica-Flores-Cálido-naranja, amarillo-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "3348",
@@ -28043,7 +28043,7 @@
     ],
     "orientacion": "horizontal",
     "imagen": "Imagenes/3401-Piedras del Equilibrio-Budismo-General-Neutro-violeta, rosa-Horizontal.jpg",
-    "mas_vendido": false
+    "mas_vendido": true
   },
   {
     "codigo": "3402",
