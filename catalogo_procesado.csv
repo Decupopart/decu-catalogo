@@ -3,9 +3,9 @@
 817;El resplandor;Paisajes;Playa;Natural;azul, amarillo, naranja;Horizontal;NUEVO;NO
 855;Campo de girasoles;Botanica;Girasoles;Natural;azul, amarillo, naranja;Horizontal;NUEVO;NO
 874;La venganza;Personas;Mujer;Frio;magenta, azul, beige;Horizontal;NUEVO;NO
-990;Abundancia;Comida;Frutas;Madera;naranja, violeta, verde;Horizontal;NUEVO;SI
+990;Abundancia;Comida;Frutas;Madera;naranja, violeta, verde;Horizontal;NUEVO;NO
 1010;Luna surrealista;Paisajes;Luna;Oscuro;negro, amarillo, azul;Vertical;NUEVO;NO
-1045;Princesa del sur;Mujer;General;Calido;beige, rojo, naranja;Vertical;NUEVO;NO
+1045;Princesa del sur;Mujer;General;Calido;beige, rojo, naranja;Vertical;NUEVO;SI
 1065;Explosion Floral;Botanica;Flores;Vibrante;magenta, naranja, dorado;Horizontal;NUEVO;SI
 1082;Espíritu Viajero;Mapamundi;General;Calido;marron, ocre, negro;Horizontal;NUEVO;NO
 1295;Liberacion;Personas;Mujer;Vibrante;violeta, magenta;Triptico;NUEVO;NO
@@ -90,7 +90,7 @@
 1255;Belleza Secreta;Mujer;General;Calido;negro, naranja;Vertical;NUEVO;NO
 1256;Alma de Mujer;Mujer;General;Pastel;gris, rosa;Vertical;NUEVO;NO
 1257;Delicada Presencia;Mujer;General;Pastel;gris, rosa;Vertical;NUEVO;NO
-1258;Donde Florece el Alma;Mujer;General;Pastel;gris, rosa;Vertical;NUEVO;SI
+1258;Donde Florece el Alma;Mujer;General;Pastel;gris, rosa;Vertical;NUEVO;NO
 1260;El Arte de Sentir;Mujer;General;Oscuro;gris, magenta;Horizontal;NUEVO;NO
 1261;Luz Interior;Mujer;General;Vibrante;rosa, naranja, celeste;Horizontal;NUEVO;NO
 1262;Elegancia Atemporal;Mujer;General;Dorado;dorado, verde ;Vertical;NUEVO;NO
@@ -98,7 +98,7 @@
 1264;Mujer Eterna;Mujer;General;Vibrante;negro, amarillo;Vertical;NUEVO;NO
 1266;El Lenguaje de la Mirada;Mujer;General;Vibrante;naranja, negro;Vertical;NUEVO;NO
 1267;Siempre Bella;Mujer;General;Pastel;beige, rojo, negro;Vertical;NUEVO;NO
-1268;Primavera Interior;Mujer;General;Pastel;rosa, gris;Horizontal;NUEVO;NO
+1268;Primavera Interior;Mujer;General;Pastel;rosa, gris;Horizontal;NUEVO;SI
 1270;Mujer en Flor;Mujer;General;Vibrante;naranja, verde, rosa;Horizontal;NUEVO;NO
 1273;Flores y Silencio;Mujer;General;Dorado;dorado, gris;Horizontal;NUEVO;NO
 1274;Elegancia Celestial;Alas;General;Neutro;rosa, beige;Horizontal;NUEVO;NO
@@ -114,7 +114,7 @@
 1284;El Espíritu del Cielo;Alas;General;Pastel;rosa, blanco;Horizontal;NUEVO;NO
 1285;Alas de Marfil;Alas;General;Pastel;blanco, plateado;Horizontal;NUEVO;NO
 1286;Aura Dorada;Alas;General;Metálico;dorado, amarillo;Horizontal;NUEVO;NO
-1287;Corazón Salvaje;Animales;Felinos;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
+1287;Corazón Salvaje;Animales;Felinos;Cálido;naranja, amarillo;Horizontal;NUEVO;SI
 1288;Noble Instinto;Animales;Felinos;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
 1289;Mirada Real;Animales;Felinos;Frío;violeta, dorado;Horizontal;NUEVO;NO
 1290;Ojos de Fuego;Animales;Felinos;Cálido;verde, dorado;Horizontal;NUEVO;NO
@@ -153,7 +153,7 @@
 1328;Donde Nace el Silencio;Paisajes;Montañas;Metálico;dorado, amarillo;Horizontal;NUEVO;NO
 1329;El Camino del Bosque;Paisajes;Montañas;Cálido;violeta, naranja;Horizontal;NUEVO;NO
 1330;Refugio Alpino;Paisajes;Montañas;Frío;gris, plateado;Horizontal;NUEVO;NO
-1331;Horizonte Alpino;Paisajes;Montañas;Metálico;naranja, dorado;Horizontal;NUEVO;NO
+1331;Horizonte Alpino;Paisajes;Montañas;Metálico;naranja, dorado;Horizontal;NUEVO;SI
 1332;Sendero Dorado;Paisajes;Montañas;Metálico;dorado, beige;Vertical;NUEVO;NO
 1333;Cimas Doradas;Paisajes;Montañas;Oscuro;rojo, negro;Horizontal;NUEVO;NO
 1334;Naturaleza Infinita;Paisajes;Montañas;Metálico;plateado, dorado;Vertical;NUEVO;NO
@@ -196,7 +196,7 @@
 1386;Verde Silencioso;Botanica;Hojas;Frío;azul, amarillo;Horizontal;NUEVO;NO
 1388;Hojas Doradas;Botanica;Hojas;Metálico;dorado, plateado;Horizontal;NUEVO;NO
 1392;El Abrazo del Otoño;Botanica;Hojas;Neutro;plateado, gris;Horizontal;NUEVO;NO
-1393;Hojas al Atardecer;Botanica;Hojas;Metálico;plateado, amarillo;Horizontal;NUEVO;NO
+1393;Hojas al Atardecer;Botanica;Hojas;Metálico;plateado, amarillo;Horizontal;NUEVO;SI
 1395;Hojas Luminosas;Botanica;Hojas;Oscuro;negro, plateado;Horizontal;NUEVO;NO
 1397;Hojas del Viento Dorado;Botanica;Hojas;Pastel;blanco, rosa;Horizontal;NUEVO;NO
 1398;Otoño Escarlata;Botanica;Hojas;Tierra;verde, dorado;Horizontal;NUEVO;NO
@@ -211,7 +211,7 @@
 1407;El Camino Verde;Botanica;Hojas;Tierra;verde, blanco;Vertical;NUEVO;NO
 1408;Hojas al Amanecer;Botanica;Hojas;Tierra;verde, plateado;Horizontal;NUEVO;NO
 1409;Naturaleza Pura;Botanica;Hojas;Vibrante;verde, naranja;Vertical;NUEVO;NO
-1410;Hojas del Bosque;Botanica;Hojas;Metálico;verde, dorado;Horizontal;NUEVO;NO
+1410;Hojas del Bosque;Botanica;Hojas;Metálico;verde, dorado;Horizontal;NUEVO;SI
 1411;Verde Profundo;Botanica;Hojas;Vibrante;verde, naranja;Horizontal;NUEVO;NO
 1412;Hojas de Bronce;Botanica;Hojas;Tierra;verde, plateado;Horizontal;NUEVO;NO
 1413;Hojas Serenas;Botanica;Hojas;Tierra;verde, beige;Horizontal;NUEVO;NO
@@ -223,7 +223,7 @@
 1420;Horizonte Salino;Paisajes;Playa;Pastel;azul, blanco;Horizontal;NUEVO;NO
 1421;Horizonte Azul;Paisajes;Playa;Pastel;azul, naranja;Horizontal;NUEVO;NO
 1422;Playa Dorada;Paisajes;Playa;Cálido;naranja, azul;Horizontal;NUEVO;NO
-1423;Horizonte Infinito;Paisajes;Playa;Pastel;azul, blanco;Horizontal;NUEVO;NO
+1423;Horizonte Infinito;Paisajes;Playa;Pastel;azul, blanco;Horizontal;NUEVO;SI
 1424;Costa Turquesa;Paisajes;Playa;Frío;azul, blanco;Horizontal;NUEVO;NO
 1425;Horizonte Turquesa;Paisajes;Playa;Cálido;naranja, azul;Horizontal;NUEVO;NO
 1426;Amanecer sobre el Mar;Paisajes;Playa;Cálido;marrón, naranja;Horizontal;NUEVO;NO
@@ -251,14 +251,14 @@
 1449;Fragmentos de Luz;Abstracto;General;Frío;rojo, plateado;Horizontal;NUEVO;NO
 1450;El Arte del Equilibrio;Abstracto;General;Frío;naranja, plateado;Horizontal;NUEVO;NO
 1451;El Susurro del Cielo;Alas;General;Vibrante;dorado, amarillo;Horizontal;NUEVO;NO
-1452;Alas de Luz;Alas;General;Pastel;rosa, dorado;Horizontal;NUEVO;NO
-1453;Esperanza Infinita;Alas;General;Metálico;dorado, amarillo;Horizontal;NUEVO;NO
+1452;Alas de Luz;Alas;General;Pastel;rosa, dorado;Horizontal;NUEVO;SI
+1453;Esperanza Infinita;Alas;General;Metálico;dorado, amarillo;Horizontal;NUEVO;SI
 1454;Alas para Soñar;Alas;General;Metálico;naranja, dorado;Horizontal;NUEVO;NO
 1455;Donde Nacen las Alas;Alas;General;Metálico;dorado, plateado;Vertical;NUEVO;NO
 1456;Elevarse;Alas;General;Metálico;plateado, marrón;Horizontal;NUEVO;NO
 1457;Camino Celestial;Alas;General;Neutro;plateado, gris;Horizontal;NUEVO;NO
 1459;Horizonte Celestial;Alas;General;Metálico;dorado, amarillo;Vertical;NUEVO;NO
-1460;El Reflejo Rosado;Animales;Flamenco;Pastel;rosa, dorado;Horizontal;NUEVO;NO
+1460;El Reflejo Rosado;Animales;Flamenco;Pastel;rosa, dorado;Horizontal;NUEVO;SI
 1461;La Elegancia Silenciosa;Animales;Flamenco;Cálido;rosa, rojo;Horizontal;NUEVO;NO
 1462;Vuelo entre Juncos;Animales;Flamenco;Pastel;rosa, rojo;Horizontal;NUEVO;NO
 1463;El Paso del Agua;Animales;Flamenco;Pastel;rosa, rojo;Horizontal;NUEVO;NO
@@ -289,7 +289,7 @@
 1488;El Huerto Vivo;Comida;Frutas;Vibrante;amarillo, rosa;Vertical;NUEVO;NO
 1489;Cosecha Vital;Comida;Frutas;Vibrante;violeta, amarillo;Vertical;NUEVO;NO
 1490;Frescura del Huerto;Comida;Frutas;Vibrante;amarillo, azul;Horizontal;NUEVO;NO
-1491;El Sabor Dorado;Comida;Frutas;Vibrante;naranja, violeta;Horizontal;NUEVO;NO
+1491;El Sabor Dorado;Comida;Frutas;Vibrante;naranja, violeta;Horizontal;NUEVO;SI
 1492;Naturaleza en Cosecha;Comida;Frutas;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
 1493;El Sabor Natural;Comida;Frutas;Vibrante;naranja, amarillo;Horizontal;NUEVO;NO
 1494;Cosecha de Sol;Comida;Frutas;Vibrante;rojo, verde;Horizontal;NUEVO;NO
@@ -338,7 +338,7 @@
 1538;Primavera sin Fin;Botanica;Flores;Pastel;blanco, amarillo;Vertical;NUEVO;NO
 1539;Entre Flores y Cielo;Botanica;Flores;Blanco y Negro;blanco, plateado;Vertical;NUEVO;NO
 1540;Pétalos al Viento;Botanica;Flores;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
-1541;Jardín Dorado;Botanica;Flores;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
+1541;Jardín Dorado;Botanica;Flores;Cálido;amarillo, naranja;Horizontal;NUEVO;SI
 1542;Pétalos de Plata;Botanica;Flores;Vibrante;amarillo, naranja;Horizontal;NUEVO;NO
 1543;El Jardín de Cristal;Botanica;Flores;Cálido;amarillo, verde;Horizontal;NUEVO;NO
 1544;La Rosa del Silencio;Botanica;Flores;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
@@ -368,7 +368,7 @@
 1569;Rosa Serena;Botanica;Flores;Metálico;plateado, gris;Horizontal;NUEVO;NO
 1570;Rosa de Rocío;Botanica;Flores;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
 1571;El Jardín Sereno;Botanica;Flores;Cálido;rojo, violeta;Horizontal;NUEVO;NO
-1572;El Aroma del Jardín;Botanica;Flores;Blanco y Negro;blanco, verde;Horizontal;NUEVO;NO
+1572;El Aroma del Jardín;Botanica;Flores;Blanco y Negro;blanco, verde;Horizontal;NUEVO;SI
 1573;Tulipán Sereno;Botanica;Flores;Blanco y Negro;blanco, plateado;Horizontal;NUEVO;NO
 1574;Pétalos de Alba;Botanica;Flores;Cálido;blanco, verde;Horizontal;NUEVO;NO
 1575;Delicadeza Floral;Botanica;Flores;Metálico;blanco, plateado;Horizontal;NUEVO;NO
@@ -421,7 +421,7 @@
 1649;El Lobo Ancestral;Animales;Lobos;Cálido;plateado, naranja;Horizontal;NUEVO;NO
 1650;Instinto de Manada;Animales;Lobos;Frío;plateado, gris;Horizontal;NUEVO;NO
 1651;Espíritu de Libertad;Animales;Lobos;Cálido;plateado, marrón;Horizontal;NUEVO;NO
-1652;El Aullido Eterno;Animales;Lobos;Oscuro;gris, plateado;Horizontal;NUEVO;NO
+1652;El Aullido Eterno;Animales;Lobos;Oscuro;gris, plateado;Horizontal;NUEVO;SI
 1653;Aullido de Libertad;Animales;Lobos;Frío;plateado, gris;Vertical;NUEVO;NO
 1654;El Aullido de la Luna;Animales;Lobos;Frío;naranja, gris;Horizontal;NUEVO;NO
 1655;Manada Unida;Animales;Lobos;Frío;naranja, verde;Horizontal;NUEVO;NO
@@ -485,7 +485,7 @@
 1718;Sabores Compartidos;Bodegas;General;Cálido;marrón, rojo;Horizontal;NUEVO;NO
 1719;Reserva Privada;Bodegas;General;Oscuro;rojo, violeta;Horizontal;NUEVO;NO
 1720;Viñedos al Atardecer;Bodegas;General;Oscuro;violeta, rojo;Horizontal;NUEVO;NO
-1721;El Arte del Vino;Bodegas;General;Cálido;rojo, violeta;Horizontal;NUEVO;NO
+1721;El Arte del Vino;Bodegas;General;Cálido;rojo, violeta;Horizontal;NUEVO;SI
 1722;Esencia del Vino;Bodegas;General;Tierra;marrón, dorado;Horizontal;NUEVO;NO
 1723;Colinas del Vino;Bodegas;General;Oscuro;rojo, violeta;Horizontal;NUEVO;NO
 1724;El Espíritu del Vino;Bodegas;General;Tierra;amarillo, beige;Horizontal;NUEVO;NO
@@ -699,7 +699,7 @@
 1962;Herencia Ancestral;Animales;Elefantes;Metálico;plateado, gris;Horizontal;NUEVO;NO
 1965;Espíritu Ancestral;Animales;Elefantes;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
 1966;El Peso de la Sabana;Animales;Elefantes;Cálido;rojo, naranja;Horizontal;NUEVO;NO
-1967;El Guardián de la Sabana;Animales;Elefantes;Vibrante;naranja, amarillo;Horizontal;NUEVO;NO
+1967;El Guardián de la Sabana;Animales;Elefantes;Vibrante;naranja, amarillo;Horizontal;NUEVO;SI
 1968;El Paso del Gigante;Animales;Elefantes;Blanco y Negro;gris, plateado;Horizontal;NUEVO;NO
 1969;Corazón de la Sabana;Animales;Elefantes;Vibrante;rojo, rosa;Horizontal;NUEVO;NO
 1970;Paso Firme;Animales;Elefantes;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
@@ -787,7 +787,7 @@
 2083;Aroma de Primavera;Botanica;Flores;Vibrante;amarillo, naranja;Vertical;NUEVO;NO
 2084;Esencia de Pétalos;Botanica;Flores;Cálido;rojo, naranja;Horizontal;NUEVO;NO
 2085;Vida en Flor;Botanica;Flores;Pastel;rosa, blanco;Vertical;NUEVO;NO
-2086;Eterno Florecer;Botanica;Flores;Cálido;rojo, rosa;Horizontal;NUEVO;NO
+2086;Eterno Florecer;Botanica;Flores;Cálido;rojo, rosa;Horizontal;NUEVO;SI
 2087;Encanto Floral;Botanica;Flores;Oscuro;rojo, rosa;Horizontal;NUEVO;NO
 2088;Primavera Silvestre;Botanica;Flores;Vibrante;rojo, rosa;Horizontal;NUEVO;NO
 2089;Despertar Floral;Botanica;Flores;Cálido;naranja, rojo;Vertical;NUEVO;NO
@@ -824,7 +824,7 @@
 2121;Legado de mi Sangre;Mujer;Rostros étnicos;Vibrante;dorado, amarillo;Vertical;NUEVO;NO
 2122;Aura;Mujer;General;Cálido;amarillo, marrón;Horizontal;NUEVO;NO
 2123;Dimensión Creativa;Abstracto;General;Metálico;plateado, gris;Horizontal;NUEVO;NO
-2124;Paso Firme y Libre;Animales;Caballos;Vibrante;naranja, marrón;Horizontal;NUEVO;NO
+2124;Paso Firme y Libre;Animales;Caballos;Vibrante;naranja, marrón;Horizontal;NUEVO;SI
 2125;Herencia del Alma;Mujer;Rostros étnicos;Metálico;plateado, gris;Horizontal;NUEVO;NO
 2127;Instinto Supremo;Animales;Felinos;Vibrante;naranja, amarillo;Vertical;NUEVO;NO
 2128;Reflejos de la Tierra;Paisajes;General;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
@@ -855,7 +855,7 @@
 2184;Sinfonía Cromática;Abstracto;General;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
 2185;Silencio Floral;Botanica;Flores;Vibrante;violeta, rosa;Horizontal;NUEVO;NO
 2186;Vuelo de Pétalos;Botanica;Flores;Pastel;rosa, blanco;Horizontal;NUEVO;NO
-2187;Brote Primaveral;Botanica;Flores;Frío;azul, amarillo;Horizontal;NUEVO;NO
+2187;Brote Primaveral;Botanica;Flores;Frío;azul, amarillo;Horizontal;NUEVO;SI
 2188;Floración Eterna;Botanica;Flores;Vibrante;dorado, violeta;Horizontal;NUEVO;NO
 2189;Corazón de León;Animales;Felinos;Vibrante;violeta, dorado;Horizontal;NUEVO;NO
 2190;Nobleza Salvaje;Animales;Felinos;Metálico;dorado, amarillo;Horizontal;NUEVO;NO
@@ -912,7 +912,7 @@
 2231;Alma de la Sabana;Animales;Felinos;Vibrante;naranja, amarillo;Horizontal;NUEVO;NO
 2232;Espíritu Real;Animales;Felinos;Blanco y Negro;azul, naranja;Horizontal;NUEVO;NO
 2233;Libertad Salvaje;Animales;Felinos;Blanco y Negro;gris, plateado;Horizontal;NUEVO;NO
-2234;El Acecho;Animales;Felinos;Frío;violeta, amarillo;Horizontal;NUEVO;NO
+2234;El Acecho;Animales;Felinos;Frío;violeta, amarillo;Horizontal;NUEVO;SI
 2235;Ecos de la Selva;Animales;Felinos;Cálido;amarillo, dorado;Horizontal;NUEVO;NO
 2236;Majestad Felina;Animales;Felinos;Metálico;amarillo, dorado;Vertical;NUEVO;NO
 2237;Sigilo Real;Animales;Felinos;Cálido;naranja, dorado;Horizontal;NUEVO;NO
@@ -954,7 +954,7 @@
 2279;Playa de Cristal;Paisajes;Playa;Pastel;naranja, azul;Horizontal;NUEVO;NO
 2280;Verano Eterno;Paisajes;Playa;Cálido;naranja, verde;Horizontal;NUEVO;NO
 2281;Bruma de Sal;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
-2282;Horizonte Coral;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
+2282;Horizonte Coral;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;SI
 2283;Costa Infinita;Paisajes;Playa;Pastel;naranja, azul;Horizontal;NUEVO;NO
 2284;Bajo el Sol de la Costa;Paisajes;Playa;Pastel;azul, violeta;Horizontal;NUEVO;NO
 2285;El Susurro de la Costa;Paisajes;Playa;Pastel;marrón, azul;Horizontal;NUEVO;NO
@@ -970,7 +970,7 @@
 2299;Aliento de Vida;Cristianismo;General;Metálico;dorado, naranja;Horizontal;NUEVO;NO
 2300;Camino de Luz;Cristianismo;General;Oscuro;amarillo, dorado;Horizontal;NUEVO;NO
 2301;Palabra Eterna;Cristianismo;General;Blanco y Negro;blanco, gris;Vertical;NUEVO;NO
-2302;Promesa Cumplida;Cristianismo;General;Metálico;dorado, amarillo;Horizontal;NUEVO;NO
+2302;Promesa Cumplida;Cristianismo;General;Metálico;dorado, amarillo;Horizontal;NUEVO;SI
 2303;Gracia Eterna;Cristianismo;General;Cálido;dorado, marrón;Horizontal;NUEVO;NO
 2304;Rostro de Luz;Mujer;General;Cálido;naranja, beige;Vertical;NUEVO;NO
 2305;Amor Infinito;Cristianismo;General;Metálico;rojo, dorado;Horizontal;NUEVO;NO
@@ -987,7 +987,7 @@
 2330;Instinto Abstracto;Abstracto;General;Pastel;azul, gris;Horizontal;NUEVO;NO
 2331;Costa de Ensueño;Paisajes;Playa;Pastel;violeta, naranja;Horizontal;NUEVO;NO
 2334;El Susurro de las Conchas;Paisajes;Playa;Frío;azul, blanco;Horizontal;NUEVO;NO
-2335;Impulso Creativo;Abstracto;General;Frío;azul, dorado;Horizontal;NUEVO;NO
+2335;Impulso Creativo;Abstracto;General;Frío;azul, dorado;Horizontal;NUEVO;SI
 2336;El Alma del Mundo;Mapamundi;General;Metálico;plateado, blanco;Horizontal;NUEVO;NO
 2338;Bosque Encantado;Paisajes;Montañas;Neutro;verde, plateado;Horizontal;NUEVO;NO
 2339;Costa Eterna;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
@@ -998,7 +998,7 @@
 2344;Espuma de Plata;Paisajes;Playa;Cálido;azul, naranja;Horizontal;NUEVO;NO
 2349;Sal y Espuma;Paisajes;Playa;Pastel;azul, gris;Horizontal;NUEVO;NO
 2350;Marea Perlada;Paisajes;Playa;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
-2351;El Susurro de la Marea;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
+2351;El Susurro de la Marea;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;SI
 2353;Reflejo de las Cumbres;Paisajes;Montañas;Pastel;rosa, violeta;Horizontal;NUEVO;NO
 2354;Manto Nocturno;Paisajes;Luna;Pastel;beige, plateado;Horizontal;NUEVO;NO
 2355;El Alma de la Tierra;Paisajes;General;Pastel;violeta, amarillo;Horizontal;NUEVO;NO
@@ -1043,7 +1043,7 @@
 2399;Rincón Encantado;Botanica;Flores;Frío;rosa, violeta;Vertical;NUEVO;NO
 2400;Tesoro Floral;Botanica;Flores;Pastel;amarillo, blanco;Vertical;NUEVO;NO
 2401;Aroma Eterno;Botanica;Flores;Pastel;rosa, violeta;Vertical;NUEVO;NO
-2402;Color y Fragancia;Botanica;Flores;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
+2402;Color y Fragancia;Botanica;Flores;Cálido;amarillo, naranja;Horizontal;NUEVO;SI
 2403;Vuelo Floral;Botanica;Flores;Cálido;amarillo, marrón;Horizontal;NUEVO;NO
 2404;Silencio de Pétalos;Botanica;Flores;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
 2405;Sendero de Pétalos;Botanica;Flores;Vibrante;amarillo, naranja;Horizontal;NUEVO;NO
@@ -1086,7 +1086,7 @@
 2444;El Origen de la Forma;Abstracto;General;Metálico;gris, plateado;Vertical;NUEVO;NO
 2445;Movimiento Puro;Abstracto;General;Neutro;beige, plateado;Vertical;NUEVO;NO
 2446;Belleza Atemporal;Mujer;General;Neutro;beige, naranja;Horizontal;NUEVO;NO
-2447;El Guardián Peludo;Animales;Osos;Cálido;naranja, marrón;Horizontal;NUEVO;NO
+2447;El Guardián Peludo;Animales;Osos;Cálido;naranja, marrón;Horizontal;NUEVO;SI
 2448;Poesía de Pétalos;Botanica;Flores;Pastel;rosa, marrón;Vertical;NUEVO;NO
 2449;El Arte de Ser Ella;Mujer;General;Frío;azul, naranja;Horizontal;NUEVO;NO
 2450;Historia Viva;Mujer;Rostros étnicos;Frío;plateado, azul;Vertical;NUEVO;NO
@@ -1096,7 +1096,7 @@
 2454;Presencia Femenina;Mujer;General;Cálido;marrón, naranja;Horizontal;NUEVO;NO
 2455;Luz Interior;Mujer;General;Vibrante;marrón, rosa;Vertical;NUEVO;NO
 2456;Belleza Genuina;Mujer;General;Cálido;naranja, azul;Horizontal;NUEVO;NO
-2457;Alma Libre;Mujer;General;Frío;azul, amarillo;Horizontal;NUEVO;NO
+2457;Alma Libre;Mujer;General;Frío;azul, amarillo;Horizontal;NUEVO;SI
 2458;La Grandeza del Mundo;Paisajes;General;Tierra;verde, naranja;Horizontal;NUEVO;NO
 2459;Ramillete Eterno;Botanica;Flores;Pastel;blanco, amarillo;Horizontal;NUEVO;NO
 2460;Belleza en Flor;Botanica;Flores;Cálido;amarillo, marrón;Vertical;NUEVO;NO
@@ -1201,7 +1201,7 @@
 2560;Alma Auténtica;Mujer;General;Metálico;amarillo, dorado;Horizontal;NUEVO;NO
 2561;Belleza Interior;Mujer;General;Metálico;amarillo, dorado;Horizontal;NUEVO;NO
 2562;Expresión Genuina;Mujer;General;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
-2563;Encanto Sereno;Mujer;General;Cálido;amarillo, dorado;Horizontal;NUEVO;NO
+2563;Encanto Sereno;Mujer;General;Cálido;amarillo, dorado;Horizontal;NUEVO;SI
 2564;Brillo Natural;Mujer;General;Pastel;azul, blanco;Vertical;NUEVO;NO
 2565;Melodía del Abismo;Animales;Ballenas;Frío;azul, plateado;Horizontal;NUEVO;NO
 2566;Cielo de Verano;Paisajes;Playa;Frío;beige, blanco;Vertical;NUEVO;NO
@@ -1230,7 +1230,7 @@
 2590;Bosque Encantado;Paisajes;Bosque;Cálido;verde, amarillo;Vertical;NUEVO;NO
 2591;Naturaleza Infinita;Paisajes;Bosque;Cálido;amarillo, verde;Horizontal;NUEVO;NO
 2592;Elegancia Rayada;Animales;Cebras;Vibrante;plateado, violeta;Horizontal;NUEVO;NO
-2593;Equilibrio Interior;Budismo;General;Frío;azul, dorado;Horizontal;NUEVO;NO
+2593;Equilibrio Interior;Budismo;General;Frío;azul, dorado;Horizontal;NUEVO;SI
 2595;Arena Blanca;Paisajes;Playa;Pastel;azul, violeta;Vertical;NUEVO;NO
 2596;La Mirada Salvaje;Animales;Felinos;Vibrante;naranja, verde;Vertical;NUEVO;NO
 2597;Grandeza Milenaria;Paisajes;Piramides;Cálido;naranja, dorado;Horizontal;NUEVO;NO
@@ -1332,7 +1332,7 @@
 2696;Huella Cultural;Tematico;General;Vibrante;violeta, dorado;Horizontal;NUEVO;NO
 2697;Fronteras Invisibles;Mapamundi;General;Tierra;marrón, naranja;Horizontal;NUEVO;NO
 2698;El Mundo Antiguo;Mapamundi;Piramides;Neutro;dorado, amarillo;Horizontal;NUEVO;NO
-2699;Identidad Propia;Mujer;Frida Khalo;Cálido;rosa, violeta;Horizontal;NUEVO;NO
+2699;Identidad Propia;Mujer;Frida Khalo;Cálido;rosa, violeta;Horizontal;NUEVO;SI
 2700;Vuelo sobre el Mundo;Mapamundi;General;Tierra;negro, blanco;Horizontal;NUEVO;NO
 2701;La Esencia de Ella;Mujer;General;Vibrante;violeta, amarillo;Horizontal;NUEVO;NO
 2702;Retrato de una Época;Tematico;General;Oscuro;verde, amarillo;Horizontal;NUEVO;NO
@@ -1549,7 +1549,7 @@
 2917;Colores de Abril;Botanica;Flores;Vibrante;verde, violeta;Horizontal;NUEVO;NO
 2918;Flor en Floración;Botanica;Flores;Vibrante;violeta, negro;Horizontal;NUEVO;NO
 2919;Sabor y Arte;Tematico;Gastronomia;Neutro;plateado, rojo;Horizontal;NUEVO;NO
-2920;Travesía Profunda;Animales;Delfines;Pastel;naranja, azul;Horizontal;NUEVO;NO
+2920;Travesía Profunda;Animales;Delfines;Pastel;naranja, azul;Horizontal;NUEVO;SI
 2921;Sonrisa del Océano;Animales;Delfines;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
 2922;Independencia Felina;Animales;Gatos;Blanco y Negro;azul, plateado;Horizontal;NUEVO;NO
 2923;Venciendo el Miedo;Animales;Toros;Oscuro;violeta, marrón;Horizontal;NUEVO;NO
@@ -1639,14 +1639,14 @@
 3009;Brisa de Otoño;Paisajes;General;Oscuro;rojo, violeta;Horizontal;NUEVO;NO
 3010;El Ciclo de la Vida Verde;Botanica;Hojas;Vibrante;verde, azul;Vertical;NUEVO;NO
 3012;Tierra de mis Ancestros;Mujer;Rostros étnicos;Blanco y Negro;gris, plateado;Vertical;NUEVO;NO
-3013;El Rostro Milenario;Mujer;Rostros étnicos;Tierra;marrón, dorado;Vertical;NUEVO;NO
+3013;El Rostro Milenario;Mujer;Rostros étnicos;Tierra;marrón, dorado;Vertical;NUEVO;SI
 3014;Historia del Alma;Mujer;Rostros étnicos;Tierra;marrón, dorado;Vertical;NUEVO;NO
 3015;Sombras del Atardecer;Paisajes;General;Pastel;amarillo, naranja;Vertical;NUEVO;NO
 3016;Colores Ancestrales;Mujer;Rostros étnicos;Cálido;marrón, dorado;Vertical;NUEVO;NO
 3017;Herencia Sagrada;Mujer;Rostros étnicos;Cálido;dorado, marrón;Vertical;NUEVO;NO
 3018;Herencia Eterna;Mujer;Rostros étnicos;Cálido;marrón, rojo;Vertical;NUEVO;NO
 3019;Bruma Marina;Paisajes;Playa;Vibrante;naranja, rosa;Horizontal;NUEVO;NO
-3020;Ola Serena;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
+3020;Ola Serena;Paisajes;Playa;Cálido;naranja, amarillo;Horizontal;NUEVO;SI
 3021;Fuerza y Belleza;Mujer;General;Neutro;blanco, gris;Vertical;NUEVO;NO
 3022;Alma Libre;Mujer;General;Metálico;beige, plateado;Vertical;NUEVO;NO
 3023;Mirada Profunda;Mujer;General;Metálico;beige, blanco;Vertical;NUEVO;NO
@@ -1693,7 +1693,7 @@
 3068;Trazo Libre;Abstracto;General;Cálido;naranja, rojo;Horizontal;NUEVO;NO
 3069;El Rostro de la Historia;Mujer;Rostros étnicos;Metálico;negro, amarillo;Horizontal;NUEVO;NO
 3070;Fuerza del Origen;Mujer;Rostros étnicos;Frío;marrón, dorado;Horizontal;NUEVO;NO
-3071;Tierra Eterna;Mujer;Rostros étnicos;Cálido;naranja, marrón;Horizontal;NUEVO;NO
+3071;Tierra Eterna;Mujer;Rostros étnicos;Cálido;naranja, marrón;Horizontal;NUEVO;SI
 3072;Presencia Eterna;Mujer;Rostros étnicos;Frío;plateado, dorado;Horizontal;NUEVO;NO
 3073;Misterio Verde;Paisajes;Bosque;Pastel;verde, rosa;Horizontal;NUEVO;NO
 3074;Trote Libre;Animales;Caballos;Metálico;plateado, gris;Horizontal;NUEVO;NO
@@ -1771,7 +1771,7 @@
 3161;Murmullo Urbano;Paisajes;Ciudades;Cálido;naranja, verde;Horizontal;NUEVO;NO
 3162;Donde Florece el Alma;Botanica;Arboles;Vibrante;marrón, verde;Horizontal;NUEVO;NO
 3163;Trazo Emocional;Abstracto;General;Pastel;rosa, beige;Horizontal;NUEVO;NO
-3164;Brío Salvaje;Animales;Caballos;Metálico;negro, plateado;Horizontal;NUEVO;NO
+3164;Brío Salvaje;Animales;Caballos;Metálico;negro, plateado;Horizontal;NUEVO;SI
 3166;Ternura Maternal;Mujer;Madre & hijo;Cálido;amarillo, naranja;Horizontal;NUEVO;NO
 3167;Abrazo Infinito;Mujer;Madre & hijo;Oscuro;plateado, rojo;Horizontal;NUEVO;NO
 3168;Postal Nocturna;Paisajes;Ciudades;Vibrante;verde, violeta;Horizontal;NUEVO;NO
@@ -1937,7 +1937,7 @@
 3344;Fortaleza Interior;Mujer;General;Tierra;naranja, marrón;Horizontal;NUEVO;NO
 3345;Susurro de Olas;Paisajes;Playa;Cálido;naranja, amarillo;Vertical;NUEVO;NO
 3346;El Rostro Sagrado;Mujer;Rostros étnicos;Tierra;marrón, dorado;Horizontal;NUEVO;NO
-3347;Rocío Sereno;Botanica;Flores;Cálido;naranja, amarillo;Horizontal;NUEVO;NO
+3347;Rocío Sereno;Botanica;Flores;Cálido;naranja, amarillo;Horizontal;NUEVO;SI
 3348;Fragmento Sensorial;Abstracto;General;Pastel;dorado, beige;Horizontal;NUEVO;NO
 3349;Susurro del Jardín;Botanica;Flores;Cálido;naranja, rosa;Horizontal;NUEVO;NO
 3350;Frescor de Verano;Comida;Frutas;Pastel;amarillo, naranja;Horizontal;NUEVO;NO
@@ -1999,7 +1999,7 @@
 3398;Equilibrio de Piedra;Budismo;General;Metálico;plateado, gris;Horizontal;NUEVO;NO
 3399;Río de Serenidad;Budismo;General;Cálido;naranja, rojo;Horizontal;NUEVO;NO
 3400;Torre de Piedras;Budismo;General;Neutro;verde, gris;Horizontal;NUEVO;NO
-3401;Piedras del Equilibrio;Budismo;General;Neutro;violeta, rosa;Horizontal;NUEVO;NO
+3401;Piedras del Equilibrio;Budismo;General;Neutro;violeta, rosa;Horizontal;NUEVO;SI
 3402;Pétalos de Paz;Budismo;General;Neutro;violeta, plateado;Horizontal;NUEVO;NO
 3403;Mirada de Buda;Budismo;General;Metálico;plateado, amarillo;Horizontal;NUEVO;NO
 3404;Presencia de Buda;Budismo;General;Tierra;plateado, marrón;Horizontal;NUEVO;NO
