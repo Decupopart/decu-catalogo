@@ -240,6 +240,35 @@ h1 em{
 }
 .btn-compartir svg{width:16px; height:16px;}
 
+/* Corazón de favoritos, esquina inferior derecha de cada imagen */
+.btn-favorito{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(28,26,23,.7);
+  border:1px solid rgba(237,230,218,.25);
+  color:var(--cream);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  backdrop-filter:blur(2px);
+  transition:background .15s ease, transform .15s ease;
+  z-index:2;
+}
+.btn-favorito:hover{
+  transform:scale(1.06);
+}
+.btn-favorito svg{width:17px; height:17px;}
+.btn-favorito.activo{
+  background:rgba(178,58,46,.85);
+  border-color:#B23A2E;
+}
+.btn-favorito.activo svg{fill:#EDE6DA;}
+
 /* Botón "Consultar" debajo de cada cuadro */
 .btn-consultar{
   display:flex;
@@ -372,6 +401,47 @@ const ORIENTACIONES_FILTRO = ["horizontal", "vertical"];
 // por eso tiene su propio manejo en chipsCategoria() y coincideCategoria().
 const CHIP_MAS_VENDIDOS = "Más Vendidos";
 
+// Chip especial para los productos que el usuario marcó con el corazón de favoritos.
+// Se guarda en localStorage del navegador (sin login, sin servidor) y solo aparece
+// en la lista de categorías cuando hay al menos un favorito guardado.
+const CHIP_FAVORITOS = "Favoritos";
+const FAVORITOS_KEY = "decu_favoritos";
+
+function leerFavoritos(){
+  try{
+    return new Set(JSON.parse(localStorage.getItem(FAVORITOS_KEY)) || []);
+  }catch(err){
+    return new Set();
+  }
+}
+
+function guardarFavoritos(set){
+  try{
+    localStorage.setItem(FAVORITOS_KEY, JSON.stringify([...set]));
+  }catch(err){
+    // localStorage puede fallar en navegación privada muy restrictiva; se ignora silenciosamente
+  }
+}
+
+let FAVORITOS = leerFavoritos();
+
+function toggleFavorito(codigo, btn){
+  if(FAVORITOS.has(codigo)){
+    FAVORITOS.delete(codigo);
+  }else{
+    FAVORITOS.add(codigo);
+  }
+  guardarFavoritos(FAVORITOS);
+  if(btn) btn.classList.toggle("activo");
+  // Si el chip "Favoritos" está activo y se sacó el último favorito visible, refrescamos filtros y grilla
+  if(estado.categoria === CHIP_FAVORITOS){
+    renderFiltros();
+    renderGrid();
+  }else{
+    renderFiltros(); // por si el chip "Favoritos" tiene que aparecer/desaparecer
+  }
+}
+
 /* ============================================================
    NÚMERO DE WHATSAPP SEGÚN EL LOCAL (parámetro ?local= en la URL)
    ============================================================ */
@@ -425,6 +495,8 @@ function chipsCategoria(){
   const resultado = [];
   // "Más Vendidos" va primero, y solo aparece si hay al menos un producto marcado
   if (PRODUCTOS.some(p => p.mas_vendido)) resultado.push(CHIP_MAS_VENDIDOS);
+  // "Favoritos" va justo después, y solo aparece si el usuario ya guardó alguno
+  if (FAVORITOS.size > 0) resultado.push(CHIP_FAVORITOS);
   base.forEach(c=>{
     resultado.push(c);
     SUBCATEGORIAS_INDEPENDIENTES
@@ -440,6 +512,7 @@ function coincideCategoria(p, catSeleccionada){
   if(!catSeleccionada) return true;
 
   if(catSeleccionada === CHIP_MAS_VENDIDOS) return !!p.mas_vendido;
+  if(catSeleccionada === CHIP_FAVORITOS) return FAVORITOS.has(p.codigo);
 
   const especial = SUBCATEGORIAS_INDEPENDIENTES.find(s=>s.id===catSeleccionada);
   if(especial){
@@ -545,6 +618,11 @@ function renderGrid(){
               <circle cx="18" cy="19" r="3"></circle>
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
+          <button class="btn-favorito ${FAVORITOS.has(p.codigo)?'activo':''}" title="Guardar en favoritos" onclick="toggleFavorito('${p.codigo}', this)">
+            <svg viewBox="0 0 24 24" fill="${FAVORITOS.has(p.codigo)?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
           </button>
         </div>
