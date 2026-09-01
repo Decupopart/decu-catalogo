@@ -28562,5 +28562,145 @@
     "orientacion": "horizontal",
     "imagen": "Imagenes/3439-Serenidad Sagrada-Budismo-General-Oscuro-plateado, gris-Horizontal.jpg",
     "mas_vendido": false
+  },
+  {
+    "codigo": "3440",
+    "nombre": "Bajo el Sol Dorado",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Vibrante",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3440-Bajo el Sol Dorado-Botanica-Flores-Vibrante-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3441",
+    "nombre": "Alegría Amarilla",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Vibrante",
+    "colores": [
+      "amarillo",
+      "dorado"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3441-Alegría Amarilla-Botanica-Flores-Vibrante-amarillo, dorado-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3442",
+    "nombre": "Cielo y Flores",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Pastel",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "vertical",
+    "imagen": "Imagenes/3442-Cielo y Flores-Botanica-Flores-Pastel-amarillo, naranja-Vertical.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3443",
+    "nombre": "Flores del Mar",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Natural",
+    "colores": [
+      "violeta",
+      "rosa"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3443-Flores del Mar-Botanica-Flores-Natural-violeta, rosa-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3444",
+    "nombre": "Margaritas al Sol",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Pastel",
+    "colores": [
+      "amarillo",
+      "blanco"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3444-Margaritas al Sol-Botanica-Flores-Pastel-amarillo, blanco-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3445",
+    "nombre": "Resplandor Rosa",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Pastel",
+    "colores": [
+      "rosa",
+      "amarillo"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3445-Resplandor Rosa-Botanica-Flores-Pastel-rosa, amarillo-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3446",
+    "nombre": "No Me Olvides",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Tierra",
+    "colores": [
+      "azul",
+      "marron"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3446-No Me Olvides-Botanica-Flores-Tierra-azul, marrón-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3447",
+    "nombre": "Jardín Rosado",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Pastel",
+    "colores": [
+      "violeta",
+      "rosa"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3447-Jardín Rosado-Botanica-Flores-Pastel-violeta, rosa-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3448",
+    "nombre": "Atardecer en la Pradera",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Cálido",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3448-Atardecer en la Pradera-Botanica-Flores-Cálido-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3449",
+    "nombre": "Luz entre Silvestres",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Cálido",
+    "colores": [
+      "rojo",
+      "violeta"
+    ],
+    "orientacion": "vertical",
+    "imagen": "Imagenes/3449-Luz entre Silvestres-Botanica-Flores-Cálido-rojo, violeta-Vertical.jpg",
+    "mas_vendido": false
   }
 ]
