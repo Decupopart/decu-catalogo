@@ -28702,5 +28702,145 @@
     "orientacion": "vertical",
     "imagen": "Imagenes/3449-Luz entre Silvestres-Botanica-Flores-Cálido-rojo, violeta-Vertical.jpg",
     "mas_vendido": false
+  },
+  {
+    "codigo": "3450",
+    "nombre": "Dúo Floral",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Madera",
+    "colores": [
+      "rosa",
+      "marron"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3450-Dúo Floral-Botanica-Flores-Madera-rosa, marrón-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3451",
+    "nombre": "Ramas Silvestres",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Madera",
+    "colores": [
+      "naranja",
+      "amarillo"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3451-Ramas Silvestres-Botanica-Flores-Madera-naranja, amarillo-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3452",
+    "nombre": "Canto a la Tierra",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Madera",
+    "colores": [
+      "violeta",
+      "marron"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3452-Canto a la Tierra-Botanica-Flores-Madera-violeta, marrón-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3453",
+    "nombre": "Jardín Amarillo",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Dorado",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3453-Jardín Amarillo-Botanica-Flores-Dorado-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3454",
+    "nombre": "Mirada Íntima",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Dorado",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3454-Mirada Íntima-Botanica-Flores-Dorado-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3455",
+    "nombre": "Flores al Sol",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Dorado",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3455-Flores al Sol-Botanica-Flores-Dorado-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3456",
+    "nombre": "Joyas de la Tierra",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Dorado",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3456-Joyas de la Tierra-Botanica-Flores-Dorado-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3457",
+    "nombre": "Elegancia Rústica",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Madera",
+    "colores": [
+      "marron",
+      "beige"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3457-Elegancia Rústica-Botanica-Flores-Madera-marrón, beige-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3458",
+    "nombre": "Promesa de Verano",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Cálido",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3458-Promesa de Verano-Botanica-Flores-Cálido-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
+  },
+  {
+    "codigo": "3459",
+    "nombre": "Macro Naranja",
+    "categoria": "Botanica",
+    "subcategoria": "Flores",
+    "tonalidad": "Dorado",
+    "colores": [
+      "amarillo",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "imagen": "Imagenes/3459-Macro Naranja-Botanica-Flores-Dorado-amarillo, naranja-Horizontal.jpg",
+    "mas_vendido": false
   }
 ]
