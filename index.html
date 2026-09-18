@@ -346,6 +346,32 @@ header:after{content:'';position:absolute;width:520px;height:520px;right:-120px;
 .art-panel{overflow:hidden;background:#d8efff;}.art-panel img{width:100%;height:100%;object-fit:cover;display:block;}
 .living-hero{position:absolute;right:0;top:82px;bottom:0;width:52%;background:url('Imagenes/living-decu-maqueta.png') center / cover no-repeat;z-index:0;}.living-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#eef8ff 0%,rgba(238,248,255,.08) 34%,transparent 62%);}
 @media(max-width:860px){header{min-height:auto;padding-bottom:0;}.hero-content{padding:124px 24px 40px;}.hero-content h1{font-size:42px;}.hero-content .sub{font-size:16px;}.living-hero{position:relative;top:auto;right:auto;width:calc(100% + 48px);margin-left:-24px;height:270px;background-position:center;order:3;}.living-hero:before{background:linear-gradient(180deg,rgba(238,248,255,.12),transparent);}.hero-decoration{display:none;}}
+/* Encuadres de portada y colecciones, con flujo vertical en celular. */
+header{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:82px 0 0;min-height:560px;}
+header:after{display:none;}
+.hero-content{max-width:none;padding:64px 32px 64px 7vw;align-self:center;}
+.hero-content h1{font-size:clamp(36px,4.2vw,58px);}
+.hero-actions{flex-wrap:wrap;}
+.hero-cta{text-decoration:none;}
+.living-hero{position:relative;inset:auto;width:100%;height:100%;min-height:430px;margin:0;background:none;overflow:hidden;}
+.living-hero:before{display:none;}
+.living-hero svg{display:block;width:100%;height:100%;position:absolute;inset:0;}
+.collection-card,.collection-card:nth-child(2),.collection-card:nth-child(3){background:#fff;padding:0;overflow:hidden;min-height:0;justify-content:flex-start;}
+.collection-image{display:block;width:100%;aspect-ratio:900/539;flex-shrink:0;}
+.collection-copy{padding:18px;}
+.collection-card h3,.collection-card p{background:rgba(255,255,255,.95);margin:0;padding:12px 14px;color:var(--cream);}
+.collection-card h3{border-radius:8px 8px 0 0;padding-bottom:4px;}
+.collection-card p{border-radius:0 0 8px 8px;padding-top:4px;}
+.step{border-top:2px solid #cdebff;}
+main{min-width:0;}
+@media(max-width:860px){
+  header{display:flex;flex-direction:column;padding:82px 0 0;min-height:0;}
+  .hero-content{width:100%;padding:40px 24px 32px;}
+  .hero-content h1{font-size:clamp(34px,9vw,46px);}
+  .living-hero{position:relative;inset:auto;width:100%;height:auto;min-height:0;aspect-ratio:690/408;margin:0;order:initial;}
+  .collection-card{min-height:240px;}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));}
+}
 </style>
 </head>
 <body>
@@ -364,13 +390,30 @@ header:after{content:'';position:absolute;width:520px;height:520px;right:-120px;
     <p class="sub">Encontrá obras que acompañan tu estilo y hacen que cada rincón se sienta más tuyo.</p>
     <div class="hero-actions"><a class="hero-cta" href="#catalogo">Explorar catálogo</a><a class="hero-link" href="#como-comprar">Cómo comprar →</a></div>
   </div>
-  <div class="living-hero" role="img" aria-label="Living luminoso con cuadros Decu"></div>
+  <div class="living-hero">
+    <svg viewBox="660 58 690 408" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Living luminoso con cuadros sobre el sofá" overflow="hidden">
+      <image href="Imagenes/living-decu-maqueta.png" width="1505" height="1045" />
+    </svg>
+  </div>
 </header>
 
 <section class="section collections" id="colecciones">
   <div class="section-kicker">Explorá por estilo</div><h2>Colecciones para cada ambiente.</h2>
   <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
-  <div class="collection-grid"><article class="collection-card" style="background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.25)),url('Imagenes/855-Campo de girasoles-Botanica-Girasoles-Natural-azul, amarillo, naranja-Horizontal.jpg')"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></article><article class="collection-card" style="background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.25)),url('Imagenes/817-El resplandor-Paisajes-Playa-Natural-azul, amarillo, naranja-Horizontal.jpg')"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></article><article class="collection-card" style="background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.25)),url('Imagenes/520-Choque de fuerzas-Animales-Caballos-Madera-marron, ocre, negro-Horizontal.jpg')"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></article></div>
+  <div class="collection-grid">
+    <article class="collection-card">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image href="Imagenes/855-Campo de girasoles-Botanica-Girasoles-Natural-azul, amarillo, naranja-Horizontal.jpg" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
+    </article>
+    <article class="collection-card">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paisajes" overflow="hidden"><image href="Imagenes/817-El resplandor-Paisajes-Playa-Natural-azul, amarillo, naranja-Horizontal.jpg" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></div>
+    </article>
+    <article class="collection-card">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animales" overflow="hidden"><image href="Imagenes/520-Choque de fuerzas-Animales-Caballos-Madera-marron, ocre, negro-Horizontal.jpg" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
+    </article>
+  </div>
 </section>
 
 <div class="wrap" id="catalogo">
