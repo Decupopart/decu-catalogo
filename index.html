@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Decu — Catálogo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg: #1C1A17;
@@ -330,17 +330,50 @@ footer{
 .btn-whatsapp:hover {
   transform: scale(1.1);
 }
+
+/* ---------- Rediseño Decu: editorial, luminoso y celeste ---------- */
+:root{--bg:#fff;--panel:#f5faff;--panel-2:#eaf5ff;--wood:#1685f8;--wood-dim:#0965ce;--cream:#10233e;--muted:#61738a;--line:#d8e7f4;}
+body{font-family:'DM Sans',sans-serif;color:var(--cream);}
+header{min-height:560px;padding:0 7vw 56px;border:0;overflow:hidden;background:linear-gradient(112deg,#fff 0%,#f5fbff 52%,#d8efff 100%);display:flex;flex-direction:column;justify-content:center;}
+header:after{content:'';position:absolute;width:520px;height:520px;right:-120px;bottom:-220px;border-radius:50%;background:rgba(22,133,248,.11);}
+.topbar{position:absolute;top:0;left:7vw;right:7vw;height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);z-index:2;}
+.logo{font-size:23px;font-weight:700;letter-spacing:.28em;color:var(--cream);text-decoration:none;}.nav{display:flex;gap:26px;align-items:center;}.nav a{color:var(--cream);font-size:14px;text-decoration:none;font-weight:500;}.nav a:hover{color:var(--wood);}.nav-cta,.hero-cta{background:var(--wood);color:#fff!important;border-radius:999px;padding:11px 18px;box-shadow:0 8px 22px rgba(22,133,248,.22);}
+.hero-content{max-width:650px;position:relative;z-index:1;padding-top:88px;}.hero-decoration{position:absolute;z-index:1;right:8vw;bottom:52px;width:min(36vw,460px);height:300px;display:grid;grid-template-columns:1fr 1fr;gap:16px;transform:rotate(-3deg);}.art-panel{border:9px solid #fff;box-shadow:0 18px 40px rgba(16,35,62,.15);background:linear-gradient(135deg,#aee0ff,#fff 52%,#4a9ee8);}.art-panel:last-child{transform:translateY(48px);background:linear-gradient(145deg,#fff,#b6dff6 42%,#1378c5);}
+.eyebrow{font-family:'Manrope',sans-serif;color:var(--wood-dim);font-weight:700;}.hero-content h1{font-family:'Manrope',sans-serif;font-weight:700;letter-spacing:-.05em;}.hero-content h1 em{font-style:normal;color:var(--wood);}.hero-content .sub{font-size:17px;}.hero-actions{display:flex;gap:18px;align-items:center;margin-top:28px;}.hero-link{color:var(--wood-dim);font-weight:700;text-decoration:none;}
+.wrap{max-width:1380px;margin:0 auto 84px;border:1px solid var(--line);border-radius:18px;overflow:hidden;}.sala{background:var(--panel);}.sala h2,.conteo,footer{font-family:'Manrope',sans-serif;}.buscador{color:var(--cream);}.buscador:focus{border-color:var(--wood);}.chip:hover{border-color:var(--wood);color:var(--wood-dim);}.chip.activo{background:var(--wood);border-color:var(--wood);color:#fff;}.limpiar{color:var(--wood-dim);}.conteo b{color:var(--wood);}.galeria-header{background:#fff;}.grid{gap:24px;}.cuadro{border-radius:12px;}.cuadro:hover{border-color:var(--wood);}.lienzo-marco{background:linear-gradient(160deg,#dceefa,#c9e4f7);}.lienzo{border-color:rgba(255,255,255,.7);}.btn-compartir,.btn-favorito{background:rgba(255,255,255,.86);border-color:rgba(16,35,62,.12);color:var(--cream);}.btn-compartir:hover{background:var(--wood);}.btn-consultar{background:#fff;color:var(--wood-dim);}.btn-consultar:hover{background:var(--wood);color:#fff;}
+.section{max-width:1380px;margin:0 auto;padding:82px 7vw;}.section-kicker{font-size:11px;color:var(--wood-dim);letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin:0 0 9px;}.section h2{font-family:'Manrope',sans-serif;font-size:clamp(29px,4vw,43px);letter-spacing:-.045em;margin:0 0 16px;line-height:1.06;}.section-copy{max-width:590px;color:var(--muted);line-height:1.65;font-size:16px;margin:0;}.collections{background:var(--panel);max-width:none;padding-left:7vw;padding-right:7vw;}.collection-grid,.steps{max-width:1180px;margin:34px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}.collection-card{padding:26px;min-height:180px;border-radius:14px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;background-image:linear-gradient(135deg,rgba(205,235,255,.75),#fff 62%);}.collection-card:nth-child(2){background-image:linear-gradient(135deg,#fff,rgba(172,219,251,.85));}.collection-card:nth-child(3){background-image:linear-gradient(135deg,rgba(174,225,255,.85),#fff 62%);}.collection-card h3{margin:0 0 7px;font-size:20px;}.collection-card p{margin:0;color:var(--muted);}.about{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;}.about-card{background:var(--wood);padding:44px;border-radius:18px;color:#fff;}.about-card p{font-size:20px;line-height:1.5;margin:0;}.about-card span{display:block;margin-top:24px;font-size:13px;opacity:.78;}.steps{grid-template-columns:repeat(3,1fr);}.step{padding:22px 0;border-top:2px solid #cde bff;border-top-color:#cdebff;}.step b{display:block;color:var(--wood);font-size:13px;margin-bottom:16px;}.step h3{margin:0 0 7px;font-size:18px;}.step p{margin:0;color:var(--muted);line-height:1.55;}.contact{background:var(--cream);color:#fff;max-width:none;padding-left:7vw;padding-right:7vw;}.contact .section-kicker{color:#cdebff;}.contact h2{max-width:580px;}.contact .section-copy{color:#cbd7e5;}.contact a{display:inline-block;margin-top:24px;text-decoration:none;font-weight:700;background:#fff;color:var(--cream);padding:13px 20px;border-radius:999px;}
+@media(max-width:860px){header{min-height:620px;padding:0 24px 44px}.topbar{left:24px;right:24px}.nav{display:none}.hero-content{padding-top:72px}.hero-decoration{width:270px;height:180px;right:-20px;bottom:45px;opacity:.72}.section{padding:64px 24px}.collections,.contact{padding-left:24px;padding-right:24px}.collection-grid,.steps,.about{grid-template-columns:1fr;gap:14px}.wrap{margin:0 16px 52px}.grid{padding:16px;gap:16px}.galeria-header{padding:20px 16px}.sala{padding:24px 16px}}
+.art-panel{overflow:hidden;background:#d8efff;}.art-panel img{width:100%;height:100%;object-fit:cover;display:block;}
+.living-hero{position:absolute;right:0;top:82px;bottom:0;width:52%;background:url('Imagenes/living-decu-maqueta.png') center / cover no-repeat;z-index:0;}.living-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#eef8ff 0%,rgba(238,248,255,.08) 34%,transparent 62%);}
+@media(max-width:860px){header{min-height:auto;padding-bottom:0;}.hero-content{padding:124px 24px 40px;}.hero-content h1{font-size:42px;}.hero-content .sub{font-size:16px;}.living-hero{position:relative;top:auto;right:auto;width:calc(100% + 48px);margin-left:-24px;height:270px;background-position:center;order:3;}.living-hero:before{background:linear-gradient(180deg,rgba(238,248,255,.12),transparent);}.hero-decoration{display:none;}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="eyebrow">Decu · Cuadros en lienzo sobre bastidor</div>
-  <h1>Cada pared<br><em>tiene su estilo.</em></h1>
-  <p class="sub">Filtrá por categoría, tonalidad u orientación y encontrá el modelo exacto para tu espacio.</p>
+  <div class="topbar">
+    <a class="logo" href="#inicio">DECU</a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="#catalogo">Catálogo</a><a href="#colecciones">Colecciones</a><a href="#decu">Sobre Decu</a><a href="#contacto">Contacto</a>
+      <a class="nav-cta" href="#catalogo">Ver catálogo</a>
+    </nav>
+  </div>
+  <div class="hero-content" id="inicio">
+    <div class="eyebrow">Cuadros en lienzo sobre bastidor</div>
+    <h1>Arte que transforma<br><em>tus espacios.</em></h1>
+    <p class="sub">Encontrá obras que acompañan tu estilo y hacen que cada rincón se sienta más tuyo.</p>
+    <div class="hero-actions"><a class="hero-cta" href="#catalogo">Explorar catálogo</a><a class="hero-link" href="#como-comprar">Cómo comprar →</a></div>
+  </div>
+  <div class="living-hero" role="img" aria-label="Living luminoso con cuadros Decu"></div>
 </header>
 
-<div class="wrap">
+<section class="section collections" id="colecciones">
+  <div class="section-kicker">Explorá por estilo</div><h2>Colecciones para cada ambiente.</h2>
+  <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
+  <div class="collection-grid"><article class="collection-card" style="background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.25)),url('Imagenes/855-Campo de girasoles-Botanica-Girasoles-Natural-azul, amarillo, naranja-Horizontal.jpg')"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></article><article class="collection-card" style="background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.25)),url('Imagenes/817-El resplandor-Paisajes-Playa-Natural-azul, amarillo, naranja-Horizontal.jpg')"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></article><article class="collection-card" style="background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.25)),url('Imagenes/520-Choque de fuerzas-Animales-Caballos-Madera-marron, ocre, negro-Horizontal.jpg')"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></article></div>
+</section>
+
+<div class="wrap" id="catalogo">
   <aside class="sala">
     <h2>Buscar en el catálogo</h2>
     <input class="buscador" id="buscador" type="text" placeholder="Nombre o código…">
@@ -372,8 +405,22 @@ footer{
   </main>
 </div>
 
+<section class="section about" id="decu">
+  <div><div class="section-kicker">Sobre Decu</div><h2>Obras pensadas para habitar tus paredes.</h2><p class="section-copy">En Decu creemos que una imagen puede cambiar la energía de un ambiente. Por eso reunimos diseños en lienzo listos para encontrar su lugar en tu casa.</p></div>
+  <div class="about-card"><p>Elegí con calma, filtrá por estilo y encontrá ese cuadro que hace que el espacio se sienta realmente tuyo.</p><span>DECU · Arte para vivir mejor</span></div>
+</section>
+
+<section class="section" id="como-comprar">
+  <div class="section-kicker">Así de simple</div><h2>Cómo comprar.</h2>
+  <div class="steps"><article class="step"><b>01</b><h3>Elegí tu favorito</h3><p>Recorré el catálogo o usá los filtros para encontrar el estilo ideal.</p></article><article class="step"><b>02</b><h3>Consultanos</h3><p>Escribinos por WhatsApp directamente desde la obra que te gustó.</p></article><article class="step"><b>03</b><h3>Disfrutalo en casa</h3><p>Coordinamos tu pedido para que el arte llegue a tu espacio.</p></article></div>
+</section>
+
+<section class="section contact" id="contacto">
+  <div class="section-kicker">Estamos para ayudarte</div><h2>¿Buscás una obra para un ambiente especial?</h2><p class="section-copy">Escribinos y te ayudamos a encontrar el cuadro indicado.</p><a href="#btn-whatsapp">Hablar por WhatsApp</a>
+</section>
+
 <footer>
-  Datos cargados desde productos.json. Los productos sin imagen todavía no se muestran en el catálogo.
+  © Decu · Cuadros en lienzo sobre bastidor.
 </footer>
 
 <script>
