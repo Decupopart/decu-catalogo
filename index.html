@@ -146,6 +146,31 @@ h1 em{
   cursor:not-allowed;
   pointer-events:none;
 }
+.toggle-opciones,.toggle-categorias{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:0;
+  background:transparent;
+  color:var(--wood-dim);
+  padding:4px 0;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+}
+.toggle-opciones{margin-top:2px;}
+.toggle-categorias{
+  width:100%;
+  justify-content:space-between;
+  padding:11px 0;
+  margin:-8px 0 22px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.toggle-opciones span,.toggle-categorias span{transition:transform .2s ease;}
+.toggle-opciones[aria-expanded="true"] span,.toggle-categorias[aria-expanded="true"] span{transform:rotate(180deg);}
+#filtros-secundarios[hidden]{display:none;}
 .limpiar{
   background:none;
   border:none;
@@ -362,6 +387,9 @@ header:after{display:none;}
 .collection-card h3,.collection-card p{background:rgba(255,255,255,.95);margin:0;padding:12px 14px;color:var(--cream);}
 .collection-card h3{border-radius:8px 8px 0 0;padding-bottom:4px;}
 .collection-card p{border-radius:0 0 8px 8px;padding-top:4px;}
+.collection-card[data-categoria-destino]{cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+.collection-card[data-categoria-destino]:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(16,35,62,.12);border-color:var(--wood);}
+.collection-card[data-categoria-destino]:focus-visible{outline:3px solid rgba(22,133,248,.35);outline-offset:4px;}
 .step{border-top:2px solid #cdebff;}
 main{min-width:0;}
 @media(max-width:860px){
@@ -401,15 +429,15 @@ main{min-width:0;}
   <div class="section-kicker">Explorá por estilo</div><h2>Colecciones para cada ambiente.</h2>
   <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
   <div class="collection-grid">
-    <article class="collection-card">
+    <article class="collection-card" data-categoria-destino="Botanica" role="button" tabindex="0" aria-label="Ver cuadros de naturaleza">
       <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image data-imagen-destacada data-codigo="855" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
     </article>
-    <article class="collection-card">
+    <article class="collection-card" data-categoria-destino="Paisajes" role="button" tabindex="0" aria-label="Ver cuadros de paisajes">
       <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paisajes" overflow="hidden"><image data-imagen-destacada data-codigo="817" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></div>
     </article>
-    <article class="collection-card">
+    <article class="collection-card" data-categoria-destino="Animales" role="button" tabindex="0" aria-label="Ver cuadros de animales">
       <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animales" overflow="hidden"><image data-imagen-destacada data-codigo="520" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
     </article>
@@ -421,16 +449,6 @@ main{min-width:0;}
     <h2>Buscar en el catálogo</h2>
     <input class="buscador" id="buscador" type="text" placeholder="Nombre o código…">
 
-    <div class="grupo-filtro">
-      <h3>Categoría</h3>
-      <div id="filtro-categoria"></div>
-    </div>
-
-    <div class="grupo-filtro">
-      <h3>Tonalidad</h3>
-      <div id="filtro-tonalidad"></div>
-    </div>
-
     <div class="grupo-filtro filtro-opcional" hidden>
       <h3>Ambiente</h3>
       <div id="filtro-ambiente"></div>
@@ -441,24 +459,41 @@ main{min-width:0;}
       <div id="filtro-estilo"></div>
     </div>
 
-    <div class="grupo-filtro filtro-opcional" hidden>
-      <h3>Emoción</h3>
-      <div id="filtro-emocion"></div>
-    </div>
-
-    <div class="grupo-filtro filtro-opcional" hidden>
-      <h3>Impacto visual</h3>
-      <div id="filtro-impacto-visual"></div>
-    </div>
-
-    <div class="grupo-filtro filtro-opcional" hidden>
-      <h3>Técnica visual</h3>
-      <div id="filtro-tecnica-visual"></div>
+    <div class="grupo-filtro">
+      <h3>Tonalidad</h3>
+      <div id="filtro-tonalidad"></div>
     </div>
 
     <div class="grupo-filtro">
-      <h3>Orientación</h3>
-      <div id="filtro-orientacion"></div>
+      <h3>Categoría</h3>
+      <div id="filtro-categoria"></div>
+    </div>
+
+    <button class="toggle-categorias" id="toggle-filtros-secundarios" type="button" aria-expanded="false">
+      Ver más categorías <span aria-hidden="true">↓</span>
+    </button>
+
+    <div id="filtros-secundarios" hidden>
+
+      <div class="grupo-filtro filtro-opcional" hidden>
+        <h3>Emoción</h3>
+        <div id="filtro-emocion"></div>
+      </div>
+
+      <div class="grupo-filtro filtro-opcional" hidden>
+        <h3>Impacto visual</h3>
+        <div id="filtro-impacto-visual"></div>
+      </div>
+
+      <div class="grupo-filtro filtro-opcional" hidden>
+        <h3>Técnica visual</h3>
+        <div id="filtro-tecnica-visual"></div>
+      </div>
+
+      <div class="grupo-filtro">
+        <h3>Orientación</h3>
+        <div id="filtro-orientacion"></div>
+      </div>
     </div>
 
     <button class="limpiar" id="limpiar">Limpiar filtros</button>
@@ -578,13 +613,9 @@ const numeroWhatsappActivo = (localActivo && LOCALES[localActivo]) ? LOCALES[loc
 
 let PRODUCTOS = [];
 
-const FILTROS_ADICIONALES = [
-  { campo:"ambiente", id:"filtro-ambiente" },
-  { campo:"estilo", id:"filtro-estilo" },
-  { campo:"emocion", id:"filtro-emocion" },
-  { campo:"impacto_visual", id:"filtro-impacto-visual" },
-  { campo:"tecnica_visual", id:"filtro-tecnica-visual" },
-];
+const LIMITE_OPCIONES_FILTRO = 8;
+const filtrosExpandidos = new Set();
+let filtrosSecundariosVisibles = false;
 
 function textoSeguro(valor){
   return valor == null ? "" : String(valor).trim();
@@ -760,32 +791,77 @@ function valorDisponible(campo, valor){
   return PRODUCTOS.some(p=>productoCoincide(p, campo, valor));
 }
 
-function renderFiltroSimple(campo, idContenedor, valoresFijos=null){
+function cantidadProductosFiltro(campo, valor){
+  return PRODUCTOS.filter(p=>{
+    if(!p.imagen) return false;
+    if(campo === "categoria") return coincideCategoria(p, valor);
+    return p[campo] === valor;
+  }).length;
+}
+
+function ordenarValoresRepresentativos(campo, valores){
+  const prioridadEspecial = valor=>{
+    if(valor === CHIP_MAS_VENDIDOS) return 0;
+    if(valor === CHIP_FAVORITOS) return 1;
+    return 2;
+  };
+  return [...valores].sort((a,b)=>{
+    const diferenciaPrioridad = prioridadEspecial(a) - prioridadEspecial(b);
+    if(diferenciaPrioridad) return diferenciaPrioridad;
+    const diferenciaCantidad = cantidadProductosFiltro(campo, b) - cantidadProductosFiltro(campo, a);
+    return diferenciaCantidad || a.localeCompare(b, "es");
+  });
+}
+
+function opcionesVisibles(campo, valores){
+  if(filtrosExpandidos.has(campo) || valores.length <= LIMITE_OPCIONES_FILTRO) return valores;
+  const visibles = valores.slice(0, LIMITE_OPCIONES_FILTRO);
+  const activo = estado[campo];
+  if(activo && !visibles.includes(activo)) visibles[visibles.length - 1] = activo;
+  return visibles;
+}
+
+function renderGrupoFiltro(campo, idContenedor, valoresFijos=null){
   const contenedor = document.getElementById(idContenedor);
   if(!contenedor) return;
-  const valores = valoresFijos || valoresUnicos(campo);
+  const valores = ordenarValoresRepresentativos(campo, valoresFijos || valoresUnicos(campo));
+  const visibles = opcionesVisibles(campo, valores);
   const grupo = contenedor.closest(".grupo-filtro");
   if(grupo && grupo.classList.contains("filtro-opcional")) grupo.hidden = valores.length === 0;
 
-  contenedor.innerHTML = valores.map(valor=>{
+  const opciones = visibles.map(valor=>{
     const activo = estado[campo] === valor;
     const disponible = valorDisponible(campo, valor);
     const clases = `chip ${activo?'activo':''} ${(!disponible && !activo)?'no-disponible':''}`;
     return `<button class="${clases}" data-campo="${campo}" data-valor="${escaparHtml(valor)}">${escaparHtml(valor)}</button>`;
   }).join("");
+
+  const expandido = filtrosExpandidos.has(campo);
+  const botonOpciones = valores.length > LIMITE_OPCIONES_FILTRO
+    ? `<button class="toggle-opciones" type="button" data-expandir-filtro="${campo}" aria-expanded="${expandido}">${expandido?'Menos opciones':'Más opciones'} <span aria-hidden="true">↓</span></button>`
+    : "";
+  contenedor.innerHTML = `<div class="opciones-filtro">${opciones}</div>${botonOpciones}`;
 }
 
 function renderFiltros(){
-  // Categoría
-  const contCategoria = document.getElementById("filtro-categoria");
-  contCategoria.innerHTML = chipsCategoria().map(v=>{
-    const valorSeguro = escaparHtml(v);
-    return `<button class="chip ${estado.categoria===v?'activo':''}" data-campo="categoria" data-valor="${valorSeguro}">${valorSeguro}</button>`;
-  }).join("");
+  renderGrupoFiltro("ambiente", "filtro-ambiente");
+  renderGrupoFiltro("estilo", "filtro-estilo");
+  renderGrupoFiltro("tonalidad", "filtro-tonalidad");
+  renderGrupoFiltro("categoria", "filtro-categoria", chipsCategoria());
+  renderGrupoFiltro("emocion", "filtro-emocion");
+  renderGrupoFiltro("impacto_visual", "filtro-impacto-visual");
+  renderGrupoFiltro("tecnica_visual", "filtro-tecnica-visual");
+  renderGrupoFiltro("orientacion", "filtro-orientacion", ORIENTACIONES_FILTRO);
 
-  renderFiltroSimple("tonalidad", "filtro-tonalidad");
-  FILTROS_ADICIONALES.forEach(({campo, id})=>renderFiltroSimple(campo, id));
-  renderFiltroSimple("orientacion", "filtro-orientacion", ORIENTACIONES_FILTRO);
+  const secundarios = document.getElementById("filtros-secundarios");
+  const botonSecundarios = document.getElementById("toggle-filtros-secundarios");
+  secundarios.hidden = !filtrosSecundariosVisibles;
+  botonSecundarios.setAttribute("aria-expanded", String(filtrosSecundariosVisibles));
+  botonSecundarios.innerHTML = `${filtrosSecundariosVisibles?'Ver menos categorías':'Ver más categorías'} <span aria-hidden="true">↓</span>`;
+  botonSecundarios.onclick = ()=>{
+    filtrosSecundariosVisibles = !filtrosSecundariosVisibles;
+    renderFiltros();
+  };
 
   document.querySelectorAll(".chip").forEach(btn=>{
     btn.addEventListener("click", ()=>{
@@ -794,6 +870,15 @@ function renderFiltros(){
       estado[campo] = estado[campo]===valor ? null : valor;
       renderFiltros();
       renderGrid();
+    });
+  });
+
+  document.querySelectorAll("[data-expandir-filtro]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const campo = btn.dataset.expandirFiltro;
+      if(filtrosExpandidos.has(campo)) filtrosExpandidos.delete(campo);
+      else filtrosExpandidos.add(campo);
+      renderFiltros();
     });
   });
 }
@@ -840,6 +925,34 @@ function renderGrid(){
   `).join("");
 }
 
+function mostrarColeccion(categoria){
+  Object.keys(estado).forEach(campo=>{
+    estado[campo] = campo === "texto" ? "" : null;
+  });
+  filtrosExpandidos.clear();
+  filtrosSecundariosVisibles = false;
+  estado.categoria = categoria;
+  document.getElementById("buscador").value = "";
+  renderFiltros();
+  renderGrid();
+  window.setTimeout(()=>{
+    document.getElementById("catalogo").scrollIntoView({ behavior:"smooth", block:"start" });
+  }, 80);
+}
+
+function activarTarjetasColeccion(){
+  document.querySelectorAll("[data-categoria-destino]").forEach(tarjeta=>{
+    const activar = ()=>mostrarColeccion(tarjeta.dataset.categoriaDestino);
+    tarjeta.addEventListener("click", activar);
+    tarjeta.addEventListener("keydown", evento=>{
+      if(evento.key === "Enter" || evento.key === " "){
+        evento.preventDefault();
+        activar();
+      }
+    });
+  });
+}
+
 /* Arma el link de WhatsApp para consultar/encargar un cuadro puntual,
    usando el número de local vigente (numeroWhatsappActivo, definido más abajo) */
 function linkConsulta(p){
@@ -879,11 +992,14 @@ document.getElementById("limpiar").addEventListener("click", ()=>{
   Object.keys(estado).forEach(campo=>{
     estado[campo] = campo === "texto" ? "" : null;
   });
+  filtrosExpandidos.clear();
+  filtrosSecundariosVisibles = false;
   document.getElementById("buscador").value="";
   renderFiltros();
   renderGrid();
 });
 
+activarTarjetasColeccion();
 cargarProductos();
 </script>
 
