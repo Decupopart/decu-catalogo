@@ -431,6 +431,31 @@ main{min-width:0;}
       <div id="filtro-tonalidad"></div>
     </div>
 
+    <div class="grupo-filtro filtro-opcional" hidden>
+      <h3>Ambiente</h3>
+      <div id="filtro-ambiente"></div>
+    </div>
+
+    <div class="grupo-filtro filtro-opcional" hidden>
+      <h3>Estilo</h3>
+      <div id="filtro-estilo"></div>
+    </div>
+
+    <div class="grupo-filtro filtro-opcional" hidden>
+      <h3>Emoción</h3>
+      <div id="filtro-emocion"></div>
+    </div>
+
+    <div class="grupo-filtro filtro-opcional" hidden>
+      <h3>Impacto visual</h3>
+      <div id="filtro-impacto-visual"></div>
+    </div>
+
+    <div class="grupo-filtro filtro-opcional" hidden>
+      <h3>Técnica visual</h3>
+      <div id="filtro-tecnica-visual"></div>
+    </div>
+
     <div class="grupo-filtro">
       <h3>Orientación</h3>
       <div id="filtro-orientacion"></div>
@@ -553,12 +578,47 @@ const numeroWhatsappActivo = (localActivo && LOCALES[localActivo]) ? LOCALES[loc
 
 let PRODUCTOS = [];
 
+const FILTROS_ADICIONALES = [
+  { campo:"ambiente", id:"filtro-ambiente" },
+  { campo:"estilo", id:"filtro-estilo" },
+  { campo:"emocion", id:"filtro-emocion" },
+  { campo:"impacto_visual", id:"filtro-impacto-visual" },
+  { campo:"tecnica_visual", id:"filtro-tecnica-visual" },
+];
+
+function textoSeguro(valor){
+  return valor == null ? "" : String(valor).trim();
+}
+
+function normalizarProducto(producto){
+  const p = producto && typeof producto === "object" ? producto : {};
+  return {
+    ...p,
+    codigo: textoSeguro(p.codigo),
+    nombre: textoSeguro(p.nombre),
+    categoria: textoSeguro(p.categoria),
+    subcategoria: textoSeguro(p.subcategoria),
+    tonalidad: textoSeguro(p.tonalidad),
+    orientacion: textoSeguro(p.orientacion).toLowerCase(),
+    ambiente: textoSeguro(p.ambiente),
+    estilo: textoSeguro(p.estilo),
+    emocion: textoSeguro(p.emocion),
+    impacto_visual: textoSeguro(p.impacto_visual),
+    tecnica_visual: textoSeguro(p.tecnica_visual),
+    colores: Array.isArray(p.colores) ? p.colores.map(textoSeguro).filter(Boolean) : [],
+    imagen: textoSeguro(p.imagen) || null,
+    mas_vendido: p.mas_vendido === true,
+  };
+}
+
 async function cargarProductos(){
   const grid = document.getElementById("grid");
   try{
     const resp = await fetch("productos.json");
     if(!resp.ok) throw new Error("No se pudo leer productos.json");
-    PRODUCTOS = await resp.json();
+    const datos = await resp.json();
+    if(!Array.isArray(datos)) throw new Error("productos.json no contiene una lista");
+    PRODUCTOS = datos.map(normalizarProducto).filter(p=>p.codigo && p.nombre && p.categoria);
   }catch(err){
     grid.innerHTML = `<div class="vacio">
       <p>No se pudo cargar productos.json</p>
@@ -572,10 +632,20 @@ async function cargarProductos(){
 }
 
 /* estado de filtros */
-const estado = { categoria:null, tonalidad:null, orientacion:null, texto:"" };
+const estado = {
+  categoria:null,
+  tonalidad:null,
+  ambiente:null,
+  estilo:null,
+  emocion:null,
+  impacto_visual:null,
+  tecnica_visual:null,
+  orientacion:null,
+  texto:"",
+};
 
 function valoresUnicos(campo){
-  return [...new Set(PRODUCTOS.map(p=>p[campo]))];
+  return [...new Set(PRODUCTOS.map(p=>textoSeguro(p[campo])).filter(Boolean))];
 }
 
 /* Chips de categoría: categorías reales (sin las excluidas) + subcategorías independizadas,
@@ -621,43 +691,71 @@ function coincideCategoria(p, catSeleccionada){
   return true;
 }
 
-/* Verifica si existe al menos un producto visible para una tonalidad dada,
-   respetando el resto de los filtros activos (categoría, orientación, texto) */
-function tonalidadDisponible(t){
-  return PRODUCTOS.some(p=>{
-    if(!p.imagen) return false;
-    if(p.orientacion === "triptico" || p.orientacion === "tríptico") return false;
-    if(!coincideCategoria(p, estado.categoria)) return false;
-    if(estado.orientacion && p.orientacion!==estado.orientacion) return false;
-    if(estado.texto){
-      const q = estado.texto.toLowerCase();
-      if(!p.nombre.toLowerCase().includes(q) && !p.codigo.toLowerCase().includes(q)) return false;
-    }
-    return p.tonalidad === t;
-  });
+function escaparHtml(valor){
+  return textoSeguro(valor).replace(/[&<>"]/g, caracter=>({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;"
+  })[caracter]);
+}
+
+function coincideTexto(p, consulta){
+  if(!consulta) return true;
+  const contenido = [
+    p.codigo, p.nombre, p.categoria, p.subcategoria, p.tonalidad,
+    p.ambiente, p.estilo, p.emocion, p.impacto_visual, p.tecnica_visual,
+    ...(p.colores || []),
+  ].join(" ").toLowerCase();
+  return contenido.includes(consulta.toLowerCase());
+}
+
+function productoCoincide(p, ignorarCampo=null, valorAlternativo=null){
+  if(!p.imagen) return false;
+  if(p.orientacion === "triptico" || p.orientacion === "tríptico") return false;
+
+  const categoria = ignorarCampo === "categoria" ? valorAlternativo : estado.categoria;
+  if(!coincideCategoria(p, categoria)) return false;
+
+  const camposSimples = [
+    "tonalidad", "ambiente", "estilo", "emocion",
+    "impacto_visual", "tecnica_visual", "orientacion",
+  ];
+  for(const campo of camposSimples){
+    const seleccionado = campo === ignorarCampo ? valorAlternativo : estado[campo];
+    if(seleccionado && p[campo] !== seleccionado) return false;
+  }
+
+  return coincideTexto(p, estado.texto);
+}
+
+function valorDisponible(campo, valor){
+  return PRODUCTOS.some(p=>productoCoincide(p, campo, valor));
+}
+
+function renderFiltroSimple(campo, idContenedor, valoresFijos=null){
+  const contenedor = document.getElementById(idContenedor);
+  if(!contenedor) return;
+  const valores = valoresFijos || valoresUnicos(campo);
+  const grupo = contenedor.closest(".grupo-filtro");
+  if(grupo && grupo.classList.contains("filtro-opcional")) grupo.hidden = valores.length === 0;
+
+  contenedor.innerHTML = valores.map(valor=>{
+    const activo = estado[campo] === valor;
+    const disponible = valorDisponible(campo, valor);
+    const clases = `chip ${activo?'activo':''} ${(!disponible && !activo)?'no-disponible':''}`;
+    return `<button class="${clases}" data-campo="${campo}" data-valor="${escaparHtml(valor)}">${escaparHtml(valor)}</button>`;
+  }).join("");
 }
 
 function renderFiltros(){
   // Categoría
   const contCategoria = document.getElementById("filtro-categoria");
-  contCategoria.innerHTML = chipsCategoria().map(v=>
-    `<button class="chip ${estado.categoria===v?'activo':''}" data-campo="categoria" data-valor="${v}">${v}</button>`
-  ).join("");
-
-  // Tonalidad (con chips deshabilitados si no hay modelos disponibles para la selección actual)
-  const contTonalidad = document.getElementById("filtro-tonalidad");
-  contTonalidad.innerHTML = valoresUnicos("tonalidad").map(v=>{
-    const activo = estado.tonalidad===v;
-    const disponible = tonalidadDisponible(v);
-    const clases = `chip ${activo?'activo':''} ${(!disponible && !activo)?'no-disponible':''}`;
-    return `<button class="${clases}" data-campo="tonalidad" data-valor="${v}">${v}</button>`;
+  contCategoria.innerHTML = chipsCategoria().map(v=>{
+    const valorSeguro = escaparHtml(v);
+    return `<button class="chip ${estado.categoria===v?'activo':''}" data-campo="categoria" data-valor="${valorSeguro}">${valorSeguro}</button>`;
   }).join("");
 
-  // Orientación
-  const contOrientacion = document.getElementById("filtro-orientacion");
-  contOrientacion.innerHTML = ORIENTACIONES_FILTRO.map(v=>
-    `<button class="chip ${estado.orientacion===v?'activo':''}" data-campo="orientacion" data-valor="${v}">${v}</button>`
-  ).join("");
+  renderFiltroSimple("tonalidad", "filtro-tonalidad");
+  FILTROS_ADICIONALES.forEach(({campo, id})=>renderFiltroSimple(campo, id));
+  renderFiltroSimple("orientacion", "filtro-orientacion", ORIENTACIONES_FILTRO);
 
   document.querySelectorAll(".chip").forEach(btn=>{
     btn.addEventListener("click", ()=>{
@@ -673,21 +771,7 @@ function renderFiltros(){
 function renderGrid(){
   const grid = document.getElementById("grid");
 
-  const filtrados = PRODUCTOS.filter(p=>{
-    if(!p.imagen) return false;
-
-    // Filtrar para que no se muestren los trípticos
-    if(p.orientacion === "triptico" || p.orientacion === "tríptico") return false;
-
-    if(!coincideCategoria(p, estado.categoria)) return false;
-    if(estado.tonalidad && p.tonalidad!==estado.tonalidad) return false;
-    if(estado.orientacion && p.orientacion!==estado.orientacion) return false;
-    if(estado.texto){
-      const q = estado.texto.toLowerCase();
-      if(!p.nombre.toLowerCase().includes(q) && !p.codigo.toLowerCase().includes(q)) return false;
-    }
-    return true;
-  });
+  const filtrados = PRODUCTOS.filter(p=>productoCoincide(p));
 
   document.getElementById("cant").textContent = filtrados.length;
 
@@ -762,7 +846,9 @@ document.getElementById("buscador").addEventListener("input", e=>{
 });
 
 document.getElementById("limpiar").addEventListener("click", ()=>{
-  estado.categoria=null; estado.tonalidad=null; estado.orientacion=null; estado.texto="";
+  Object.keys(estado).forEach(campo=>{
+    estado[campo] = campo === "texto" ? "" : null;
+  });
   document.getElementById("buscador").value="";
   renderFiltros();
   renderGrid();
