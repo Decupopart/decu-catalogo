@@ -344,7 +344,7 @@ header:after{content:'';position:absolute;width:520px;height:520px;right:-120px;
 .section{max-width:1380px;margin:0 auto;padding:82px 7vw;}.section-kicker{font-size:11px;color:var(--wood-dim);letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin:0 0 9px;}.section h2{font-family:'Manrope',sans-serif;font-size:clamp(29px,4vw,43px);letter-spacing:-.045em;margin:0 0 16px;line-height:1.06;}.section-copy{max-width:590px;color:var(--muted);line-height:1.65;font-size:16px;margin:0;}.collections{background:var(--panel);max-width:none;padding-left:7vw;padding-right:7vw;}.collection-grid,.steps{max-width:1180px;margin:34px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}.collection-card{padding:26px;min-height:180px;border-radius:14px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;background-image:linear-gradient(135deg,rgba(205,235,255,.75),#fff 62%);}.collection-card:nth-child(2){background-image:linear-gradient(135deg,#fff,rgba(172,219,251,.85));}.collection-card:nth-child(3){background-image:linear-gradient(135deg,rgba(174,225,255,.85),#fff 62%);}.collection-card h3{margin:0 0 7px;font-size:20px;}.collection-card p{margin:0;color:var(--muted);}.about{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;}.about-card{background:var(--wood);padding:44px;border-radius:18px;color:#fff;}.about-card p{font-size:20px;line-height:1.5;margin:0;}.about-card span{display:block;margin-top:24px;font-size:13px;opacity:.78;}.steps{grid-template-columns:repeat(3,1fr);}.step{padding:22px 0;border-top:2px solid #cde bff;border-top-color:#cdebff;}.step b{display:block;color:var(--wood);font-size:13px;margin-bottom:16px;}.step h3{margin:0 0 7px;font-size:18px;}.step p{margin:0;color:var(--muted);line-height:1.55;}.contact{background:var(--cream);color:#fff;max-width:none;padding-left:7vw;padding-right:7vw;}.contact .section-kicker{color:#cdebff;}.contact h2{max-width:580px;}.contact .section-copy{color:#cbd7e5;}.contact a{display:inline-block;margin-top:24px;text-decoration:none;font-weight:700;background:#fff;color:var(--cream);padding:13px 20px;border-radius:999px;}
 @media(max-width:860px){header{min-height:620px;padding:0 24px 44px}.topbar{left:24px;right:24px}.nav{display:none}.hero-content{padding-top:72px}.hero-decoration{width:270px;height:180px;right:-20px;bottom:45px;opacity:.72}.section{padding:64px 24px}.collections,.contact{padding-left:24px;padding-right:24px}.collection-grid,.steps,.about{grid-template-columns:1fr;gap:14px}.wrap{margin:0 16px 52px}.grid{padding:16px;gap:16px}.galeria-header{padding:20px 16px}.sala{padding:24px 16px}}
 .art-panel{overflow:hidden;background:#d8efff;}.art-panel img{width:100%;height:100%;object-fit:cover;display:block;}
-.living-hero{position:absolute;right:0;top:82px;bottom:0;width:52%;background:url('Imagenes/living-decu-maqueta.png') center / cover no-repeat;z-index:0;}.living-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#eef8ff 0%,rgba(238,248,255,.08) 34%,transparent 62%);}
+.living-hero{position:absolute;right:0;top:82px;bottom:0;width:52%;background:#d8efff;z-index:0;}.living-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#eef8ff 0%,rgba(238,248,255,.08) 34%,transparent 62%);}
 @media(max-width:860px){header{min-height:auto;padding-bottom:0;}.hero-content{padding:124px 24px 40px;}.hero-content h1{font-size:42px;}.hero-content .sub{font-size:16px;}.living-hero{position:relative;top:auto;right:auto;width:calc(100% + 48px);margin-left:-24px;height:270px;background-position:center;order:3;}.living-hero:before{background:linear-gradient(180deg,rgba(238,248,255,.12),transparent);}.hero-decoration{display:none;}}
 /* Encuadres de portada y colecciones, con flujo vertical en celular. */
 header{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:82px 0 0;min-height:560px;}
@@ -392,7 +392,7 @@ main{min-width:0;}
   </div>
   <div class="living-hero">
     <svg viewBox="660 58 690 408" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Living luminoso con cuadros sobre el sofá" overflow="hidden">
-      <image href="Imagenes/living-decu-maqueta.png" width="1505" height="1045" />
+      <image data-imagen-destacada data-codigo="520" data-imagen-preferida="Imagenes/living-decu-maqueta.png" href="" width="1505" height="1045" />
     </svg>
   </div>
 </header>
@@ -402,15 +402,15 @@ main{min-width:0;}
   <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
   <div class="collection-grid">
     <article class="collection-card">
-      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image href="Imagenes/855-Campo de girasoles-Botanica-Girasoles-Natural-azul, amarillo, naranja-Horizontal.jpg" width="1063" height="1063" /></svg>
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image data-imagen-destacada data-codigo="855" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
     </article>
     <article class="collection-card">
-      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paisajes" overflow="hidden"><image href="Imagenes/817-El resplandor-Paisajes-Playa-Natural-azul, amarillo, naranja-Horizontal.jpg" width="1063" height="1063" /></svg>
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paisajes" overflow="hidden"><image data-imagen-destacada data-codigo="817" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></div>
     </article>
     <article class="collection-card">
-      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animales" overflow="hidden"><image href="Imagenes/520-Choque de fuerzas-Animales-Caballos-Madera-marron, ocre, negro-Horizontal.jpg" width="1063" height="1063" /></svg>
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animales" overflow="hidden"><image data-imagen-destacada data-codigo="520" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
     </article>
   </div>
@@ -611,6 +611,35 @@ function normalizarProducto(producto){
   };
 }
 
+function primeraImagenDisponible(rutas){
+  const candidatas = [...new Set(rutas.filter(Boolean))];
+  return new Promise(resolve=>{
+    const probar = indice=>{
+      if(indice >= candidatas.length){
+        resolve(null);
+        return;
+      }
+      const prueba = new Image();
+      prueba.onload = ()=>resolve(candidatas[indice]);
+      prueba.onerror = ()=>probar(indice + 1);
+      prueba.src = candidatas[indice];
+    };
+    probar(0);
+  });
+}
+
+async function actualizarImagenesDestacadas(){
+  const elementos = [...document.querySelectorAll("[data-imagen-destacada]")];
+  await Promise.all(elementos.map(async elemento=>{
+    const producto = PRODUCTOS.find(p=>p.codigo === elemento.dataset.codigo);
+    const ruta = await primeraImagenDisponible([
+      elemento.dataset.imagenPreferida,
+      producto && producto.imagen,
+    ]);
+    if(ruta) elemento.setAttribute("href", ruta);
+  }));
+}
+
 async function cargarProductos(){
   const grid = document.getElementById("grid");
   try{
@@ -619,6 +648,7 @@ async function cargarProductos(){
     const datos = await resp.json();
     if(!Array.isArray(datos)) throw new Error("productos.json no contiene una lista");
     PRODUCTOS = datos.map(normalizarProducto).filter(p=>p.codigo && p.nombre && p.categoria);
+    await actualizarImagenesDestacadas();
   }catch(err){
     grid.innerHTML = `<div class="vacio">
       <p>No se pudo cargar productos.json</p>
