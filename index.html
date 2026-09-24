@@ -416,6 +416,115 @@ main{min-width:0;}
   .collection-card{min-height:240px;}
   .grid{grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));}
 }
+
+/* ---------- Prueba de ficha completa: modelo 1010 ---------- */
+.btn-ficha-completa{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  padding:11px 14px;
+  border:0;
+  border-top:1px solid var(--line);
+  background:#fff;
+  color:var(--wood-dim);
+  font:700 13px 'DM Sans',sans-serif;
+  cursor:pointer;
+}
+.btn-ficha-completa:hover{background:var(--panel);color:var(--wood);}
+body.ficha-abierta{overflow:hidden;}
+.ficha-modal[hidden]{display:none;}
+.ficha-modal{
+  position:fixed;
+  inset:0;
+  z-index:12000;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+}
+.ficha-fondo{position:absolute;inset:0;background:rgba(8,20,38,.64);backdrop-filter:blur(3px);}
+.ficha-panel{
+  position:relative;
+  width:min(760px,100%);
+  max-height:94dvh;
+  overflow:hidden;
+  overscroll-behavior:contain;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+  color:var(--cream);
+  border-radius:28px 28px 0 0;
+  box-shadow:0 -16px 60px rgba(8,20,38,.25);
+  scrollbar-width:thin;
+}
+.ficha-tirador{width:76px;height:7px;border-radius:999px;background:#d6dbe1;margin:18px auto 4px;}
+.ficha-cerrar{
+  position:absolute;
+  top:22px;
+  right:22px;
+  z-index:2;
+  width:46px;
+  height:46px;
+  border:0;
+  border-radius:50%;
+  background:var(--panel-2);
+  color:var(--cream);
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
+}
+.ficha-contenido{padding:18px 34px 0;overflow-y:auto;overscroll-behavior:contain;min-height:0;}
+.ficha-imagen-recorte{
+  position:relative;
+  margin:0 auto 18px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 7px 20px rgba(16,35,62,.13);
+}
+.ficha-imagen-recorte.vertical{width:min(210px,54vw);aspect-ratio:447/743;}
+.ficha-imagen-recorte.vertical img{display:block;width:241.62%;max-width:none;height:auto;transform:translate(-28.43%,-8.06%);}
+.ficha-imagen-recorte.horizontal{width:min(520px,86vw);aspect-ratio:902/541;}
+.ficha-imagen-recorte.horizontal img{display:block;width:119.73%;max-width:none;height:auto;transform:translate(-7.5%,-11.48%);}
+.ficha-titulo{text-align:center;font-family:'Fraunces',serif;font-size:32px;line-height:1.1;margin:0 0 3px;}
+.ficha-referencia{text-align:center;margin:0 0 25px;color:var(--muted);font-size:16px;}
+.ficha-seccion{margin:0 0 22px;}
+.ficha-seccion h3{font-family:'Manrope',sans-serif;font-size:20px;margin:0 0 15px;}
+.ficha-destacados{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;}
+.ficha-dato{display:grid;grid-template-columns:46px 1fr;gap:11px;align-items:center;min-width:0;}
+.ficha-icono{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--panel-2);color:var(--wood);}
+.ficha-icono svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.ficha-etiqueta{display:block;color:#7b8ca4;font-size:12px;margin-bottom:2px;}
+.ficha-valor{display:block;font-size:16px;font-weight:600;overflow-wrap:anywhere;}
+.ficha-caracteristicas{border-top:1px solid var(--line);padding-top:20px;}
+.ficha-fila{display:grid;grid-template-columns:minmax(110px,.8fr) 1.3fr;gap:14px;padding:7px 0;align-items:center;}
+.ficha-fila dt{color:#7b8ca4;font-size:13px;}
+.ficha-fila dd{margin:0;font-size:14px;font-weight:600;}
+.ficha-paleta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.ficha-color{width:22px;height:22px;border-radius:50%;border:1px solid rgba(16,35,62,.15);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);}
+.ficha-calidad{display:flex;align-items:center;justify-content:center;gap:9px;margin:20px 0 0;padding:13px;border-radius:11px;background:var(--panel-2);color:var(--wood-dim);font-size:14px;font-weight:600;text-align:center;}
+.ficha-calidad svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;}
+.ficha-acciones{position:relative;flex:0 0 auto;display:grid;grid-template-columns:1fr 52px;gap:12px;padding:14px 22px calc(14px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);backdrop-filter:blur(10px);}
+.ficha-whatsapp{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;border-radius:999px;background:var(--wood);color:#fff;text-decoration:none;font-size:16px;font-weight:700;box-shadow:0 8px 22px rgba(22,133,248,.22);}
+.ficha-whatsapp svg{width:23px;height:23px;fill:currentColor;}
+.ficha-favorito{display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--cream);cursor:pointer;}
+.ficha-favorito svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;}
+.ficha-favorito.activo{color:var(--wood);}.ficha-favorito.activo svg{fill:currentColor;}
+@media(min-width:861px){
+  .ficha-modal{align-items:center;padding:28px;}
+  .ficha-panel{border-radius:28px;max-height:92vh;}
+}
+@media(max-width:520px){
+  .ficha-contenido{padding:14px 20px 0;}
+  .ficha-cerrar{top:18px;right:16px;width:42px;height:42px;}
+  .ficha-imagen-recorte.vertical{width:min(185px,50vw);}
+  .ficha-titulo{font-size:28px;}
+  .ficha-referencia{margin-bottom:20px;}
+  .ficha-seccion h3{font-size:18px;}
+  .ficha-destacados{gap:12px 14px;}
+  .ficha-dato{grid-template-columns:40px 1fr;gap:8px;}
+  .ficha-icono{width:40px;height:40px;}
+  .ficha-valor{font-size:14px;}
+}
 </style>
 </head>
 <body>
@@ -541,6 +650,15 @@ main{min-width:0;}
 <footer>
   © Decu · Cuadros en lienzo sobre bastidor.
 </footer>
+
+<div class="ficha-modal" id="ficha-modal" hidden aria-hidden="true">
+  <div class="ficha-fondo" data-cerrar-ficha></div>
+  <section class="ficha-panel" role="dialog" aria-modal="true" aria-labelledby="ficha-titulo" tabindex="-1">
+    <div class="ficha-tirador" aria-hidden="true"></div>
+    <button class="ficha-cerrar" id="ficha-cerrar" type="button" aria-label="Cerrar ficha completa">×</button>
+    <div class="ficha-contenido" id="ficha-contenido"></div>
+  </section>
+</div>
 
 <script>
 /* ============================================================
@@ -929,6 +1047,7 @@ function htmlTarjetaProducto(p, indice){
           </button>
         </div>
       </div>
+      ${p.codigo === "1010" ? `<button class="btn-ficha-completa" type="button" onclick="abrirFichaCompleta('1010')">Ver ficha completa →</button>` : ""}
       <a class="btn-consultar" href="${linkConsulta(p)}" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
         Consultar
@@ -1017,6 +1136,107 @@ function activarTarjetasColeccion(){
     });
   });
 }
+
+let ultimoEnfoqueFicha = null;
+
+const ICONOS_FICHA = {
+  ambiente:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11v8M21 11v8M5 16h14M5 11V7h6a3 3 0 0 1 3 3v6M3 19h18"/></svg>`,
+  estilo:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5 19.5 9.5M12 7l5-5 5 5-5 5M14 10 6 18M4 20c2 0 4-1 4-4-3 0-4 2-4 4Z"/></svg>`,
+  emocion:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.4 4.1L17.5 8.5l-4.1 1.4L12 14l-1.4-4.1-4.1-1.4 4.1-1.4L12 3ZM19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z"/></svg>`,
+  impacto:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg>`,
+};
+
+const COLORES_FICHA = {
+  negro:"#141820", amarillo:"#f2aa13", azul:"#0a4fa3", blanco:"#ffffff",
+  gris:"#8b95a3", dorado:"#d9a51a", naranja:"#e87522", rojo:"#c93636",
+  rosa:"#e781a8", verde:"#3b8f61", violeta:"#7252a3", marron:"#795548",
+  marrón:"#795548", ocre:"#b38332", celeste:"#69b8df", beige:"#d7c4a4",
+};
+
+function textoCapitalizado(valor){
+  const texto = textoSeguro(valor);
+  return texto ? texto.charAt(0).toUpperCase() + texto.slice(1) : "—";
+}
+
+function tonalidadComoPaleta(valor){
+  const equivalencias = { Oscuro:"Oscura", Cálido:"Cálida", Calido:"Cálida", Frío:"Fría", Frio:"Fría", Neutro:"Neutra" };
+  return equivalencias[valor] || textoCapitalizado(valor);
+}
+
+function datoDestacadoFicha(icono, etiqueta, valor){
+  return `<div class="ficha-dato"><span class="ficha-icono">${ICONOS_FICHA[icono]}</span><span><span class="ficha-etiqueta">${etiqueta}</span><span class="ficha-valor">${escaparHtml(valor || "—")}</span></span></div>`;
+}
+
+function abrirFichaCompleta(codigo){
+  const producto = PRODUCTOS.find(p=>p.codigo === codigo);
+  if(!producto) return;
+
+  ultimoEnfoqueFicha = document.activeElement;
+  const modal = document.getElementById("ficha-modal");
+  const orientacion = producto.orientacion === "horizontal" ? "horizontal" : "vertical";
+  const tema = [producto.categoria, producto.subcategoria].filter(Boolean).join(" · ");
+  const paleta = (producto.colores || []).map(color=>{
+    const clave = color.toLowerCase();
+    const muestra = COLORES_FICHA[clave] || "#c9d4df";
+    return `<span class="ficha-color" style="background:${muestra}" title="${escaparHtml(textoCapitalizado(color))}"></span>`;
+  }).join("");
+
+  document.getElementById("ficha-contenido").innerHTML = `
+    <div class="ficha-imagen-recorte ${orientacion}"><img src="${escaparHtml(producto.imagen)}" alt="Detalle de ${escaparHtml(producto.nombre)}" decoding="async"></div>
+    <h2 class="ficha-titulo" id="ficha-titulo">${escaparHtml(producto.nombre)}</h2>
+    <p class="ficha-referencia">Ref. ${escaparHtml(producto.codigo)}</p>
+
+    <section class="ficha-seccion">
+      <h3>Pensado para tu espacio</h3>
+      <div class="ficha-destacados">
+        ${datoDestacadoFicha("ambiente", "Ideal para", producto.ambiente)}
+        ${datoDestacadoFicha("estilo", "Estilo", producto.estilo)}
+        ${datoDestacadoFicha("emocion", "Sensación", producto.emocion)}
+        ${datoDestacadoFicha("impacto", "Presencia", producto.impacto_visual)}
+      </div>
+    </section>
+
+    <section class="ficha-seccion ficha-caracteristicas">
+      <h3>Características de la obra</h3>
+      <dl>
+        <div class="ficha-fila"><dt>Tema</dt><dd>${escaparHtml(tema || "—")}</dd></div>
+        <div class="ficha-fila"><dt>Paleta</dt><dd class="ficha-paleta">${paleta}<span>${escaparHtml(tonalidadComoPaleta(producto.tonalidad))}</span></dd></div>
+        <div class="ficha-fila"><dt>Orientación</dt><dd>${escaparHtml(textoCapitalizado(producto.orientacion))}</dd></div>
+        <div class="ficha-fila"><dt>Técnica visual</dt><dd>${escaparHtml(producto.tecnica_visual || "—")}</dd></div>
+      </dl>
+      <div class="ficha-calidad"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 8 4.5v9L12 20l-8-4.5v-9L12 2Z"/><path d="m4 6.5 8 4.5 8-4.5M12 11v9"/></svg><span>Lienzo canvas · Bastidor de madera · Listo para colgar</span></div>
+    </section>
+  `;
+
+  const acciones = document.createElement("div");
+  acciones.className = "ficha-acciones";
+  acciones.innerHTML = `
+    <a class="ficha-whatsapp" href="${linkConsulta(producto)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 0 1-5.034-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 5.45 0 9.886 4.437 9.884 9.892-.003 5.45-4.437 9.884-9.889 9.884Z"/></svg>Consultar por WhatsApp</a>
+    <button class="ficha-favorito ${FAVORITOS.has(producto.codigo)?'activo':''}" type="button" title="Guardar en favoritos" aria-label="Guardar en favoritos" onclick="toggleFavorito('${producto.codigo}', this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>
+  `;
+  document.querySelector(".ficha-panel").appendChild(acciones);
+
+  modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("ficha-abierta");
+  document.getElementById("ficha-contenido").scrollTop = 0;
+  document.getElementById("ficha-cerrar").focus();
+}
+
+function cerrarFichaCompleta(){
+  const modal = document.getElementById("ficha-modal");
+  modal.hidden = true;
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("ficha-abierta");
+  document.querySelector(".ficha-acciones")?.remove();
+  if(ultimoEnfoqueFicha && document.contains(ultimoEnfoqueFicha)) ultimoEnfoqueFicha.focus();
+}
+
+document.getElementById("ficha-cerrar").addEventListener("click", cerrarFichaCompleta);
+document.querySelector("[data-cerrar-ficha]").addEventListener("click", cerrarFichaCompleta);
+document.addEventListener("keydown", evento=>{
+  if(evento.key === "Escape" && !document.getElementById("ficha-modal").hidden) cerrarFichaCompleta();
+});
 
 /* Arma el link de WhatsApp para consultar/encargar un cuadro puntual,
    usando el número de local vigente (numeroWhatsappActivo, definido más abajo) */
