@@ -209,6 +209,8 @@ h1 em{
   border-radius:2px;
   overflow:hidden;
   transition:transform .18s ease, border-color .18s ease;
+  content-visibility:auto;
+  contain-intrinsic-size:420px;
 }
 .cuadro:hover{
   transform:translateY(-3px);
@@ -326,6 +328,20 @@ h1 em{
   color:var(--muted);
 }
 .vacio p{font-family:'Fraunces', serif; font-size:20px; color:var(--cream); margin-bottom:6px;}
+.carga-progresiva{
+  grid-column:1/-1;
+  min-height:1px;
+  text-align:center;
+}
+.carga-progresiva button{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:11px 18px;
+  background:#fff;
+  color:var(--wood-dim);
+  font:700 14px 'DM Sans',sans-serif;
+  cursor:pointer;
+}
 footer{
   padding:26px 32px 50px;
   color:var(--muted);
@@ -616,6 +632,9 @@ let PRODUCTOS = [];
 const LIMITE_OPCIONES_FILTRO = 8;
 const filtrosExpandidos = new Set();
 let filtrosSecundariosVisibles = false;
+let productosFiltrados = [];
+let cantidadRenderizada = 0;
+let observadorCarga = null;
 
 function textoSeguro(valor){
   return valor == null ? "" : String(valor).trim();
@@ -883,23 +902,16 @@ function renderFiltros(){
   });
 }
 
-function renderGrid(){
-  const grid = document.getElementById("grid");
-
-  const filtrados = PRODUCTOS.filter(p=>productoCoincide(p));
-
-  document.getElementById("cant").textContent = filtrados.length;
-
-  if(filtrados.length===0){
-    grid.innerHTML = `<div class="vacio"><p>Ningún modelo coincide</p>Probá con otra combinación de filtros.</div>`;
-    return;
-  }
-
-  grid.innerHTML = filtrados.map(p=>`
+function htmlTarjetaProducto(p, indice){
+  const cargaPrioritaria = indice === 0;
+  return `
     <div class="cuadro" data-codigo="${p.codigo}">
       <div class="lienzo-marco">
         <div class="lienzo">
-          <img src="${p.imagen}" alt="${p.nombre}" loading="lazy"
+          <img src="${p.imagen}" alt="${escaparHtml(p.nombre)}"
+               loading="${cargaPrioritaria?'eager':'lazy'}"
+               decoding="async" fetchpriority="${cargaPrioritaria?'high':'low'}"
+               width="720" height="720"
                onerror="this.closest('.cuadro').remove()">
           <button class="btn-compartir" title="Compartir imagen" onclick="compartirCuadro('${p.codigo}', '${p.nombre.replace(/'/g,"\\'")}', '${p.imagen}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -922,7 +934,62 @@ function renderGrid(){
         Consultar
       </a>
     </div>
-  `).join("");
+  `;
+}
+
+function renderSiguienteLote(){
+  const grid = document.getElementById("grid");
+  const anterior = document.getElementById("carga-progresiva");
+  if(anterior) anterior.remove();
+  if(observadorCarga) observadorCarga.disconnect();
+
+  const tamanoLote = window.matchMedia("(max-width: 860px)").matches ? 8 : 24;
+  const fin = Math.min(cantidadRenderizada + tamanoLote, productosFiltrados.length);
+  const lote = productosFiltrados
+    .slice(cantidadRenderizada, fin)
+    .map((p, indice)=>htmlTarjetaProducto(p, cantidadRenderizada + indice))
+    .join("");
+  grid.insertAdjacentHTML("beforeend", lote);
+  cantidadRenderizada = fin;
+
+  if(cantidadRenderizada >= productosFiltrados.length) return;
+
+  grid.insertAdjacentHTML("beforeend", `<div class="carga-progresiva" id="carga-progresiva"><button type="button">Mostrar más cuadros</button></div>`);
+  const centinela = document.getElementById("carga-progresiva");
+  centinela.querySelector("button").addEventListener("click", renderSiguienteLote);
+  if("IntersectionObserver" in window){
+    observadorCarga = new IntersectionObserver(entradas=>{
+      if(entradas.some(entrada=>entrada.isIntersecting)) renderSiguienteLote();
+    }, { rootMargin:"700px 0px" });
+    observadorCarga.observe(centinela);
+  }
+}
+
+function renderGrid(){
+  const grid = document.getElementById("grid");
+  if(observadorCarga) observadorCarga.disconnect();
+  productosFiltrados = PRODUCTOS.filter(p=>productoCoincide(p));
+  cantidadRenderizada = 0;
+
+  document.getElementById("cant").textContent = productosFiltrados.length;
+
+  if(productosFiltrados.length===0){
+    grid.innerHTML = `<div class="vacio"><p>Ningún modelo coincide</p>Probá con otra combinación de filtros.</div>`;
+    return;
+  }
+  grid.innerHTML = "";
+  renderSiguienteLote();
+}
+
+function desplazarAResultados(){
+  if(window.matchMedia("(max-width: 860px)").matches){
+    const cabeceraGaleria = document.querySelector(".galeria-header");
+    const margenVisual = window.innerHeight * 0.62;
+    const destino = cabeceraGaleria.getBoundingClientRect().top + window.scrollY - margenVisual;
+    window.scrollTo({ top:Math.max(0, destino), behavior:"smooth" });
+    return;
+  }
+  document.getElementById("catalogo").scrollIntoView({ behavior:"smooth", block:"start" });
 }
 
 function mostrarColeccion(categoria){
@@ -935,9 +1002,7 @@ function mostrarColeccion(categoria){
   document.getElementById("buscador").value = "";
   renderFiltros();
   renderGrid();
-  window.setTimeout(()=>{
-    document.getElementById("catalogo").scrollIntoView({ behavior:"smooth", block:"start" });
-  }, 80);
+  window.requestAnimationFrame(()=>window.requestAnimationFrame(desplazarAResultados));
 }
 
 function activarTarjetasColeccion(){
