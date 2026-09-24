@@ -437,7 +437,7 @@ main{min-width:0;}
   cursor:pointer;
 }
 .btn-ficha-completa:hover{background:var(--panel);color:var(--wood);}
-body.ficha-abierta{overflow:hidden;}
+body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 .ficha-modal[hidden]{display:none;}
 .ficha-modal{
   position:fixed;
@@ -508,6 +508,16 @@ body.ficha-abierta{overflow:hidden;}
 .ficha-color{width:22px;height:22px;border-radius:50%;border:1px solid rgba(16,35,62,.15);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);}
 .ficha-calidad{display:flex;align-items:center;justify-content:center;gap:9px;margin:20px 0 0;padding:13px;border-radius:11px;background:var(--panel-2);color:var(--wood-dim);font-size:14px;font-weight:600;text-align:center;}
 .ficha-calidad svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;}
+.ficha-relacionados{border-top:1px solid var(--line);padding-top:20px;}
+.ficha-relacionados-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+.ficha-relacionado{min-width:0;padding:0 0 10px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;color:var(--cream);text-align:left;cursor:pointer;transition:transform .18s ease,border-color .18s ease;}
+.ficha-relacionado:hover{transform:translateY(-2px);border-color:var(--wood);}
+.ficha-relacionado:focus-visible{outline:3px solid rgba(22,133,248,.35);outline-offset:2px;}
+.ficha-relacionado-imagen{display:grid;place-items:center;width:100%;aspect-ratio:1/1;margin-bottom:9px;background:var(--panel-2);overflow:hidden;}
+.ficha-relacionado-imagen img{display:block;width:100%;height:100%;object-fit:contain;}
+.ficha-relacionado-nombre,.ficha-relacionado-ref{display:block;padding:0 10px;}
+.ficha-relacionado-nombre{min-height:34px;font:700 13px/1.3 'DM Sans',sans-serif;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.ficha-relacionado-ref{margin-top:4px;color:var(--muted);font-size:11px;}
 .ficha-acciones{position:relative;flex:0 0 auto;display:grid;grid-template-columns:1fr 52px;gap:12px;padding:14px 22px calc(14px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);backdrop-filter:blur(10px);}
 .ficha-whatsapp{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;border-radius:999px;background:var(--wood);color:#fff;text-decoration:none;font-size:16px;font-weight:700;box-shadow:0 8px 22px rgba(22,133,248,.22);}
 .ficha-whatsapp svg{width:23px;height:23px;fill:currentColor;}
@@ -529,6 +539,8 @@ body.ficha-abierta{overflow:hidden;}
   .ficha-dato{grid-template-columns:40px 1fr;gap:8px;}
   .ficha-icono{width:40px;height:40px;}
   .ficha-valor{font-size:14px;}
+  .ficha-relacionados-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(132px,44vw);overflow-x:auto;scroll-snap-type:x proximity;padding:2px 2px 10px;}
+  .ficha-relacionado{scroll-snap-align:start;}
 }
 </style>
 </head>
@@ -751,6 +763,9 @@ const localActivo = paramsLocal.get("local");
 const numeroWhatsappActivo = (localActivo && LOCALES[localActivo]) ? LOCALES[localActivo] : NUMERO_DEFAULT;
 
 let PRODUCTOS = [];
+const TITULO_CATALOGO = document.title;
+let scrollAntesFicha = 0;
+let navegacionProductoInicializada = false;
 
 const LIMITE_OPCIONES_FILTRO = 8;
 const filtrosExpandidos = new Set();
@@ -832,6 +847,7 @@ async function cargarProductos(){
   }
   renderFiltros();
   renderGrid();
+  inicializarFichaDesdeUrl();
 }
 
 /* estado de filtros */
@@ -1175,6 +1191,56 @@ function datoDestacadoFicha(icono, etiqueta, valor){
   return `<div class="ficha-dato"><span class="ficha-icono">${ICONOS_FICHA[icono]}</span><span><span class="ficha-etiqueta">${etiqueta}</span><span class="ficha-valor">${escaparHtml(valor || "—")}</span></span></div>`;
 }
 
+function urlProducto(codigo){
+  const url = new URL(window.location.href);
+  url.searchParams.set("producto", codigo);
+  url.hash = "";
+  return url;
+}
+
+function puntajeRelacionado(origen, candidato){
+  let puntaje = 0;
+  if(candidato.categoria === origen.categoria) puntaje += 6;
+  if(candidato.subcategoria && candidato.subcategoria === origen.subcategoria) puntaje += 5;
+  if(candidato.estilo === origen.estilo) puntaje += 3;
+  if(candidato.tonalidad === origen.tonalidad) puntaje += 3;
+  if(candidato.ambiente === origen.ambiente) puntaje += 2;
+  if(candidato.emocion === origen.emocion) puntaje += 2;
+  if(candidato.impacto_visual === origen.impacto_visual) puntaje += 1;
+  if(candidato.orientacion === origen.orientacion) puntaje += 1;
+  const coloresOrigen = new Set((origen.colores || []).map(color=>color.toLowerCase()));
+  puntaje += (candidato.colores || []).filter(color=>coloresOrigen.has(color.toLowerCase())).length;
+  return puntaje;
+}
+
+function productosRelacionados(producto, limite = 4){
+  return PRODUCTOS
+    .filter(candidato=>candidato.codigo !== producto.codigo && candidato.imagen)
+    .map(candidato=>({ producto:candidato, puntaje:puntajeRelacionado(producto, candidato) }))
+    .sort((a,b)=>b.puntaje - a.puntaje || a.producto.nombre.localeCompare(b.producto.nombre, "es"))
+    .slice(0, limite)
+    .map(resultado=>resultado.producto);
+}
+
+function htmlProductosRelacionados(producto){
+  const relacionados = productosRelacionados(producto);
+  if(!relacionados.length) return "";
+  return `
+    <section class="ficha-seccion ficha-relacionados">
+      <h3>También podrían gustarte</h3>
+      <div class="ficha-relacionados-grid">
+        ${relacionados.map(relacionado=>`
+          <button class="ficha-relacionado" type="button" onclick="abrirFichaCompleta('${relacionado.codigo}')" aria-label="Ver ficha de ${escaparHtml(relacionado.nombre)}">
+            <span class="ficha-relacionado-imagen"><img src="${escaparHtml(relacionado.imagen)}" alt="" loading="lazy" decoding="async"></span>
+            <span class="ficha-relacionado-nombre">${escaparHtml(relacionado.nombre)}</span>
+            <span class="ficha-relacionado-ref">Ref. ${escaparHtml(relacionado.codigo)}</span>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function abrirFichaDesdeTarjeta(evento, codigo){
   const esClick = evento.type === "click";
   const esTeclado = evento.type === "keydown" && (evento.key === "Enter" || evento.key === " ");
@@ -1190,12 +1256,22 @@ function abrirFichaDesdeTarjeta(evento, codigo){
   abrirFichaCompleta(codigo);
 }
 
-function abrirFichaCompleta(codigo){
+function abrirFichaCompleta(codigo, opciones = {}){
   const producto = PRODUCTOS.find(p=>p.codigo === codigo);
   if(!producto) return;
 
-  ultimoEnfoqueFicha = document.activeElement;
   const modal = document.getElementById("ficha-modal");
+  const fichaYaAbierta = !modal.hidden;
+  if(!fichaYaAbierta){
+    ultimoEnfoqueFicha = document.activeElement;
+    scrollAntesFicha = window.scrollY;
+  }
+  if(opciones.actualizarUrl !== false){
+    const url = urlProducto(codigo);
+    const estadoHistorial = { ...(history.state || {}), decuCatalogo:true, producto:codigo };
+    if(fichaYaAbierta) history.replaceState(estadoHistorial, "", url);
+    else history.pushState(estadoHistorial, "", url);
+  }
   const orientacion = producto.orientacion === "horizontal" ? "horizontal" : "vertical";
   const tema = [producto.categoria, producto.subcategoria].filter(Boolean).join(" · ");
   const paleta = (producto.colores || []).map(color=>{
@@ -1229,8 +1305,10 @@ function abrirFichaCompleta(codigo){
       </dl>
       <div class="ficha-calidad"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 8 4.5v9L12 20l-8-4.5v-9L12 2Z"/><path d="m4 6.5 8 4.5 8-4.5M12 11v9"/></svg><span>Lienzo canvas · Bastidor de madera · Listo para colgar</span></div>
     </section>
+    ${htmlProductosRelacionados(producto)}
   `;
 
+  document.querySelector(".ficha-acciones")?.remove();
   const acciones = document.createElement("div");
   acciones.className = "ficha-acciones";
   acciones.innerHTML = `
@@ -1241,19 +1319,62 @@ function abrirFichaCompleta(codigo){
 
   modal.hidden = false;
   modal.setAttribute("aria-hidden", "false");
+  if(!fichaYaAbierta) document.body.style.top = `-${scrollAntesFicha}px`;
   document.body.classList.add("ficha-abierta");
+  document.title = `${producto.nombre} · Decu`;
   document.getElementById("ficha-contenido").scrollTop = 0;
   document.getElementById("ficha-cerrar").focus();
 }
 
-function cerrarFichaCompleta(){
+function ocultarFichaCompleta(){
   const modal = document.getElementById("ficha-modal");
+  if(modal.hidden) return;
   modal.hidden = true;
   modal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("ficha-abierta");
+  document.body.style.top = "";
   document.querySelector(".ficha-acciones")?.remove();
+  document.title = TITULO_CATALOGO;
+  requestAnimationFrame(()=>window.scrollTo(0, scrollAntesFicha));
   if(ultimoEnfoqueFicha && document.contains(ultimoEnfoqueFicha)) ultimoEnfoqueFicha.focus();
 }
+
+function cerrarFichaCompleta(){
+  const codigoEnUrl = new URL(window.location.href).searchParams.get("producto");
+  if(codigoEnUrl){
+    history.back();
+    return;
+  }
+  ocultarFichaCompleta();
+}
+
+function inicializarFichaDesdeUrl(){
+  if(navegacionProductoInicializada) return;
+  navegacionProductoInicializada = true;
+
+  const urlActual = new URL(window.location.href);
+  const codigo = urlActual.searchParams.get("producto");
+  const productoExiste = codigo && PRODUCTOS.some(producto=>producto.codigo === codigo);
+  const urlBase = new URL(urlActual);
+  urlBase.searchParams.delete("producto");
+
+  history.replaceState({ ...(history.state || {}), decuCatalogo:true, producto:null }, "", productoExiste ? urlBase : urlActual);
+  if(productoExiste){
+    history.pushState({ ...(history.state || {}), decuCatalogo:true, producto:codigo }, "", urlActual);
+    abrirFichaCompleta(codigo, { actualizarUrl:false });
+  }else if(codigo){
+    history.replaceState({ ...(history.state || {}), decuCatalogo:true, producto:null }, "", urlBase);
+  }
+}
+
+window.addEventListener("popstate", ()=>{
+  const codigo = new URL(window.location.href).searchParams.get("producto");
+  if(codigo && PRODUCTOS.some(producto=>producto.codigo === codigo)){
+    abrirFichaCompleta(codigo, { actualizarUrl:false });
+  }else{
+    ocultarFichaCompleta();
+  }
+});
 
 document.getElementById("ficha-cerrar").addEventListener("click", cerrarFichaCompleta);
 document.querySelector("[data-cerrar-ficha]").addEventListener("click", cerrarFichaCompleta);
@@ -1264,7 +1385,7 @@ document.addEventListener("keydown", evento=>{
 /* Arma el link de WhatsApp para consultar/encargar un cuadro puntual,
    usando el número de local vigente (numeroWhatsappActivo, definido más abajo) */
 function linkConsulta(p){
-  const texto = `Hola!%20Quer%C3%ADa%20consultarte%20sobre%20este%20cuadro%3A%20${encodeURIComponent(p.nombre)}%20(c%C3%B3digo%20${p.codigo})`;
+  const texto = encodeURIComponent(`Hola! Quería consultarte sobre este cuadro: ${p.nombre} (código ${p.codigo})\n${urlProducto(p.codigo).href}`);
   return `https://wa.me/${numeroWhatsappActivo}?text=${texto}`;
 }
 
@@ -1272,20 +1393,21 @@ function linkConsulta(p){
    Si el navegador no lo soporta (típico en desktop), cae de nuevo en el botón de Consultar. */
 async function compartirCuadro(codigo, nombre, rutaImagen){
   const mensaje = `Me gustaría encargarte este cuadro: ${nombre} (código ${codigo})`;
+  const enlace = urlProducto(codigo).href;
   try{
     if(navigator.canShare){
       const resp = await fetch(rutaImagen);
       const blob = await resp.blob();
       const archivo = new File([blob], `${codigo}.jpg`, { type: blob.type || "image/jpeg" });
       if(navigator.canShare({ files: [archivo] })){
-        await navigator.share({ files: [archivo], text: mensaje });
+        await navigator.share({ files: [archivo], text: mensaje, url:enlace });
         return;
       }
     }
     throw new Error("Share de archivos no soportado");
   }catch(err){
     // Fallback: abre WhatsApp con el texto (sin imagen adjunta)
-    const texto = encodeURIComponent(mensaje);
+    const texto = encodeURIComponent(`${mensaje}\n${enlace}`);
     window.open(`https://wa.me/${numeroWhatsappActivo}?text=${texto}`, "_blank");
   }
 }
