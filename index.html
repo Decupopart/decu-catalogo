@@ -490,6 +490,16 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 .ficha-imagen-recorte.vertical img{display:block;width:241.62%;max-width:none;height:auto;transform:translate(-28.43%,-8.06%);}
 .ficha-imagen-recorte.horizontal{width:min(520px,86vw);aspect-ratio:902/541;}
 .ficha-imagen-recorte.horizontal img{display:block;width:119.73%;max-width:none;height:auto;transform:translate(-7.5%,-11.48%);}
+.ficha-galeria{margin:0 0 20px;}
+.ficha-galeria .ficha-imagen-recorte{margin-bottom:11px;}
+.ficha-imagen-recorte.completa{display:grid;place-items:center;width:min(520px,86vw);aspect-ratio:1/1;background:#f7f8fa;}
+.ficha-imagen-recorte.completa img{display:block;width:100%;height:100%;max-width:100%;object-fit:contain;transform:none;}
+.ficha-miniaturas{display:flex;justify-content:center;gap:9px;max-width:520px;margin:0 auto;padding:2px;overflow-x:auto;scrollbar-width:thin;}
+.ficha-miniatura{flex:0 0 82px;padding:4px 4px 6px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--muted);cursor:pointer;transition:border-color .18s ease,color .18s ease,box-shadow .18s ease;}
+.ficha-miniatura img{display:block;width:100%;aspect-ratio:1/1;margin-bottom:4px;border-radius:6px;background:var(--panel-2);object-fit:cover;}
+.ficha-miniatura span{display:block;font:700 10px/1.2 'DM Sans',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ficha-miniatura:hover,.ficha-miniatura.activa{border-color:var(--wood);color:var(--wood-dim);box-shadow:0 0 0 1px var(--wood);}
+.ficha-miniatura:focus-visible{outline:3px solid rgba(22,133,248,.35);outline-offset:2px;}
 .ficha-titulo{text-align:center;font-family:'Fraunces',serif;font-size:32px;line-height:1.1;margin:0 0 3px;}
 .ficha-referencia{text-align:center;margin:0 0 25px;color:var(--muted);font-size:16px;}
 .ficha-seccion{margin:0 0 22px;}
@@ -532,6 +542,9 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   .ficha-contenido{padding:14px 20px 0;}
   .ficha-cerrar{top:18px;right:16px;width:42px;height:42px;}
   .ficha-imagen-recorte.vertical{width:min(185px,50vw);}
+  .ficha-imagen-recorte.completa{width:min(335px,86vw);}
+  .ficha-miniaturas{justify-content:flex-start;}
+  .ficha-miniatura{flex-basis:72px;}
   .ficha-titulo{font-size:28px;}
   .ficha-referencia{margin-bottom:20px;}
   .ficha-seccion h3{font-size:18px;}
@@ -764,6 +777,13 @@ const numeroWhatsappActivo = (localActivo && LOCALES[localActivo]) ? LOCALES[loc
 
 let PRODUCTOS = [];
 const TITULO_CATALOGO = document.title;
+const GALERIAS_PRODUCTO = {
+  "520": [
+    { imagen:"Imagenes/520-Choque-de-fuerzas-ambiente.webp", etiqueta:"En ambiente", alt:"Cuadro Choque de fuerzas exhibido en un comedor luminoso", modo:"completa" },
+    { imagen:"Imagenes/520-Choque-de-fuerzas-perspectiva.webp", etiqueta:"Perspectiva", alt:"Cuadro Choque de fuerzas en perspectiva sobre fondo blanco", modo:"completa" },
+    { imagen:"Imagenes/520-Choque-de-fuerzas-detalle.webp", etiqueta:"Detalle", alt:"Detalle del lienzo canvas y los laterales del cuadro Choque de fuerzas", modo:"completa" },
+  ],
+};
 let scrollAntesFicha = 0;
 let navegacionProductoInicializada = false;
 
@@ -1241,6 +1261,57 @@ function htmlProductosRelacionados(producto){
   `;
 }
 
+function imagenesGaleriaProducto(producto){
+  const orientacion = producto.orientacion === "horizontal" ? "horizontal" : "vertical";
+  return [
+    { imagen:producto.imagen, etiqueta:"Obra", alt:`Vista principal de ${producto.nombre}`, modo:orientacion },
+    ...(GALERIAS_PRODUCTO[producto.codigo] || []),
+  ].filter(item=>item.imagen);
+}
+
+function htmlGaleriaFicha(producto){
+  const imagenes = imagenesGaleriaProducto(producto);
+  const principal = imagenes[0];
+  if(imagenes.length === 1){
+    return `<div class="ficha-imagen-recorte ${principal.modo}"><img src="${escaparHtml(principal.imagen)}" alt="${escaparHtml(principal.alt)}" decoding="async"></div>`;
+  }
+
+  return `
+    <div class="ficha-galeria" data-ficha-galeria>
+      <div class="ficha-imagen-recorte ${principal.modo}" data-ficha-imagen-principal>
+        <img src="${escaparHtml(principal.imagen)}" alt="${escaparHtml(principal.alt)}" decoding="async">
+      </div>
+      <div class="ficha-miniaturas" aria-label="Galería de imágenes de ${escaparHtml(producto.nombre)}">
+        ${imagenes.map((item, indice)=>`
+          <button class="ficha-miniatura ${indice === 0 ? "activa" : ""}" type="button"
+                  aria-label="Mostrar ${escaparHtml(item.etiqueta)}" aria-pressed="${indice === 0 ? "true" : "false"}"
+                  data-src="${escaparHtml(item.imagen)}" data-alt="${escaparHtml(item.alt)}" data-modo="${escaparHtml(item.modo)}"
+                  onclick="seleccionarImagenFicha(this)">
+            <img src="${escaparHtml(item.imagen)}" alt="" loading="${indice === 0 ? "eager" : "lazy"}" decoding="async">
+            <span>${escaparHtml(item.etiqueta)}</span>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function seleccionarImagenFicha(boton){
+  const galeria = boton.closest("[data-ficha-galeria]");
+  if(!galeria) return;
+  const marco = galeria.querySelector("[data-ficha-imagen-principal]");
+  const imagen = marco.querySelector("img");
+  marco.className = `ficha-imagen-recorte ${boton.dataset.modo}`;
+  marco.setAttribute("data-ficha-imagen-principal", "");
+  imagen.src = boton.dataset.src;
+  imagen.alt = boton.dataset.alt;
+  galeria.querySelectorAll(".ficha-miniatura").forEach(opcion=>{
+    const activa = opcion === boton;
+    opcion.classList.toggle("activa", activa);
+    opcion.setAttribute("aria-pressed", activa ? "true" : "false");
+  });
+}
+
 function abrirFichaDesdeTarjeta(evento, codigo){
   const esClick = evento.type === "click";
   const esTeclado = evento.type === "keydown" && (evento.key === "Enter" || evento.key === " ");
@@ -1272,7 +1343,6 @@ function abrirFichaCompleta(codigo, opciones = {}){
     if(fichaYaAbierta) history.replaceState(estadoHistorial, "", url);
     else history.pushState(estadoHistorial, "", url);
   }
-  const orientacion = producto.orientacion === "horizontal" ? "horizontal" : "vertical";
   const tema = [producto.categoria, producto.subcategoria].filter(Boolean).join(" · ");
   const paleta = (producto.colores || []).map(color=>{
     const clave = color.toLowerCase();
@@ -1281,7 +1351,7 @@ function abrirFichaCompleta(codigo, opciones = {}){
   }).join("");
 
   document.getElementById("ficha-contenido").innerHTML = `
-    <div class="ficha-imagen-recorte ${orientacion}"><img src="${escaparHtml(producto.imagen)}" alt="Detalle de ${escaparHtml(producto.nombre)}" decoding="async"></div>
+    ${htmlGaleriaFicha(producto)}
     <h2 class="ficha-titulo" id="ficha-titulo">${escaparHtml(producto.nombre)}</h2>
     <p class="ficha-referencia">Ref. ${escaparHtml(producto.codigo)}</p>
 
