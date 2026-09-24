@@ -211,10 +211,15 @@ h1 em{
   transition:transform .18s ease, border-color .18s ease;
   content-visibility:auto;
   contain-intrinsic-size:420px;
+  cursor:pointer;
 }
 .cuadro:hover{
   transform:translateY(-3px);
   border-color:var(--wood-dim);
+}
+.cuadro:focus-visible{
+  outline:3px solid rgba(22,133,248,.35);
+  outline-offset:3px;
 }
 /* efecto bastidor: doble marco que imita el borde espejado del lienzo */
 .lienzo-marco{
@@ -1023,7 +1028,10 @@ function renderFiltros(){
 function htmlTarjetaProducto(p, indice){
   const cargaPrioritaria = indice === 0;
   return `
-    <div class="cuadro" data-codigo="${p.codigo}">
+    <div class="cuadro" data-codigo="${p.codigo}" role="group" tabindex="0"
+         aria-label="Abrir ficha completa de ${escaparHtml(p.nombre)}"
+         onclick="abrirFichaDesdeTarjeta(event, '${p.codigo}')"
+         onkeydown="abrirFichaDesdeTarjeta(event, '${p.codigo}')">
       <div class="lienzo-marco">
         <div class="lienzo">
           <img src="${p.imagen}" alt="${escaparHtml(p.nombre)}"
@@ -1165,6 +1173,21 @@ function tonalidadComoPaleta(valor){
 
 function datoDestacadoFicha(icono, etiqueta, valor){
   return `<div class="ficha-dato"><span class="ficha-icono">${ICONOS_FICHA[icono]}</span><span><span class="ficha-etiqueta">${etiqueta}</span><span class="ficha-valor">${escaparHtml(valor || "—")}</span></span></div>`;
+}
+
+function abrirFichaDesdeTarjeta(evento, codigo){
+  const esClick = evento.type === "click";
+  const esTeclado = evento.type === "keydown" && (evento.key === "Enter" || evento.key === " ");
+  if(!esClick && !esTeclado) return;
+
+  // Compartir, favoritos, ficha y consulta conservan su acción independiente.
+  if(evento.target !== evento.currentTarget && evento.target.closest("button, a")) return;
+  if(esTeclado){
+    if(evento.target !== evento.currentTarget) return;
+    evento.preventDefault();
+  }
+
+  abrirFichaCompleta(codigo);
 }
 
 function abrirFichaCompleta(codigo){
