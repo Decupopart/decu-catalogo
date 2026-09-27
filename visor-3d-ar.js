@@ -32,20 +32,11 @@
     return modelos[String(codigo)] || null;
   }
 
-  function medida(valor) {
-    const numero = Number(valor);
-    return Number.isFinite(numero)
-      ? numero.toLocaleString("es-AR", { maximumFractionDigits: 1 })
-      : escapar(valor);
-  }
-
   function html(producto) {
     const modelo = obtener(producto.codigo);
     if (!modelo) return "";
     const codigo = escapar(producto.codigo);
     const nombre = escapar(producto.nombre);
-    const ancho = medida(modelo.ancho_cm);
-    const alto = medida(modelo.alto_cm);
     return `
       <section class="ficha-seccion decu-visor" data-decu-visor="${codigo}">
         <div class="decu-visor-cabecera">
@@ -53,7 +44,6 @@
             <span class="decu-visor-eyebrow">VISTA INTERACTIVA</span>
             <h3>Conocé el cuadro desde todos los ángulos</h3>
           </div>
-          <span class="decu-visor-medida">${ancho} × ${alto} cm</span>
         </div>
         <model-viewer
           id="decu-modelo-${codigo}"
