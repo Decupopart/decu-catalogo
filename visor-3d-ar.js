@@ -72,6 +72,7 @@
           ar
           ar-modes="webxr scene-viewer quick-look"
           ar-placement="wall"
+          ar-scale="fixed"
           xr-environment>
           <button class="decu-ar-nativo" slot="ar-button" type="button">Ver en mi ambiente</button>
           <div class="decu-carga" slot="poster" style="background-image:url('${escapar(modelo.poster)}')">
