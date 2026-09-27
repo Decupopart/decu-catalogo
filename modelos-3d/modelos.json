@@ -1,0 +1,14 @@
+{
+  "2665": {
+    "codigo": "2665",
+    "nombre": "Sendero de Arena",
+    "modelo": "modelos-3d/2665.glb",
+    "poster": "modelos-3d/2665-poster.jpg",
+    "qr": "modelos-3d/2665-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=2665&ar=1",
+    "ancho_cm": 70.6875,
+    "alto_cm": 100.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  }
+}

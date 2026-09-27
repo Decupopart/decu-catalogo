@@ -556,6 +556,7 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   .ficha-relacionado{scroll-snap-align:start;}
 }
 </style>
+<link rel="stylesheet" href="visor-3d-ar.css">
 </head>
 <body>
 
@@ -689,6 +690,9 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
     <div class="ficha-contenido" id="ficha-contenido"></div>
   </section>
 </div>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+<script src="visor-3d-ar.js"></script>
 
 <script>
 /* ============================================================
@@ -851,6 +855,7 @@ async function actualizarImagenesDestacadas(){
 async function cargarProductos(){
   const grid = document.getElementById("grid");
   try{
+    await window.DecuVisor3D?.cargar();
     const resp = await fetch("productos.json");
     if(!resp.ok) throw new Error("No se pudo leer productos.json");
     const datos = await resp.json();
@@ -1354,6 +1359,7 @@ function abrirFichaCompleta(codigo, opciones = {}){
     ${htmlGaleriaFicha(producto)}
     <h2 class="ficha-titulo" id="ficha-titulo">${escaparHtml(producto.nombre)}</h2>
     <p class="ficha-referencia">Ref. ${escaparHtml(producto.codigo)}</p>
+    ${window.DecuVisor3D?.html(producto) || ""}
 
     <section class="ficha-seccion">
       <h3>Pensado para tu espacio</h3>
