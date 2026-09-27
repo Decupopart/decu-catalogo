@@ -1,4 +1,88 @@
 {
+  "520": {
+    "codigo": "520",
+    "nombre": "Choque de fuerzas",
+    "modelo": "modelos-3d/520.glb",
+    "poster": "modelos-3d/520-poster.jpg",
+    "qr": "modelos-3d/520-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=520&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 56.25,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "817": {
+    "codigo": "817",
+    "nombre": "El resplandor",
+    "modelo": "modelos-3d/817.glb",
+    "poster": "modelos-3d/817-poster.jpg",
+    "qr": "modelos-3d/817-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=817&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 56.25,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "855": {
+    "codigo": "855",
+    "nombre": "Campo de girasoles 1",
+    "modelo": "modelos-3d/855.glb",
+    "poster": "modelos-3d/855-poster.jpg",
+    "qr": "modelos-3d/855-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=855&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 60.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "874": {
+    "codigo": "874",
+    "nombre": "La venganza",
+    "modelo": "modelos-3d/874.glb",
+    "poster": "modelos-3d/874-poster.jpg",
+    "qr": "modelos-3d/874-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=874&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 50.666666666666664,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "990": {
+    "codigo": "990",
+    "nombre": "Abundancia",
+    "modelo": "modelos-3d/990.glb",
+    "poster": "modelos-3d/990-poster.jpg",
+    "qr": "modelos-3d/990-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=990&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 60.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "1010": {
+    "codigo": "1010",
+    "nombre": "Luna surrealista",
+    "modelo": "modelos-3d/1010.glb",
+    "poster": "modelos-3d/1010-poster.jpg",
+    "qr": "modelos-3d/1010-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=1010&ar=1",
+    "ancho_cm": 66.66666666666666,
+    "alto_cm": 100.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "1045": {
+    "codigo": "1045",
+    "nombre": "Princesa del sur",
+    "modelo": "modelos-3d/1045.glb",
+    "poster": "modelos-3d/1045-poster.jpg",
+    "qr": "modelos-3d/1045-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=1045&ar=1",
+    "ancho_cm": 56.018518518518526,
+    "alto_cm": 100.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
   "2665": {
     "codigo": "2665",
     "nombre": "Sendero de Arena",
