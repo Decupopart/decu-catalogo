@@ -1,16 +1,45 @@
-.decu-visor{border-top:1px solid var(--line);padding-top:22px;}
-.decu-visor-cabecera{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;}
-.decu-visor-cabecera h3{margin:3px 0 0;}
+.decu-activar-360{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  z-index:3;
+  width:64px;
+  height:52px;
+  border:1px solid rgba(16,35,62,.12);
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  color:var(--wood);
+  font:800 16px/1 'DM Sans',sans-serif;
+  box-shadow:0 7px 22px rgba(16,35,62,.2);
+  cursor:pointer;
+}
+.decu-activar-360 span{display:inline-block;border-bottom:2px solid currentColor;padding-bottom:2px;}
+.decu-activar-360:hover{transform:translateY(-1px);background:#fff;}
+.decu-galeria-3d{position:absolute;inset:0;z-index:2;visibility:hidden;opacity:0;background:linear-gradient(145deg,#f8fafc,#e9eef4);transition:opacity .18s ease;}
+.decu-3d-activo .decu-galeria-3d{visibility:visible;opacity:1;}
+.decu-3d-activo>img,.decu-3d-activo>.decu-activar-360{visibility:hidden;}
+.decu-galeria-3d model-viewer{display:block;width:100%;height:100%;background:linear-gradient(145deg,#f8fafc,#e9eef4);outline:none;}
+.decu-carga{width:100%;height:100%;background:center/contain no-repeat;}
+.decu-cerrar-360{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  z-index:4;
+  width:48px;
+  height:48px;
+  border:0;
+  border-radius:50%;
+  background:#fff;
+  color:var(--wood);
+  font:400 34px/1 'DM Sans',sans-serif;
+  box-shadow:0 7px 22px rgba(16,35,62,.2);
+  cursor:pointer;
+}
+.decu-ayuda-giro{position:absolute;left:14px;bottom:14px;z-index:3;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.9);color:var(--muted);font:700 11px/1 'DM Sans',sans-serif;pointer-events:none;}
+.decu-accion-pared{max-width:520px;margin:14px auto 0;text-align:center;}
+.decu-boton-ar{width:100%;min-height:52px;border:0;border-radius:999px;background:var(--wood);color:#fff;font:700 15px 'DM Sans',sans-serif;box-shadow:0 8px 22px rgba(22,133,248,.18);cursor:pointer;}
+.decu-accion-pared p{margin:8px 5px 0;color:var(--muted);font-size:12px;line-height:1.4;}
 .decu-visor-eyebrow{display:block;color:var(--wood);font:800 11px/1.2 'DM Sans',sans-serif;letter-spacing:.13em;}
-.decu-visor model-viewer{display:block;width:100%;height:390px;border-radius:18px;background:linear-gradient(145deg,#f8fafc,#e9eef4);overflow:hidden;outline:none;}
-.decu-carga{width:100%;height:100%;display:grid;place-items:end center;padding:22px;background:center/contain no-repeat;}
-.decu-carga button,.decu-ar-nativo{padding:11px 18px;border:0;border-radius:999px;background:#fff;color:var(--cream);font:700 13px 'DM Sans',sans-serif;box-shadow:0 7px 22px rgba(16,35,62,.18);cursor:pointer;}
-.decu-ar-nativo{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:var(--wood);color:#fff;white-space:nowrap;}
-.decu-visor-acciones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
-.decu-visor-acciones button{min-height:48px;border-radius:999px;font:700 14px 'DM Sans',sans-serif;cursor:pointer;}
-.decu-boton-3d{border:1px solid var(--line);background:#fff;color:var(--cream);}
-.decu-boton-ar{border:0;background:var(--wood);color:#fff;box-shadow:0 8px 22px rgba(22,133,248,.18);}
-.decu-visor-ayuda{margin:10px 5px 0;color:var(--muted);font-size:12px;line-height:1.45;text-align:center;}
 .decu-qr-modal[hidden]{display:none;}
 .decu-qr-modal{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;padding:20px;}
 .decu-qr-fondo{position:absolute;inset:0;background:rgba(8,20,38,.72);backdrop-filter:blur(4px);}
@@ -22,8 +51,7 @@
 .decu-qr-cerrar{position:absolute;top:12px;right:12px;width:40px;height:40px;border:0;border-radius:50%;background:var(--panel-2);color:var(--cream);font-size:26px;cursor:pointer;}
 body.decu-qr-abierto{overflow:hidden;}
 @media(max-width:520px){
-  .decu-visor model-viewer{height:330px;}
-  .decu-visor-cabecera{display:block;}
-  .decu-visor-acciones{grid-template-columns:1fr;}
-  .decu-boton-3d{display:none;}
+  .decu-activar-360{right:10px;bottom:10px;width:60px;height:48px;font-size:15px;}
+  .decu-cerrar-360{right:12px;bottom:12px;width:46px;height:46px;}
+  .decu-ayuda-giro{left:10px;bottom:12px;}
 }

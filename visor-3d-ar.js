@@ -32,19 +32,18 @@
     return modelos[String(codigo)] || null;
   }
 
-  function html(producto) {
+  function galeria(producto) {
     const modelo = obtener(producto.codigo);
     if (!modelo) return "";
     const codigo = escapar(producto.codigo);
     const nombre = escapar(producto.nombre);
     return `
-      <section class="ficha-seccion decu-visor" data-decu-visor="${codigo}">
-        <div class="decu-visor-cabecera">
-          <div>
-            <span class="decu-visor-eyebrow">VISTA INTERACTIVA</span>
-            <h3>Conocé el cuadro desde todos los ángulos</h3>
-          </div>
-        </div>
+      <button class="decu-activar-360" type="button" aria-pressed="false"
+              aria-label="Abrir vista 360 grados de ${nombre}"
+              onclick="DecuVisor3D.activar360('${codigo}')">
+        <span>360°</span>
+      </button>
+      <div class="decu-galeria-3d" data-decu-visor="${codigo}" aria-hidden="true">
         <model-viewer
           id="decu-modelo-${codigo}"
           src="${escapar(modelo.modelo)}"
@@ -64,17 +63,25 @@
           ar-placement="wall"
           ar-scale="fixed"
           xr-environment>
-          <button class="decu-ar-nativo" slot="ar-button" type="button">Ver en mi ambiente</button>
-          <div class="decu-carga" slot="poster" style="background-image:url('${escapar(modelo.poster)}')">
-            <button type="button" onclick="this.closest('model-viewer').dismissPoster()">Cargar vista 3D</button>
-          </div>
+          <div class="decu-carga" slot="poster" style="background-image:url('${escapar(modelo.poster)}')"></div>
         </model-viewer>
-        <div class="decu-visor-acciones">
-          <button class="decu-boton-3d" type="button" onclick="DecuVisor3D.enfocar('${codigo}')">↻ Girar y explorar</button>
-          <button class="decu-boton-ar" type="button" onclick="DecuVisor3D.verEnAmbiente('${codigo}')">▣ Ver en mi ambiente</button>
-        </div>
-        <p class="decu-visor-ayuda">En celular utiliza la cámara. Desde una computadora muestra un QR para continuar en el teléfono.</p>
-      </section>`;
+        <button class="decu-cerrar-360" type="button" aria-label="Cerrar vista 360 grados"
+                onclick="DecuVisor3D.cerrar360('${codigo}')">×</button>
+        <span class="decu-ayuda-giro">Arrastrá para girar</span>
+      </div>`;
+  }
+
+  function accion(producto) {
+    const modelo = obtener(producto.codigo);
+    if (!modelo) return "";
+    const codigo = escapar(producto.codigo);
+    return `
+      <div class="decu-accion-pared">
+        <button class="decu-boton-ar" type="button" onclick="DecuVisor3D.verEnAmbiente('${codigo}')">
+          <span aria-hidden="true">▣</span> Ver en mi pared
+        </button>
+        <p>En celular abre la cámara. Desde una computadora muestra un QR.</p>
+      </div>`;
   }
 
   function esMovil() {
@@ -104,7 +111,7 @@
         <h3 id="decu-qr-titulo">Mirá el cuadro en tu pared</h3>
         <p>Escaneá este código con la cámara de tu teléfono.</p>
         <img width="220" height="220" alt="Código QR para abrir el cuadro en el teléfono">
-        <small>Después tocá “Ver en mi ambiente” y apuntá la cámara hacia una pared.</small>
+        <small>Después tocá “Ver en mi pared” y apuntá la cámara hacia una pared.</small>
       </section>`;
     modal.addEventListener("click", (evento) => {
       if (evento.target.closest("[data-cerrar-qr]")) cerrarQr();
@@ -133,6 +140,7 @@
     const visor = document.getElementById(`decu-modelo-${codigo}`);
     if (esMovil() && visor?.activateAR) {
       try {
+        visor.dismissPoster?.();
         await visor.activateAR();
         return;
       } catch (_) {
@@ -142,20 +150,55 @@
     await abrirQr(codigo);
   }
 
-  function enfocar(codigo) {
+  function activar360(codigo) {
     const visor = document.getElementById(`decu-modelo-${codigo}`);
     if (!visor) return;
+    const marco = visor.closest("[data-ficha-imagen-principal]");
+    const panel = visor.closest("[data-decu-visor]");
+    if (!marco || !panel) return;
+    if (!marco.dataset.claseAntes3d) marco.dataset.claseAntes3d = marco.className;
+    marco.className = "ficha-imagen-recorte completa decu-3d-activo";
+    marco.setAttribute("data-ficha-imagen-principal", "");
+    panel.setAttribute("aria-hidden", "false");
+    marco.querySelector(".decu-activar-360")?.setAttribute("aria-pressed", "true");
     visor.dismissPoster?.();
-    visor.scrollIntoView({ behavior: "smooth", block: "center" });
     visor.focus({ preventScroll: true });
   }
 
+  function cerrar360(codigo) {
+    const visor = document.getElementById(`decu-modelo-${codigo}`);
+    if (!visor) return;
+    const marco = visor.closest("[data-ficha-imagen-principal]");
+    const panel = visor.closest("[data-decu-visor]");
+    if (!marco || !panel) return;
+    marco.className = marco.dataset.claseAntes3d || "ficha-imagen-recorte completa";
+    delete marco.dataset.claseAntes3d;
+    marco.setAttribute("data-ficha-imagen-principal", "");
+    panel.setAttribute("aria-hidden", "true");
+    marco.querySelector(".decu-activar-360")?.setAttribute("aria-pressed", "false");
+  }
+
   document.addEventListener("keydown", (evento) => {
-    if (evento.key === "Escape" && !document.getElementById("decu-qr-modal")?.hidden) cerrarQr();
+    if (evento.key !== "Escape") return;
+    if (!document.getElementById("decu-qr-modal")?.hidden) {
+      cerrarQr();
+      return;
+    }
+    const visorActivo = document.querySelector(".decu-3d-activo model-viewer");
+    if (visorActivo) cerrar360(visorActivo.id.replace("decu-modelo-", ""));
   });
 
   // Se carga en paralelo con productos.json. Cuando el usuario abre una ficha,
-  // la función html() decide si ese código ya tiene un GLB generado.
+  // las funciones de galería deciden si ese código ya tiene un GLB generado.
   cargar();
-  window.DecuVisor3D = { cargar, obtener, html, verEnAmbiente, enfocar, cerrarQr };
+  window.DecuVisor3D = {
+    cargar,
+    obtener,
+    galeria,
+    accion,
+    activar360,
+    cerrar360,
+    verEnAmbiente,
+    cerrarQr,
+  };
 })();

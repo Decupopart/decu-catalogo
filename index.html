@@ -1277,16 +1277,16 @@ function imagenesGaleriaProducto(producto){
 function htmlGaleriaFicha(producto){
   const imagenes = imagenesGaleriaProducto(producto);
   const principal = imagenes[0];
-  if(imagenes.length === 1){
-    return `<div class="ficha-imagen-recorte ${principal.modo}"><img src="${escaparHtml(principal.imagen)}" alt="${escaparHtml(principal.alt)}" decoding="async"></div>`;
-  }
+  const visor3d = window.DecuVisor3D?.galeria(producto) || "";
+  const accionPared = window.DecuVisor3D?.accion(producto) || "";
 
   return `
     <div class="ficha-galeria" data-ficha-galeria>
       <div class="ficha-imagen-recorte ${principal.modo}" data-ficha-imagen-principal>
         <img src="${escaparHtml(principal.imagen)}" alt="${escaparHtml(principal.alt)}" decoding="async">
+        ${visor3d}
       </div>
-      <div class="ficha-miniaturas" aria-label="Galería de imágenes de ${escaparHtml(producto.nombre)}">
+      ${imagenes.length > 1 ? `<div class="ficha-miniaturas" aria-label="Galería de imágenes de ${escaparHtml(producto.nombre)}">
         ${imagenes.map((item, indice)=>`
           <button class="ficha-miniatura ${indice === 0 ? "activa" : ""}" type="button"
                   aria-label="Mostrar ${escaparHtml(item.etiqueta)}" aria-pressed="${indice === 0 ? "true" : "false"}"
@@ -1296,7 +1296,8 @@ function htmlGaleriaFicha(producto){
             <span>${escaparHtml(item.etiqueta)}</span>
           </button>
         `).join("")}
-      </div>
+      </div>` : ""}
+      ${accionPared}
     </div>
   `;
 }
@@ -1306,6 +1307,8 @@ function seleccionarImagenFicha(boton){
   if(!galeria) return;
   const marco = galeria.querySelector("[data-ficha-imagen-principal]");
   const imagen = marco.querySelector("img");
+  const visor = marco.querySelector("model-viewer");
+  if(visor) window.DecuVisor3D?.cerrar360(visor.id.replace("decu-modelo-", ""));
   marco.className = `ficha-imagen-recorte ${boton.dataset.modo}`;
   marco.setAttribute("data-ficha-imagen-principal", "");
   imagen.src = boton.dataset.src;
@@ -1359,7 +1362,6 @@ function abrirFichaCompleta(codigo, opciones = {}){
     ${htmlGaleriaFicha(producto)}
     <h2 class="ficha-titulo" id="ficha-titulo">${escaparHtml(producto.nombre)}</h2>
     <p class="ficha-referencia">Ref. ${escaparHtml(producto.codigo)}</p>
-    ${window.DecuVisor3D?.html(producto) || ""}
 
     <section class="ficha-seccion">
       <h3>Pensado para tu espacio</h3>
