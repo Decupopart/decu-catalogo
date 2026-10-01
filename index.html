@@ -555,6 +555,16 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   .ficha-relacionados-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(132px,44vw);overflow-x:auto;scroll-snap-type:x proximity;padding:2px 2px 10px;}
   .ficha-relacionado{scroll-snap-align:start;}
 }
+/* Galerías migradas: mismo encuadre cuadrado en las cuatro vistas. */
+.tarjeta-titulo{text-align:center;padding:4px 18px 20px;background:white;}
+.tarjeta-titulo h2{font-family:'Fraunces',serif;font-size:25px;line-height:1.2;margin:0 0 6px;}
+.tarjeta-titulo p{margin:0;color:var(--muted);font-size:14px;}
+.ficha-miniatura{flex-basis:70px;}
+.ficha-miniatura img{height:53px;object-fit:contain;}
+.ficha-calidad{background:none;padding:0;border-radius:0;color:var(--muted);font-weight:400;font-size:12px;}
+.ficha-calidad svg{display:none;}
+.ficha-titulo{padding:0 38px;}
+.ficha-referencia{margin-bottom:14px;}
 </style>
 <link rel="stylesheet" href="visor-3d-ar.css">
 </head>
@@ -693,6 +703,7 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 
 <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
 <script src="visor-3d-ar.js"></script>
+<script src="galerias-optimizadas.js"></script>
 
 <script>
 /* ============================================================
@@ -855,7 +866,7 @@ async function actualizarImagenesDestacadas(){
 async function cargarProductos(){
   const grid = document.getElementById("grid");
   try{
-    await window.DecuVisor3D?.cargar();
+    await Promise.all([window.DecuVisor3D?.cargar(), window.DecuImagenes.cargar()]);
     const resp = await fetch("productos.json");
     if(!resp.ok) throw new Error("No se pudo leer productos.json");
     const datos = await resp.json();
@@ -1068,6 +1079,7 @@ function renderFiltros(){
 
 function htmlTarjetaProducto(p, indice){
   const cargaPrioritaria = indice === 0;
+  const principal = window.DecuImagenes.principal(p);
   return `
     <div class="cuadro" data-codigo="${p.codigo}" role="group" tabindex="0"
          aria-label="Abrir ficha completa de ${escaparHtml(p.nombre)}"
@@ -1075,7 +1087,7 @@ function htmlTarjetaProducto(p, indice){
          onkeydown="abrirFichaDesdeTarjeta(event, '${p.codigo}')">
       <div class="lienzo-marco">
         <div class="lienzo">
-          <img src="${p.imagen}" alt="${escaparHtml(p.nombre)}"
+          <img src="${escaparHtml(principal?.tarjeta || p.imagen)}" ${window.DecuImagenes.atributos(principal, "(max-width: 860px) 90vw, 420px")} alt="${escaparHtml(p.nombre)}"
                loading="${cargaPrioritaria?'eager':'lazy'}"
                decoding="async" fetchpriority="${cargaPrioritaria?'high':'low'}"
                width="720" height="720"
@@ -1096,6 +1108,7 @@ function htmlTarjetaProducto(p, indice){
           </button>
         </div>
       </div>
+      ${principal ? `<div class="tarjeta-titulo"><h2>${escaparHtml(p.nombre)}</h2><p>Ref. ${escaparHtml(p.codigo)}</p></div>` : ""}
       <button class="btn-ficha-completa" type="button" onclick="abrirFichaCompleta('${p.codigo}')">Ver ficha completa →</button>
       <a class="btn-consultar" href="${linkConsulta(p)}" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
@@ -1256,7 +1269,7 @@ function htmlProductosRelacionados(producto){
       <div class="ficha-relacionados-grid">
         ${relacionados.map(relacionado=>`
           <button class="ficha-relacionado" type="button" onclick="abrirFichaCompleta('${relacionado.codigo}')" aria-label="Ver ficha de ${escaparHtml(relacionado.nombre)}">
-            <span class="ficha-relacionado-imagen"><img src="${escaparHtml(relacionado.imagen)}" alt="" loading="lazy" decoding="async"></span>
+            <span class="ficha-relacionado-imagen"><img src="${escaparHtml(window.DecuImagenes.principal(relacionado)?.tarjeta || relacionado.imagen)}" alt="" loading="lazy" decoding="async"></span>
             <span class="ficha-relacionado-nombre">${escaparHtml(relacionado.nombre)}</span>
             <span class="ficha-relacionado-ref">Ref. ${escaparHtml(relacionado.codigo)}</span>
           </button>
@@ -1267,6 +1280,8 @@ function htmlProductosRelacionados(producto){
 }
 
 function imagenesGaleriaProducto(producto){
+  const nuevas = window.DecuImagenes.galeria(producto);
+  if(nuevas) return nuevas;
   const orientacion = producto.orientacion === "horizontal" ? "horizontal" : "vertical";
   return [
     { imagen:producto.imagen, etiqueta:"Obra", alt:`Vista principal de ${producto.nombre}`, modo:orientacion },
@@ -1283,16 +1298,16 @@ function htmlGaleriaFicha(producto){
   return `
     <div class="ficha-galeria" data-ficha-galeria>
       <div class="ficha-imagen-recorte ${principal.modo}" data-ficha-imagen-principal>
-        <img src="${escaparHtml(principal.imagen)}" alt="${escaparHtml(principal.alt)}" decoding="async">
+        <img src="${escaparHtml(principal.imagen)}" ${window.DecuImagenes.atributos(principal)} width="1254" height="1254" alt="${escaparHtml(principal.alt)}" decoding="async">
         ${visor3d}
       </div>
       ${imagenes.length > 1 ? `<div class="ficha-miniaturas" aria-label="Galería de imágenes de ${escaparHtml(producto.nombre)}">
         ${imagenes.map((item, indice)=>`
           <button class="ficha-miniatura ${indice === 0 ? "activa" : ""}" type="button"
                   aria-label="Mostrar ${escaparHtml(item.etiqueta)}" aria-pressed="${indice === 0 ? "true" : "false"}"
-                  data-src="${escaparHtml(item.imagen)}" data-alt="${escaparHtml(item.alt)}" data-modo="${escaparHtml(item.modo)}"
+                  data-src="${escaparHtml(item.imagen)}" data-srcset="${escaparHtml(item.srcset || "")}" data-alt="${escaparHtml(item.alt)}" data-modo="${escaparHtml(item.modo)}"
                   onclick="seleccionarImagenFicha(this)">
-            <img src="${escaparHtml(item.imagen)}" alt="" loading="${indice === 0 ? "eager" : "lazy"}" decoding="async">
+            <img src="${escaparHtml(item.miniatura || item.imagen)}" alt="" loading="${indice === 0 ? "eager" : "lazy"}" decoding="async">
             <span>${escaparHtml(item.etiqueta)}</span>
           </button>
         `).join("")}
@@ -1311,6 +1326,13 @@ function seleccionarImagenFicha(boton){
   if(visor) window.DecuVisor3D?.cerrar360(visor.id.replace("decu-modelo-", ""));
   marco.className = `ficha-imagen-recorte ${boton.dataset.modo}`;
   marco.setAttribute("data-ficha-imagen-principal", "");
+  if(boton.dataset.srcset){
+    imagen.sizes = "(max-width: 600px) 90vw, 520px";
+    imagen.srcset = boton.dataset.srcset;
+  }else{
+    imagen.removeAttribute("srcset");
+    imagen.removeAttribute("sizes");
+  }
   imagen.src = boton.dataset.src;
   imagen.alt = boton.dataset.alt;
   galeria.querySelectorAll(".ficha-miniatura").forEach(opcion=>{
@@ -1359,9 +1381,9 @@ function abrirFichaCompleta(codigo, opciones = {}){
   }).join("");
 
   document.getElementById("ficha-contenido").innerHTML = `
-    ${htmlGaleriaFicha(producto)}
     <h2 class="ficha-titulo" id="ficha-titulo">${escaparHtml(producto.nombre)}</h2>
     <p class="ficha-referencia">Ref. ${escaparHtml(producto.codigo)}</p>
+    ${htmlGaleriaFicha(producto)}
 
     <section class="ficha-seccion">
       <h3>Pensado para tu espacio</h3>
