@@ -576,14 +576,16 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 .collection-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:#abc5dd;}
 .collection-dot[aria-current="true"]::before{background:var(--wood);width:22px;border-radius:8px;}
 .collection-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+#colecciones .collection-grid{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:6px 4px 12px;scroll-padding-inline:4px;}
+#colecciones .collection-card{flex:0 0 calc((100% - 36px)/3);min-width:0;scroll-snap-align:start;}
+.collection-controls:not([hidden]){display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:0 12px;max-width:440px;margin:12px auto 0;}
+.collection-count{text-align:center;color:var(--muted);font-size:14px;}
+.collection-indicators{grid-column:1 / -1;grid-row:2;justify-content:center;flex-wrap:wrap;}
+[data-collection-next]{grid-column:3;grid-row:1;}
 @media(max-width:860px){
-  #colecciones .collection-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:6px 4px 12px;margin-left:-4px;margin-right:-4px;scroll-padding-inline:4px;}
-  #colecciones .collection-card{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;}
+  #colecciones .collection-grid{gap:14px;margin-left:-4px;margin-right:-4px;}
+  #colecciones .collection-card{flex-basis:100%;scroll-snap-stop:always;}
   #colecciones .collection-card:hover{transform:none;}
-  .collection-controls:not([hidden]){display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:0 12px;max-width:440px;margin:12px auto 0;}
-  .collection-count{text-align:center;color:var(--muted);font-size:14px;}
-  .collection-indicators{grid-column:1 / -1;grid-row:2;justify-content:center;flex-wrap:wrap;}
-  [data-collection-next]{grid-column:3;grid-row:1;}
 }
 @media(prefers-reduced-motion:reduce){#colecciones .collection-card{transition:none;}}
 
@@ -618,17 +620,9 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
   <div class="collection-carousel" role="region" aria-roledescription="carrusel" aria-label="Colecciones para cada ambiente">
   <div class="collection-grid" id="collection-track">
-    <article class="collection-card" data-categoria-destino="Botanica" role="button" tabindex="0" aria-label="Ver cuadros de naturaleza">
-      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image data-imagen-destacada data-codigo="855" href="" width="1063" height="1063" /></svg>
-      <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
-    </article>
-    <article class="collection-card" data-categoria-destino="Paisajes" role="button" tabindex="0" aria-label="Ver cuadros de paisajes">
-      <img class="collection-image" src="media/colecciones/2839.webp" alt="Paisajes" width="1200" height="801" loading="lazy" decoding="async">
-      <div class="collection-copy"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></div>
-    </article>
-    <article class="collection-card" data-categoria-destino="Animales" role="button" tabindex="0" aria-label="Ver cuadros de animales">
-      <img class="collection-image" src="media/colecciones/2207.webp" alt="Animales" width="1200" height="675" loading="lazy" decoding="async">
-      <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
+    <article class="collection-card" data-categoria-destino="Abstracto" role="button" tabindex="0" aria-label="Ver cuadros de abstractos">
+      <img class="collection-image" src="media/colecciones/1437.webp" alt="Abstractos" width="1200" height="800" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Abstractos</h3><p>Formas y color que transforman espacios.</p></div>
     </article>
     <article class="collection-card" data-categoria-destino="Bodegas" role="button" tabindex="0" aria-label="Ver cuadros de bodegas">
       <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bodegas" overflow="hidden"><image data-imagen-destacada data-codigo="1249" href="" width="1063" height="1063" /></svg>
@@ -638,9 +632,17 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
       <img class="collection-image" src="media/colecciones/1261.webp" alt="Rostros étnicos" width="1200" height="800" loading="lazy" decoding="async">
       <div class="collection-copy"><h3>Rostros étnicos</h3><p>Identidad, expresión y fuerza.</p></div>
     </article>
-    <article class="collection-card" data-categoria-destino="Abstracto" role="button" tabindex="0" aria-label="Ver cuadros de abstracto">
-      <img class="collection-image" src="media/colecciones/1437.webp" alt="Abstracto" width="1200" height="800" loading="lazy" decoding="async">
-      <div class="collection-copy"><h3>Abstracto</h3><p>Formas y color que transforman espacios.</p></div>
+    <article class="collection-card" data-categoria-destino="Animales" role="button" tabindex="0" aria-label="Ver cuadros de animales">
+      <img class="collection-image" src="media/colecciones/2207.webp" alt="Animales" width="1200" height="675" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Cristianismo" role="button" tabindex="0" aria-label="Ver cuadros de cristianismo">
+      <img class="collection-image" src="media/colecciones/2302.webp" alt="Cristianismo" width="1200" height="673" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Cristianismo</h3><p>Fe y esperanza para inspirar.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Paisajes" role="button" tabindex="0" aria-label="Ver cuadros de paisajes">
+      <img class="collection-image" src="media/colecciones/2839.webp" alt="Paisajes" width="1200" height="801" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></div>
     </article>
     <article class="collection-card" data-categoria-destino="Alas" role="button" tabindex="0" aria-label="Ver cuadros de alas">
       <img class="collection-image" src="media/colecciones/1282.webp" alt="Alas" width="1200" height="675" loading="lazy" decoding="async">
@@ -650,24 +652,24 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
       <img class="collection-image" src="media/colecciones/2951.webp" alt="Budismo" width="1200" height="675" loading="lazy" decoding="async">
       <div class="collection-copy"><h3>Budismo</h3><p>Serenidad y equilibrio para tu ambiente.</p></div>
     </article>
-    <article class="collection-card" data-categoria-destino="Cristianismo" role="button" tabindex="0" aria-label="Ver cuadros de cristianismo">
-      <img class="collection-image" src="media/colecciones/2302.webp" alt="Cristianismo" width="1200" height="673" loading="lazy" decoding="async">
-      <div class="collection-copy"><h3>Cristianismo</h3><p>Fe y esperanza para inspirar.</p></div>
+    <article class="collection-card" data-categoria-destino="Botanica" role="button" tabindex="0" aria-label="Ver cuadros de naturaleza">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image data-imagen-destacada data-codigo="855" href="" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
     </article>
   </div>
   <div class="collection-controls" hidden>
     <button class="collection-control" type="button" data-collection-prev aria-label="Colección anterior" aria-controls="collection-track"><span aria-hidden="true">←</span></button>
     <span class="collection-count" aria-hidden="true">1 / 9</span>
     <div class="collection-indicators" aria-label="Elegir colección">
-      <button class="collection-dot" type="button" data-collection-index="0" aria-label="Mostrar Naturaleza, 1 de 9" aria-controls="collection-track" aria-current="true"></button>
-      <button class="collection-dot" type="button" data-collection-index="1" aria-label="Mostrar Paisajes, 2 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="2" aria-label="Mostrar Animales, 3 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="3" aria-label="Mostrar Bodegas, 4 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="4" aria-label="Mostrar Rostros étnicos, 5 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="5" aria-label="Mostrar Abstracto, 6 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="0" aria-label="Mostrar Abstractos, 1 de 9" aria-controls="collection-track" aria-current="true"></button>
+      <button class="collection-dot" type="button" data-collection-index="1" aria-label="Mostrar Bodegas, 2 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="2" aria-label="Mostrar Rostros étnicos, 3 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="3" aria-label="Mostrar Animales, 4 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="4" aria-label="Mostrar Cristianismo, 5 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="5" aria-label="Mostrar Paisajes, 6 de 9" aria-controls="collection-track" aria-current="false"></button>
       <button class="collection-dot" type="button" data-collection-index="6" aria-label="Mostrar Alas, 7 de 9" aria-controls="collection-track" aria-current="false"></button>
       <button class="collection-dot" type="button" data-collection-index="7" aria-label="Mostrar Budismo, 8 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="8" aria-label="Mostrar Cristianismo, 9 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="8" aria-label="Mostrar Naturaleza, 9 de 9" aria-controls="collection-track" aria-current="false"></button>
     </div>
     <button class="collection-control" type="button" data-collection-next aria-label="Colección siguiente" aria-controls="collection-track"><span aria-hidden="true">→</span></button>
   </div>
@@ -1259,45 +1261,71 @@ function activarCarruselColecciones(){
   const controles = carrusel.querySelector('.collection-controls');
   const anterior = carrusel.querySelector('[data-collection-prev]');
   const siguiente = carrusel.querySelector('[data-collection-next]');
-  const indicadores = Array.from(carrusel.querySelectorAll('[data-collection-index]'));
+  const grupoIndicadores = carrusel.querySelector('.collection-indicators');
   const estadoCarrusel = carrusel.querySelector('.collection-status');
   const contador = carrusel.querySelector('.collection-count');
   const movil = window.matchMedia('(max-width:860px)');
   const movimientoReducido = window.matchMedia('(prefers-reduced-motion:reduce)');
+  let porVista = movil.matches ? 1 : 3;
   let actual = 0;
   let pendiente;
-  const posicion = tarjeta => tarjeta.getBoundingClientRect().left - pista.getBoundingClientRect().left + pista.scrollLeft - 4;
+  let indicadores = [];
+  const paginas = () => Math.ceil(tarjetas.length / porVista);
+  const posicion = indice => tarjetas[indice].getBoundingClientRect().left - pista.getBoundingClientRect().left + pista.scrollLeft - 4;
   function actualizar(){
-    actual = tarjetas.reduce((mejor, tarjeta, indice) =>
-      Math.abs(posicion(tarjeta) - pista.scrollLeft) < Math.abs(posicion(tarjetas[mejor]) - pista.scrollLeft) ? indice : mejor, 0);
-    contador.textContent = (actual + 1) + ' / ' + tarjetas.length;
+    actual = Array.from({length:paginas()}, (_, indice) => indice).reduce((mejor, indice) =>
+      Math.abs(posicion(indice * porVista) - pista.scrollLeft) < Math.abs(posicion(mejor * porVista) - pista.scrollLeft) ? indice : mejor, 0);
+    const inicio = actual * porVista;
+    const fin = Math.min(inicio + porVista, tarjetas.length);
+    contador.textContent = (porVista === 1 ? inicio + 1 : (inicio + 1) + '–' + fin) + ' / ' + tarjetas.length;
     anterior.disabled = actual === 0;
-    siguiente.disabled = actual === tarjetas.length - 1;
+    siguiente.disabled = actual === paginas() - 1;
     indicadores.forEach((boton, indice) => boton.setAttribute('aria-current', String(indice === actual)));
-    estadoCarrusel.textContent = movil.matches ? tarjetas[actual].querySelector('h3').textContent + ', ' + (actual + 1) + ' de ' + tarjetas.length : '';
+    const nombres = tarjetas.slice(inicio, fin).map(tarjeta => tarjeta.querySelector('h3').textContent).join(', ');
+    estadoCarrusel.textContent = nombres + '. ' + contador.textContent;
   }
-  function irA(indice){
-    if(!movil.matches) return;
-    indice = Math.max(0, Math.min(tarjetas.length - 1, indice));
-    pista.scrollTo({left:posicion(tarjetas[indice]), behavior:movimientoReducido.matches ? 'auto' : 'smooth'});
+  function irA(indice, comportamiento){
+    indice = Math.max(0, Math.min(paginas() - 1, indice));
+    pista.scrollTo({left:posicion(indice * porVista), behavior:comportamiento || (movimientoReducido.matches ? 'auto' : 'smooth')});
+  }
+  function crearIndicadores(){
+    grupoIndicadores.replaceChildren();
+    indicadores = Array.from({length:paginas()}, (_, indice) => {
+      const boton = document.createElement('button');
+      boton.className = 'collection-dot';
+      boton.type = 'button';
+      boton.dataset.collectionIndex = indice;
+      boton.setAttribute('aria-controls', 'collection-track');
+      const nombres = tarjetas.slice(indice * porVista, (indice + 1) * porVista).map(tarjeta => tarjeta.querySelector('h3').textContent).join(', ');
+      boton.setAttribute('aria-label', 'Mostrar ' + nombres + ', vista ' + (indice + 1) + ' de ' + paginas());
+      boton.addEventListener('click', () => irA(indice));
+      grupoIndicadores.append(boton);
+      return boton;
+    });
   }
   anterior.addEventListener('click', () => irA(actual - 1));
   siguiente.addEventListener('click', () => irA(actual + 1));
-  indicadores.forEach((boton, indice) => boton.addEventListener('click', () => irA(indice)));
   carrusel.addEventListener('keydown', evento => {
-    if(!movil.matches || !['ArrowLeft','ArrowRight','Home','End'].includes(evento.key)) return;
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(evento.key)) return;
     evento.preventDefault();
-    irA(evento.key === 'Home' ? 0 : evento.key === 'End' ? tarjetas.length - 1 : actual + (evento.key === 'ArrowRight' ? 1 : -1));
+    irA(evento.key === 'Home' ? 0 : evento.key === 'End' ? paginas() - 1 : actual + (evento.key === 'ArrowRight' ? 1 : -1));
   });
-  // Al tabular hacia una tarjeta, asegurar que quede completamente visible.
-  tarjetas.forEach((tarjeta, indice) => tarjeta.addEventListener('focus', () => irA(indice)));
+  // La navegación con Tab muestra el grupo que contiene la tarjeta enfocada.
+  tarjetas.forEach((tarjeta, indice) => tarjeta.addEventListener('focus', () => irA(Math.floor(indice / porVista))));
   pista.addEventListener('scroll', () => {
     clearTimeout(pendiente);
     pendiente = setTimeout(actualizar, 120);
   }, {passive:true});
   function adaptar(){
-    controles.hidden = !movil.matches;
-    pista.scrollTo({left:movil.matches ? posicion(tarjetas[actual]) : 0, behavior:'auto'});
+    const primera = actual * porVista;
+    const nuevaVista = movil.matches ? 1 : 3;
+    if(nuevaVista !== porVista || !indicadores.length){
+      porVista = nuevaVista;
+      actual = Math.floor(primera / porVista);
+      crearIndicadores();
+    }
+    controles.hidden = false;
+    irA(actual, 'auto');
     actualizar();
   }
   window.addEventListener('resize', adaptar);
