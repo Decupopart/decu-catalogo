@@ -565,6 +565,25 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 .ficha-calidad svg{display:none;}
 .ficha-titulo{padding:0 38px;}
 .ficha-referencia{margin-bottom:14px;}
+
+/* Carrusel de colecciones: desplazamiento nativo, sin dependencias. */
+.collection-controls{display:none;}
+.collection-control,.collection-dot{font:inherit;border:1px solid #b8dafa;background:#fff;color:var(--cream);cursor:pointer;min-width:44px;min-height:44px;border-radius:999px;}
+.collection-control:disabled{opacity:.4;cursor:default;}
+.collection-control:focus-visible,.collection-dot:focus-visible{outline:3px solid var(--wood);outline-offset:3px;}
+.collection-indicators{display:flex;gap:4px;}
+.collection-dot{display:grid;place-items:center;border:0;background:transparent;}
+.collection-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:#abc5dd;}
+.collection-dot[aria-current="true"]::before{background:var(--wood);width:22px;border-radius:8px;}
+.collection-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+@media(max-width:860px){
+  #colecciones .collection-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:6px 4px 12px;margin-left:-4px;margin-right:-4px;scroll-padding-inline:4px;}
+  #colecciones .collection-card{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;}
+  #colecciones .collection-card:hover{transform:none;}
+  .collection-controls:not([hidden]){display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;}
+}
+@media(prefers-reduced-motion:reduce){#colecciones .collection-card{transition:none;}}
+
 </style>
 <link rel="stylesheet" href="visor-3d-ar.css">
 </head>
@@ -594,7 +613,8 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 <section class="section collections" id="colecciones">
   <div class="section-kicker">Explorá por estilo</div><h2>Colecciones para cada ambiente.</h2>
   <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
-  <div class="collection-grid">
+  <div class="collection-carousel" role="region" aria-roledescription="carrusel" aria-label="Colecciones para cada ambiente">
+  <div class="collection-grid" id="collection-track">
     <article class="collection-card" data-categoria-destino="Botanica" role="button" tabindex="0" aria-label="Ver cuadros de naturaleza">
       <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image data-imagen-destacada data-codigo="855" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
@@ -607,6 +627,17 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
       <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animales" overflow="hidden"><image data-imagen-destacada data-codigo="520" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
     </article>
+  </div>
+  <div class="collection-controls" hidden>
+    <button class="collection-control" type="button" data-collection-prev aria-label="Colección anterior" aria-controls="collection-track"><span aria-hidden="true">←</span></button>
+    <div class="collection-indicators" aria-label="Elegir colección">
+      <button class="collection-dot" type="button" data-collection-index="0" aria-label="Mostrar Naturaleza, 1 de 3" aria-controls="collection-track" aria-current="true"></button>
+      <button class="collection-dot" type="button" data-collection-index="1" aria-label="Mostrar Paisajes, 2 de 3" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="2" aria-label="Mostrar Animales, 3 de 3" aria-controls="collection-track" aria-current="false"></button>
+    </div>
+    <button class="collection-control" type="button" data-collection-next aria-label="Colección siguiente" aria-controls="collection-track"><span aria-hidden="true">→</span></button>
+  </div>
+  <p class="collection-status" aria-live="polite" aria-atomic="true"></p>
   </div>
 </section>
 
@@ -1186,6 +1217,57 @@ function mostrarColeccion(categoria){
   window.requestAnimationFrame(()=>window.requestAnimationFrame(desplazarAResultados));
 }
 
+
+function activarCarruselColecciones(){
+  const carrusel = document.querySelector('.collection-carousel');
+  const pista = carrusel.querySelector('.collection-grid');
+  const tarjetas = Array.from(pista.querySelectorAll('.collection-card'));
+  const controles = carrusel.querySelector('.collection-controls');
+  const anterior = carrusel.querySelector('[data-collection-prev]');
+  const siguiente = carrusel.querySelector('[data-collection-next]');
+  const indicadores = Array.from(carrusel.querySelectorAll('[data-collection-index]'));
+  const estadoCarrusel = carrusel.querySelector('.collection-status');
+  const movil = window.matchMedia('(max-width:860px)');
+  const movimientoReducido = window.matchMedia('(prefers-reduced-motion:reduce)');
+  let actual = 0;
+  let pendiente;
+  const posicion = tarjeta => tarjeta.getBoundingClientRect().left - pista.getBoundingClientRect().left + pista.scrollLeft - 4;
+  function actualizar(){
+    actual = tarjetas.reduce((mejor, tarjeta, indice) =>
+      Math.abs(posicion(tarjeta) - pista.scrollLeft) < Math.abs(posicion(tarjetas[mejor]) - pista.scrollLeft) ? indice : mejor, 0);
+    anterior.disabled = actual === 0;
+    siguiente.disabled = actual === tarjetas.length - 1;
+    indicadores.forEach((boton, indice) => boton.setAttribute('aria-current', String(indice === actual)));
+    estadoCarrusel.textContent = movil.matches ? tarjetas[actual].querySelector('h3').textContent + ', ' + (actual + 1) + ' de ' + tarjetas.length : '';
+  }
+  function irA(indice){
+    if(!movil.matches) return;
+    indice = Math.max(0, Math.min(tarjetas.length - 1, indice));
+    pista.scrollTo({left:posicion(tarjetas[indice]), behavior:movimientoReducido.matches ? 'auto' : 'smooth'});
+  }
+  anterior.addEventListener('click', () => irA(actual - 1));
+  siguiente.addEventListener('click', () => irA(actual + 1));
+  indicadores.forEach((boton, indice) => boton.addEventListener('click', () => irA(indice)));
+  carrusel.addEventListener('keydown', evento => {
+    if(!movil.matches || !['ArrowLeft','ArrowRight','Home','End'].includes(evento.key)) return;
+    evento.preventDefault();
+    irA(evento.key === 'Home' ? 0 : evento.key === 'End' ? tarjetas.length - 1 : actual + (evento.key === 'ArrowRight' ? 1 : -1));
+  });
+  // Al tabular hacia una tarjeta, asegurar que quede completamente visible.
+  tarjetas.forEach((tarjeta, indice) => tarjeta.addEventListener('focus', () => irA(indice)));
+  pista.addEventListener('scroll', () => {
+    clearTimeout(pendiente);
+    pendiente = setTimeout(actualizar, 120);
+  }, {passive:true});
+  function adaptar(){
+    controles.hidden = !movil.matches;
+    pista.scrollTo({left:movil.matches ? posicion(tarjetas[actual]) : 0, behavior:'auto'});
+    actualizar();
+  }
+  window.addEventListener('resize', adaptar);
+  adaptar();
+}
+
 function activarTarjetasColeccion(){
   document.querySelectorAll("[data-categoria-destino]").forEach(tarjeta=>{
     const activar = ()=>mostrarColeccion(tarjeta.dataset.categoriaDestino);
@@ -1530,6 +1612,7 @@ document.getElementById("limpiar").addEventListener("click", ()=>{
 });
 
 activarTarjetasColeccion();
+activarCarruselColecciones();
 cargarProductos();
 </script>
 
