@@ -572,7 +572,7 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 .collection-control:disabled{opacity:.4;cursor:default;}
 .collection-control:focus-visible,.collection-dot:focus-visible{outline:3px solid var(--wood);outline-offset:3px;}
 .collection-indicators{display:flex;gap:4px;}
-.collection-dot{display:grid;place-items:center;border:0;background:transparent;}
+.collection-dot{display:grid;place-items:center;min-width:24px;border:0;background:transparent;}
 .collection-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:#abc5dd;}
 .collection-dot[aria-current="true"]::before{background:var(--wood);width:22px;border-radius:8px;}
 .collection-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
@@ -580,7 +580,10 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   #colecciones .collection-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:6px 4px 12px;margin-left:-4px;margin-right:-4px;scroll-padding-inline:4px;}
   #colecciones .collection-card{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;}
   #colecciones .collection-card:hover{transform:none;}
-  .collection-controls:not([hidden]){display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;}
+  .collection-controls:not([hidden]){display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:0 12px;max-width:440px;margin:12px auto 0;}
+  .collection-count{text-align:center;color:var(--muted);font-size:14px;}
+  .collection-indicators{grid-column:1 / -1;grid-row:2;justify-content:center;flex-wrap:wrap;}
+  [data-collection-next]{grid-column:3;grid-row:1;}
 }
 @media(prefers-reduced-motion:reduce){#colecciones .collection-card{transition:none;}}
 
@@ -627,13 +630,44 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
       <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animales" overflow="hidden"><image data-imagen-destacada data-codigo="520" href="" width="1063" height="1063" /></svg>
       <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
     </article>
+    <article class="collection-card" data-categoria-destino="Bodegas" role="button" tabindex="0" aria-label="Ver cuadros de bodegas">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bodegas" overflow="hidden"><image data-imagen-destacada data-codigo="1249" href="" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Bodegas</h3><p>Tradición y calidez para compartir.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Rostros étnicos" role="button" tabindex="0" aria-label="Ver cuadros de rostros étnicos">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Rostros étnicos" overflow="hidden"><image data-imagen-destacada data-codigo="2121" href="" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Rostros étnicos</h3><p>Identidad, expresión y fuerza.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Abstracto" role="button" tabindex="0" aria-label="Ver cuadros de abstracto">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Abstracto" overflow="hidden"><image data-imagen-destacada data-codigo="1238" href="" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Abstracto</h3><p>Formas y color que transforman espacios.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Alas" role="button" tabindex="0" aria-label="Ver cuadros de alas">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Alas" overflow="hidden"><image data-imagen-destacada data-codigo="1274" href="" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Alas</h3><p>Libertad y elegancia en cada detalle.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Budismo" role="button" tabindex="0" aria-label="Ver cuadros de budismo">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Budismo" overflow="hidden"><image data-imagen-destacada data-codigo="2270" href="" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Budismo</h3><p>Serenidad y equilibrio para tu ambiente.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Cristianismo" role="button" tabindex="0" aria-label="Ver cuadros de cristianismo">
+      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Cristianismo" overflow="hidden"><image data-imagen-destacada data-codigo="2295" href="" width="1063" height="1063" /></svg>
+      <div class="collection-copy"><h3>Cristianismo</h3><p>Fe y esperanza para inspirar.</p></div>
+    </article>
   </div>
   <div class="collection-controls" hidden>
     <button class="collection-control" type="button" data-collection-prev aria-label="Colección anterior" aria-controls="collection-track"><span aria-hidden="true">←</span></button>
+    <span class="collection-count" aria-hidden="true">1 / 9</span>
     <div class="collection-indicators" aria-label="Elegir colección">
-      <button class="collection-dot" type="button" data-collection-index="0" aria-label="Mostrar Naturaleza, 1 de 3" aria-controls="collection-track" aria-current="true"></button>
-      <button class="collection-dot" type="button" data-collection-index="1" aria-label="Mostrar Paisajes, 2 de 3" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="2" aria-label="Mostrar Animales, 3 de 3" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="0" aria-label="Mostrar Naturaleza, 1 de 9" aria-controls="collection-track" aria-current="true"></button>
+      <button class="collection-dot" type="button" data-collection-index="1" aria-label="Mostrar Paisajes, 2 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="2" aria-label="Mostrar Animales, 3 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="3" aria-label="Mostrar Bodegas, 4 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="4" aria-label="Mostrar Rostros étnicos, 5 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="5" aria-label="Mostrar Abstracto, 6 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="6" aria-label="Mostrar Alas, 7 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="7" aria-label="Mostrar Budismo, 8 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="8" aria-label="Mostrar Cristianismo, 9 de 9" aria-controls="collection-track" aria-current="false"></button>
     </div>
     <button class="collection-control" type="button" data-collection-next aria-label="Colección siguiente" aria-controls="collection-track"><span aria-hidden="true">→</span></button>
   </div>
@@ -1227,6 +1261,7 @@ function activarCarruselColecciones(){
   const siguiente = carrusel.querySelector('[data-collection-next]');
   const indicadores = Array.from(carrusel.querySelectorAll('[data-collection-index]'));
   const estadoCarrusel = carrusel.querySelector('.collection-status');
+  const contador = carrusel.querySelector('.collection-count');
   const movil = window.matchMedia('(max-width:860px)');
   const movimientoReducido = window.matchMedia('(prefers-reduced-motion:reduce)');
   let actual = 0;
@@ -1235,6 +1270,7 @@ function activarCarruselColecciones(){
   function actualizar(){
     actual = tarjetas.reduce((mejor, tarjeta, indice) =>
       Math.abs(posicion(tarjeta) - pista.scrollLeft) < Math.abs(posicion(tarjetas[mejor]) - pista.scrollLeft) ? indice : mejor, 0);
+    contador.textContent = (actual + 1) + ' / ' + tarjetas.length;
     anterior.disabled = actual === 0;
     siguiente.disabled = actual === tarjetas.length - 1;
     indicadores.forEach((boton, indice) => boton.setAttribute('aria-current', String(indice === actual)));
