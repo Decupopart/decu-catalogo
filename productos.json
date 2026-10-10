@@ -39113,5 +39113,203 @@
     "tecnica_visual": "Fotográfica",
     "imagen": "Imagenes/3470-Paz en el Jardín-Botanica-Flores-Vibrante-verde, naranja-Horizontal-Living-Nórdico-Armonía-Equilibrado-Fotográfica.jpg",
     "mas_vendido": false
+  },
+  {
+    "codigo": "3472",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Senderos entre la Bruma",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Cálido",
+    "colores": [
+      "marron",
+      "gris",
+      "verde"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Dormitorio",
+    "estilo": "Nórdico",
+    "emocion": "Calma",
+    "impacto_visual": "Suave",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3473",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Horizontes sin Límites",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Frío",
+    "colores": [
+      "blanco",
+      "azul",
+      "rosa"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Oficina",
+    "estilo": "Minimalista",
+    "emocion": "Inspiración",
+    "impacto_visual": "Suave",
+    "tecnica_visual": "Ilustrativa"
+  },
+  {
+    "codigo": "3474",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Pradera de Acuarela",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Frío",
+    "colores": [
+      "verde",
+      "blanco",
+      "azul"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Dormitorio",
+    "estilo": "Nórdico",
+    "emocion": "Calma",
+    "impacto_visual": "Suave",
+    "tecnica_visual": "Ilustrativa"
+  },
+  {
+    "codigo": "3475",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Primer Rayo del Valle",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Frío",
+    "colores": [
+      "negro",
+      "azul",
+      "gris"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Living",
+    "estilo": "Clásico",
+    "emocion": "Misterio",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3476",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Ramas del Silencio Alpino",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Frío",
+    "colores": [
+      "gris",
+      "verde",
+      "blanco"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Baño",
+    "estilo": "Nórdico",
+    "emocion": "Calma",
+    "impacto_visual": "Equilibrado",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3477",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Espíritu de las Cumbres",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Frío",
+    "colores": [
+      "azul",
+      "negro"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Oficina",
+    "estilo": "Moderno",
+    "emocion": "Libertad",
+    "impacto_visual": "Equilibrado",
+    "tecnica_visual": "Collage/Mixta"
+  },
+  {
+    "codigo": "3478",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Cumbres en el Espejo Azul",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Frío",
+    "colores": [
+      "azul",
+      "gris"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Dormitorio",
+    "estilo": "Clásico",
+    "emocion": "Armonía",
+    "impacto_visual": "Equilibrado",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3479",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Fuego de Otoño y Nieve",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Cálido",
+    "colores": [
+      "marron",
+      "gris",
+      "naranja"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Living",
+    "estilo": "Clásico",
+    "emocion": "Energía",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3480",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Invierno en Papel Azul",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Neutro",
+    "colores": [
+      "blanco",
+      "azul",
+      "gris"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Infantil/Juvenil",
+    "estilo": "Minimalista",
+    "emocion": "Calma",
+    "impacto_visual": "Suave",
+    "tecnica_visual": "Ilustrativa"
+  },
+  {
+    "codigo": "3481",
+    "mas_vendido": false,
+    "imagen": null,
+    "nombre": "Ruta hacia los Picos Claros",
+    "categoria": "Paisajes",
+    "subcategoria": "Montañas",
+    "tonalidad": "Frío",
+    "colores": [
+      "azul",
+      "negro",
+      "blanco"
+    ],
+    "orientacion": "vertical",
+    "ambiente": "Pasillo",
+    "estilo": "Clásico",
+    "emocion": "Libertad",
+    "impacto_visual": "Equilibrado",
+    "tecnica_visual": "Fotográfica"
   }
 ]
