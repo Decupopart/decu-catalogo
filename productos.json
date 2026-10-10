@@ -39311,5 +39311,25 @@
     "emocion": "Libertad",
     "impacto_visual": "Equilibrado",
     "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3482",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3482_PRODUCTO_H_01-0c688e576b74-640.webp",
+    "nombre": "Luz entre Hojas de Otoño",
+    "categoria": "Paisajes",
+    "subcategoria": "Bosque",
+    "tonalidad": "Oscuro",
+    "colores": [
+      "marron",
+      "negro",
+      "gris"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Living",
+    "estilo": "Boho",
+    "emocion": "Calma",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
   }
 ]

@@ -24790,5 +24790,17 @@
     "alto_cm": 100.0,
     "profundidad_cm": 3.5,
     "fuente": "original"
+  },
+  "3482": {
+    "codigo": "3482",
+    "nombre": "Luz entre Hojas de Otoño",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3482.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3482-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3482-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3482&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 60.01875,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
   }
 }
