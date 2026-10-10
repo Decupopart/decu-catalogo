@@ -5,7 +5,7 @@ window.DecuImagenes = (() => {
   function url(ruta) { return manifiesto.baseUrl ? `${manifiesto.baseUrl}/${ruta}` : ruta; }
   function galeria(p) {
     const vistas = manifiesto.productos?.[p.codigo];
-    if (!Array.isArray(vistas) || vistas.length !== 4) return null;
+    if (!Array.isArray(vistas) || vistas.length < 4) return null;
     if (!vistas.every(v => v.variantes?.[160]?.ruta && v.variantes?.[640]?.ruta && v.variantes?.[1254]?.ruta)) return null;
     return vistas.map(v => ({
       imagen: url(v.variantes[1254].ruta), miniatura: url(v.variantes[160].ruta),

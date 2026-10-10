@@ -403,7 +403,7 @@ header:after{display:none;}
 .living-hero:before{display:none;}
 .living-hero svg{display:block;width:100%;height:100%;position:absolute;inset:0;}
 .collection-card,.collection-card:nth-child(2),.collection-card:nth-child(3){background:#fff;padding:0;overflow:hidden;min-height:0;justify-content:flex-start;}
-.collection-image{display:block;width:100%;aspect-ratio:900/539;flex-shrink:0;}
+.collection-image{display:block;width:100%;height:auto;aspect-ratio:900/539;object-fit:cover;flex-shrink:0;}
 .collection-copy{padding:18px;}
 .collection-card h3,.collection-card p{background:rgba(255,255,255,.95);margin:0;padding:12px 14px;color:var(--cream);}
 .collection-card h3{border-radius:8px 8px 0 0;padding-bottom:4px;}
@@ -565,8 +565,33 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 .ficha-calidad svg{display:none;}
 .ficha-titulo{padding:0 38px;}
 .ficha-referencia{margin-bottom:14px;}
+
+/* Carrusel de colecciones: desplazamiento nativo, sin dependencias. */
+.collection-controls{display:none;}
+.collection-control,.collection-dot{font:inherit;border:1px solid #b8dafa;background:#fff;color:var(--cream);cursor:pointer;min-width:44px;min-height:44px;border-radius:999px;}
+.collection-control:disabled{opacity:.4;cursor:default;}
+.collection-control:focus-visible,.collection-dot:focus-visible{outline:3px solid var(--wood);outline-offset:3px;}
+.collection-indicators{display:flex;gap:4px;}
+.collection-dot{display:grid;place-items:center;min-width:24px;border:0;background:transparent;}
+.collection-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:#abc5dd;}
+.collection-dot[aria-current="true"]::before{background:var(--wood);width:22px;border-radius:8px;}
+.collection-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+#colecciones .collection-grid{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:6px 4px 12px;scroll-padding-inline:4px;}
+#colecciones .collection-card{flex:0 0 calc((100% - 36px)/3);min-width:0;scroll-snap-align:start;}
+.collection-controls:not([hidden]){display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:0 12px;max-width:440px;margin:12px auto 0;}
+.collection-count{text-align:center;color:var(--muted);font-size:14px;}
+.collection-indicators{grid-column:1 / -1;grid-row:2;justify-content:center;flex-wrap:wrap;}
+[data-collection-next]{grid-column:3;grid-row:1;}
+@media(max-width:860px){
+  #colecciones .collection-grid{gap:14px;margin-left:-4px;margin-right:-4px;}
+  #colecciones .collection-card{flex-basis:100%;scroll-snap-stop:always;}
+  #colecciones .collection-card:hover{transform:none;}
+}
+@media(prefers-reduced-motion:reduce){#colecciones .collection-card{transition:none;}}
+
 </style>
 <link rel="stylesheet" href="visor-3d-ar.css">
+<link rel="preload" as="image" href="media/colecciones/living-hero.webp" fetchpriority="high">
 </head>
 <body>
 
@@ -586,7 +611,7 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   </div>
   <div class="living-hero">
     <svg viewBox="660 58 690 408" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Living luminoso con cuadros sobre el sofá" overflow="hidden">
-      <image data-imagen-destacada data-codigo="520" data-imagen-preferida="Imagenes/living-decu-maqueta.png" href="" width="1505" height="1045" />
+      <image href="media/colecciones/living-hero.webp" width="1505" height="1045" />
     </svg>
   </div>
 </header>
@@ -594,19 +619,62 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 <section class="section collections" id="colecciones">
   <div class="section-kicker">Explorá por estilo</div><h2>Colecciones para cada ambiente.</h2>
   <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
-  <div class="collection-grid">
-    <article class="collection-card" data-categoria-destino="Botanica" role="button" tabindex="0" aria-label="Ver cuadros de naturaleza">
-      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Naturaleza" overflow="hidden"><image data-imagen-destacada data-codigo="855" href="" width="1063" height="1063" /></svg>
-      <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
+  <div class="collection-carousel" role="region" aria-roledescription="carrusel" aria-label="Colecciones para cada ambiente">
+  <div class="collection-grid" id="collection-track">
+    <article class="collection-card" data-categoria-destino="Abstracto" role="button" tabindex="0" aria-label="Ver cuadros de abstractos">
+      <img class="collection-image" srcset="media/colecciones/1437-480.webp 480w, media/colecciones/1437-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/1437.webp" alt="Abstractos" width="1200" height="800" loading="eager" decoding="async">
+      <div class="collection-copy"><h3>Abstractos</h3><p>Formas y color que transforman espacios.</p></div>
     </article>
-    <article class="collection-card" data-categoria-destino="Paisajes" role="button" tabindex="0" aria-label="Ver cuadros de paisajes">
-      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paisajes" overflow="hidden"><image data-imagen-destacada data-codigo="817" href="" width="1063" height="1063" /></svg>
-      <div class="collection-copy"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></div>
+    <article class="collection-card" data-categoria-destino="Bodegas" role="button" tabindex="0" aria-label="Ver cuadros de bodegas">
+      <img class="collection-image" srcset="media/colecciones/1249-480.webp 480w, media/colecciones/1249-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/1249.webp" alt="Bodegas" width="900" height="539" loading="eager" decoding="async">
+      <div class="collection-copy"><h3>Bodegas</h3><p>Tradición y calidez para compartir.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Rostros étnicos" role="button" tabindex="0" aria-label="Ver cuadros de rostros étnicos">
+      <img class="collection-image" srcset="media/colecciones/1261-480.webp 480w, media/colecciones/1261-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/1261.webp" alt="Rostros étnicos" width="1200" height="800" loading="eager" decoding="async">
+      <div class="collection-copy"><h3>Rostros étnicos</h3><p>Identidad, expresión y fuerza.</p></div>
     </article>
     <article class="collection-card" data-categoria-destino="Animales" role="button" tabindex="0" aria-label="Ver cuadros de animales">
-      <svg class="collection-image" viewBox="82 125 900 539" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animales" overflow="hidden"><image data-imagen-destacada data-codigo="520" href="" width="1063" height="1063" /></svg>
+      <img class="collection-image" srcset="media/colecciones/2207-480.webp 480w, media/colecciones/2207-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/2207.webp" alt="Animales" width="1200" height="675" loading="lazy" decoding="async">
       <div class="collection-copy"><h3>Animales</h3><p>Movimiento y carácter para tu espacio.</p></div>
     </article>
+    <article class="collection-card" data-categoria-destino="Cristianismo" role="button" tabindex="0" aria-label="Ver cuadros de cristianismo">
+      <img class="collection-image" srcset="media/colecciones/2302-480.webp 480w, media/colecciones/2302-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/2302.webp" alt="Cristianismo" width="1200" height="673" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Cristianismo</h3><p>Fe y esperanza para inspirar.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Paisajes" role="button" tabindex="0" aria-label="Ver cuadros de paisajes">
+      <img class="collection-image" srcset="media/colecciones/2839-480.webp 480w, media/colecciones/2839-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/2839.webp" alt="Paisajes" width="1200" height="801" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Paisajes</h3><p>Escenas para viajar sin salir de casa.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Alas" role="button" tabindex="0" aria-label="Ver cuadros de alas">
+      <img class="collection-image" srcset="media/colecciones/1282-480.webp 480w, media/colecciones/1282-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/1282.webp" alt="Alas" width="1200" height="675" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Alas</h3><p>Libertad y elegancia en cada detalle.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Budismo" role="button" tabindex="0" aria-label="Ver cuadros de budismo">
+      <img class="collection-image" srcset="media/colecciones/2951-480.webp 480w, media/colecciones/2951-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/2951.webp" alt="Budismo" width="1200" height="675" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Budismo</h3><p>Serenidad y equilibrio para tu ambiente.</p></div>
+    </article>
+    <article class="collection-card" data-categoria-destino="Botanica" role="button" tabindex="0" aria-label="Ver cuadros de naturaleza">
+      <img class="collection-image" srcset="media/colecciones/855-480.webp 480w, media/colecciones/855-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/855.webp" alt="Naturaleza" width="900" height="539" loading="lazy" decoding="async">
+      <div class="collection-copy"><h3>Naturaleza</h3><p>Calma, textura y formas orgánicas.</p></div>
+    </article>
+  </div>
+  <div class="collection-controls" hidden>
+    <button class="collection-control" type="button" data-collection-prev aria-label="Colección anterior" aria-controls="collection-track"><span aria-hidden="true">←</span></button>
+    <span class="collection-count" aria-hidden="true">1 / 9</span>
+    <div class="collection-indicators" aria-label="Elegir colección">
+      <button class="collection-dot" type="button" data-collection-index="0" aria-label="Mostrar Abstractos, 1 de 9" aria-controls="collection-track" aria-current="true"></button>
+      <button class="collection-dot" type="button" data-collection-index="1" aria-label="Mostrar Bodegas, 2 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="2" aria-label="Mostrar Rostros étnicos, 3 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="3" aria-label="Mostrar Animales, 4 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="4" aria-label="Mostrar Cristianismo, 5 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="5" aria-label="Mostrar Paisajes, 6 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="6" aria-label="Mostrar Alas, 7 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="7" aria-label="Mostrar Budismo, 8 de 9" aria-controls="collection-track" aria-current="false"></button>
+      <button class="collection-dot" type="button" data-collection-index="8" aria-label="Mostrar Naturaleza, 9 de 9" aria-controls="collection-track" aria-current="false"></button>
+    </div>
+    <button class="collection-control" type="button" data-collection-next aria-label="Colección siguiente" aria-controls="collection-track"><span aria-hidden="true">→</span></button>
+  </div>
+  <p class="collection-status" aria-live="polite" aria-atomic="true"></p>
   </div>
 </section>
 
@@ -703,7 +771,7 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
 
 <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
 <script src="visor-3d-ar.js"></script>
-<script src="galerias-optimizadas.js"></script>
+<script src="galerias-optimizadas.js?v=2"></script>
 
 <script>
 /* ============================================================
@@ -834,45 +902,15 @@ function normalizarProducto(producto){
   };
 }
 
-function primeraImagenDisponible(rutas){
-  const candidatas = [...new Set(rutas.filter(Boolean))];
-  return new Promise(resolve=>{
-    const probar = indice=>{
-      if(indice >= candidatas.length){
-        resolve(null);
-        return;
-      }
-      const prueba = new Image();
-      prueba.onload = ()=>resolve(candidatas[indice]);
-      prueba.onerror = ()=>probar(indice + 1);
-      prueba.src = candidatas[indice];
-    };
-    probar(0);
-  });
-}
-
-async function actualizarImagenesDestacadas(){
-  const elementos = [...document.querySelectorAll("[data-imagen-destacada]")];
-  await Promise.all(elementos.map(async elemento=>{
-    const producto = PRODUCTOS.find(p=>p.codigo === elemento.dataset.codigo);
-    const ruta = await primeraImagenDisponible([
-      elemento.dataset.imagenPreferida,
-      producto && producto.imagen,
-    ]);
-    if(ruta) elemento.setAttribute("href", ruta);
-  }));
-}
-
 async function cargarProductos(){
   const grid = document.getElementById("grid");
   try{
-    await Promise.all([window.DecuVisor3D?.cargar(), window.DecuImagenes.cargar()]);
-    const resp = await fetch("productos.json");
+    const [resp] = await Promise.all([fetch("productos.json"), window.DecuImagenes.cargar(), window.DecuVisor3D?.cargar()]);
     if(!resp.ok) throw new Error("No se pudo leer productos.json");
     const datos = await resp.json();
     if(!Array.isArray(datos)) throw new Error("productos.json no contiene una lista");
     PRODUCTOS = datos.map(normalizarProducto).filter(p=>p.codigo && p.nombre && p.categoria);
-    await actualizarImagenesDestacadas();
+    // Las portadas se descargan directamente desde el HTML, sin esperar estos datos.
   }catch(err){
     grid.innerHTML = `<div class="vacio">
       <p>No se pudo cargar productos.json</p>
@@ -1184,6 +1222,103 @@ function mostrarColeccion(categoria){
   renderFiltros();
   renderGrid();
   window.requestAnimationFrame(()=>window.requestAnimationFrame(desplazarAResultados));
+}
+
+
+function activarCarruselColecciones(){
+  const carrusel = document.querySelector('.collection-carousel');
+  const pista = carrusel.querySelector('.collection-grid');
+  const tarjetas = Array.from(pista.querySelectorAll('.collection-card'));
+  const controles = carrusel.querySelector('.collection-controls');
+  const anterior = carrusel.querySelector('[data-collection-prev]');
+  const siguiente = carrusel.querySelector('[data-collection-next]');
+  const grupoIndicadores = carrusel.querySelector('.collection-indicators');
+  const estadoCarrusel = carrusel.querySelector('.collection-status');
+  const contador = carrusel.querySelector('.collection-count');
+  const movil = window.matchMedia('(max-width:860px)');
+  const movimientoReducido = window.matchMedia('(prefers-reduced-motion:reduce)');
+  let porVista = movil.matches ? 1 : 3;
+  let actual = 0;
+  let cuadroPendiente = null;
+  let anuncioPendiente;
+  let ultimaVista = -1;
+  let indicadores = [];
+  const paginas = () => Math.ceil(tarjetas.length / porVista);
+  const posicion = indice => tarjetas[indice].getBoundingClientRect().left - pista.getBoundingClientRect().left + pista.scrollLeft - 4;
+  function actualizar(){
+    actual = Array.from({length:paginas()}, (_, indice) => indice).reduce((mejor, indice) =>
+      Math.abs(posicion(indice * porVista) - pista.scrollLeft) < Math.abs(posicion(mejor * porVista) - pista.scrollLeft) ? indice : mejor, 0);
+    if(actual === ultimaVista) return;
+    ultimaVista = actual;
+    const inicio = actual * porVista;
+    const fin = Math.min(inicio + porVista, tarjetas.length);
+    contador.textContent = (porVista === 1 ? inicio + 1 : (inicio + 1) + '–' + fin) + ' / ' + tarjetas.length;
+    anterior.disabled = actual === 0;
+    siguiente.disabled = actual === paginas() - 1;
+    indicadores.forEach((boton, indice) => boton.setAttribute('aria-current', String(indice === actual)));
+  }
+  function anunciar(){
+    const inicio = actual * porVista;
+    const fin = Math.min(inicio + porVista, tarjetas.length);
+    const nombres = tarjetas.slice(inicio, fin).map(tarjeta => tarjeta.querySelector('h3').textContent).join(', ');
+    estadoCarrusel.textContent = nombres + '. ' + contador.textContent;
+  }
+  function irA(indice, comportamiento){
+    indice = Math.max(0, Math.min(paginas() - 1, indice));
+    pista.scrollTo({left:posicion(indice * porVista), behavior:comportamiento || (movimientoReducido.matches ? 'auto' : 'smooth')});
+  }
+  function crearIndicadores(){
+    ultimaVista = -1;
+    grupoIndicadores.replaceChildren();
+    indicadores = Array.from({length:paginas()}, (_, indice) => {
+      const boton = document.createElement('button');
+      boton.className = 'collection-dot';
+      boton.type = 'button';
+      boton.dataset.collectionIndex = indice;
+      boton.setAttribute('aria-controls', 'collection-track');
+      const nombres = tarjetas.slice(indice * porVista, (indice + 1) * porVista).map(tarjeta => tarjeta.querySelector('h3').textContent).join(', ');
+      boton.setAttribute('aria-label', 'Mostrar ' + nombres + ', vista ' + (indice + 1) + ' de ' + paginas());
+      boton.addEventListener('click', () => irA(indice));
+      grupoIndicadores.append(boton);
+      return boton;
+    });
+  }
+  anterior.addEventListener('click', () => irA(actual - 1));
+  siguiente.addEventListener('click', () => irA(actual + 1));
+  carrusel.addEventListener('keydown', evento => {
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(evento.key)) return;
+    evento.preventDefault();
+    irA(evento.key === 'Home' ? 0 : evento.key === 'End' ? paginas() - 1 : actual + (evento.key === 'ArrowRight' ? 1 : -1));
+  });
+  // La navegación con Tab muestra el grupo que contiene la tarjeta enfocada.
+  tarjetas.forEach((tarjeta, indice) => tarjeta.addEventListener('focus', () => irA(Math.floor(indice / porVista))));
+  pista.addEventListener('scroll', () => {
+    // Sincroniza los controles con el siguiente cuadro visible del desplazamiento.
+    if(cuadroPendiente === null){
+      cuadroPendiente = window.requestAnimationFrame(() => {
+        cuadroPendiente = null;
+        actualizar();
+      });
+    }
+    // El lector de pantalla anuncia la vista una vez que termina el movimiento.
+    clearTimeout(anuncioPendiente);
+    anuncioPendiente = setTimeout(anunciar, 120);
+  }, {passive:true});
+  function adaptar(){
+    const primera = actual * porVista;
+    const nuevaVista = movil.matches ? 1 : 3;
+    if(nuevaVista !== porVista || !indicadores.length){
+      porVista = nuevaVista;
+      actual = Math.floor(primera / porVista);
+      crearIndicadores();
+    }
+    controles.hidden = false;
+    irA(actual, 'auto');
+    actualizar();
+    anunciar();
+  }
+  window.addEventListener('resize', adaptar);
+  adaptar();
 }
 
 function activarTarjetasColeccion(){
@@ -1530,6 +1665,7 @@ document.getElementById("limpiar").addEventListener("click", ()=>{
 });
 
 activarTarjetasColeccion();
+activarCarruselColecciones();
 cargarProductos();
 </script>
 
