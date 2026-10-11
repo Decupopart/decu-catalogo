@@ -24814,5 +24814,77 @@
     "alto_cm": 50.625,
     "profundidad_cm": 3.5,
     "fuente": "original"
+  },
+  "3484": {
+    "codigo": "3484",
+    "nombre": "Pulso entre Colinas",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3484.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3484-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3484-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3484&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 60.01875,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "3485": {
+    "codigo": "3485",
+    "nombre": "Corriente de Neón",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3485.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3485-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3485-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3485&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 60.01875,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "3486": {
+    "codigo": "3486",
+    "nombre": "Ocaso sobre la Avenida",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3486.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3486-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3486-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3486&ar=1",
+    "ancho_cm": 66.625,
+    "alto_cm": 100.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "3487": {
+    "codigo": "3487",
+    "nombre": "Rieles hacia el Silencio",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3487.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3487-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3487-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3487&ar=1",
+    "ancho_cm": 66.6875,
+    "alto_cm": 100.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "3488": {
+    "codigo": "3488",
+    "nombre": "Travesía entre Espigas",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3488.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3488-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3488-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3488&ar=1",
+    "ancho_cm": 66.6875,
+    "alto_cm": 100.0,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
+  },
+  "3489": {
+    "codigo": "3489",
+    "nombre": "Curvas de la Metrópolis",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3489.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3489-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3489-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3489&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 60.074999999999996,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
   }
 }

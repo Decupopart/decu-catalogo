@@ -39350,5 +39350,123 @@
     "emocion": "Calma",
     "impacto_visual": "Protagonista",
     "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3484",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3484_PRODUCTO_H_01-3bc4f1bb861a-640.webp",
+    "nombre": "Pulso entre Colinas",
+    "categoria": "Paisajes",
+    "subcategoria": "Ciudades",
+    "tonalidad": "Oscuro",
+    "colores": [
+      "azul",
+      "negro",
+      "marron"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Oficina",
+    "estilo": "Moderno",
+    "emocion": "Energía",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3485",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3485_PRODUCTO_H_01-919a9830ca7e-640.webp",
+    "nombre": "Corriente de Neón",
+    "categoria": "Paisajes",
+    "subcategoria": "Ciudades",
+    "tonalidad": "Vibrante",
+    "colores": [
+      "azul"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Oficina",
+    "estilo": "Moderno",
+    "emocion": "Energía",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3486",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3486_PRODUCTO_V_01-309ec6c90a56-640.webp",
+    "nombre": "Ocaso sobre la Avenida",
+    "categoria": "Paisajes",
+    "subcategoria": "Ciudades",
+    "tonalidad": "Oscuro",
+    "colores": [
+      "negro",
+      "naranja",
+      "marron"
+    ],
+    "orientacion": "vertical",
+    "ambiente": "Living",
+    "estilo": "Moderno",
+    "emocion": "Calma",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3487",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3487_PRODUCTO_V_01-ef4805dc3c79-640.webp",
+    "nombre": "Rieles hacia el Silencio",
+    "categoria": "Paisajes",
+    "subcategoria": "General",
+    "tonalidad": "Oscuro",
+    "colores": [
+      "marron",
+      "negro",
+      "blanco"
+    ],
+    "orientacion": "vertical",
+    "ambiente": "Pasillo",
+    "estilo": "Industrial",
+    "emocion": "Calma",
+    "impacto_visual": "Equilibrado",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3488",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3488_PRODUCTO_V_01-c35a2a98a4d1-640.webp",
+    "nombre": "Travesía entre Espigas",
+    "categoria": "Paisajes",
+    "subcategoria": "General",
+    "tonalidad": "Cálido",
+    "colores": [
+      "azul",
+      "marron",
+      "gris"
+    ],
+    "orientacion": "vertical",
+    "ambiente": "Dormitorio",
+    "estilo": "Nórdico",
+    "emocion": "Calma",
+    "impacto_visual": "Suave",
+    "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3489",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3489_PRODUCTO_H_01-91e6e2c7c56a-640.webp",
+    "nombre": "Curvas de la Metrópolis",
+    "categoria": "Paisajes",
+    "subcategoria": "Ciudades",
+    "tonalidad": "Oscuro",
+    "colores": [
+      "azul",
+      "negro",
+      "marron"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Oficina",
+    "estilo": "Moderno",
+    "emocion": "Energía",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
   }
 ]
