@@ -24802,5 +24802,17 @@
     "alto_cm": 60.01875,
     "profundidad_cm": 3.5,
     "fuente": "original"
+  },
+  "3483": {
+    "codigo": "3483",
+    "nombre": "Latidos del Puerto",
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3483.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3483-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3483-qr.png",
+    "enlace_ar": "https://decupopart.github.io/decu-catalogo/?producto=3483&ar=1",
+    "ancho_cm": 90.0,
+    "alto_cm": 50.625,
+    "profundidad_cm": 3.5,
+    "fuente": "original"
   }
 }

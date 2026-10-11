@@ -39331,5 +39331,24 @@
     "emocion": "Calma",
     "impacto_visual": "Protagonista",
     "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3483",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3483_PRODUCTO_H_01-984ea9596e54-640.webp",
+    "nombre": "Latidos del Puerto",
+    "categoria": "Paisajes",
+    "subcategoria": "Ciudades",
+    "tonalidad": "Frío",
+    "colores": [
+      "azul",
+      "negro"
+    ],
+    "orientacion": "horizontal",
+    "ambiente": "Oficina",
+    "estilo": "Moderno",
+    "emocion": "Calma",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Fotográfica"
   }
 ]
