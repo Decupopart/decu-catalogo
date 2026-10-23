@@ -39528,5 +39528,25 @@
     "emocion": "Energía",
     "impacto_visual": "Protagonista",
     "tecnica_visual": "Abstracta"
+  },
+  {
+    "codigo": "3495",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3495_PRODUCTO_T_01-b550629b9596-640.webp",
+    "nombre": "Pausa para Seguir",
+    "categoria": "Frases",
+    "subcategoria": "General",
+    "tonalidad": "Frío",
+    "colores": [
+      "blanco",
+      "beige",
+      "verde"
+    ],
+    "orientacion": "triptico",
+    "ambiente": "Dormitorio",
+    "estilo": "Minimalista",
+    "emocion": "Inspiración",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Ilustrativa"
   }
 ]
