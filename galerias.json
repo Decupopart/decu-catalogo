@@ -204991,6 +204991,28 @@
           }
         }
       }
+    ],
+    "3494": [
+      {
+        "etiqueta": "Tríptico",
+        "variantes": {
+          "160": {
+            "ruta": "media/catalogo/3494_PRODUCTO_T_01-4b50e1eca0c5-160.webp",
+            "ancho": 160,
+            "bytes": 2828
+          },
+          "640": {
+            "ruta": "media/catalogo/3494_PRODUCTO_T_01-73c081a4d375-640.webp",
+            "ancho": 640,
+            "bytes": 19190
+          },
+          "1254": {
+            "ruta": "media/catalogo/3494_PRODUCTO_T_01-5a2936c6539c-1254.webp",
+            "ancho": 1254,
+            "bytes": 66350
+          }
+        }
+      }
     ]
   }
 }

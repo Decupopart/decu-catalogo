@@ -39508,5 +39508,25 @@
     "emocion": "Armonía",
     "impacto_visual": "Protagonista",
     "tecnica_visual": "Abstracta"
+  },
+  {
+    "codigo": "3494",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3494_PRODUCTO_T_01-73c081a4d375-640.webp",
+    "nombre": "Geometría Bauhaus 1923",
+    "categoria": "Abstracto",
+    "subcategoria": "General",
+    "tonalidad": "Cálido",
+    "colores": [
+      "blanco",
+      "naranja",
+      "gris"
+    ],
+    "orientacion": "triptico",
+    "ambiente": "Oficina",
+    "estilo": "Moderno",
+    "emocion": "Energía",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Abstracta"
   }
 ]

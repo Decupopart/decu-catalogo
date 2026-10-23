@@ -24904,5 +24904,14 @@
     "alto_cm": 60,
     "profundidad_cm": 2.5,
     "piezas": 3
+  },
+  "3494": {
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3494.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3494-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3494-qr.png",
+    "ancho_cm": 126,
+    "alto_cm": 60,
+    "profundidad_cm": 2.5,
+    "piezas": 3
   }
 }
