@@ -39468,5 +39468,45 @@
     "emocion": "Energía",
     "impacto_visual": "Protagonista",
     "tecnica_visual": "Fotográfica"
+  },
+  {
+    "codigo": "3492",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3492_PRODUCTO_T_01-9e11ea56f7e1-640.webp",
+    "nombre": "Cortejo Floral",
+    "categoria": "Mujer",
+    "subcategoria": "General",
+    "tonalidad": "Cálido",
+    "colores": [
+      "negro",
+      "verde",
+      "naranja"
+    ],
+    "orientacion": "triptico",
+    "ambiente": "Living",
+    "estilo": "Moderno",
+    "emocion": "Alegría",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Ilustrativa"
+  },
+  {
+    "codigo": "3493",
+    "mas_vendido": false,
+    "imagen": "media/catalogo/3493_PRODUCTO_T_01-fb7ceb13f5d5-640.webp",
+    "nombre": "Cadencia Bauhaus",
+    "categoria": "Abstracto",
+    "subcategoria": "General",
+    "tonalidad": "Cálido",
+    "colores": [
+      "blanco",
+      "negro",
+      "gris"
+    ],
+    "orientacion": "triptico",
+    "ambiente": "Oficina",
+    "estilo": "Moderno",
+    "emocion": "Armonía",
+    "impacto_visual": "Protagonista",
+    "tecnica_visual": "Abstracta"
   }
 ]

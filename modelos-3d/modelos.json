@@ -24886,5 +24886,23 @@
     "alto_cm": 60.074999999999996,
     "profundidad_cm": 3.5,
     "fuente": "original"
+  },
+  "3492": {
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3492.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3492-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3492-qr.png",
+    "ancho_cm": 126,
+    "alto_cm": 60,
+    "profundidad_cm": 2.5,
+    "piezas": 3
+  },
+  "3493": {
+    "modelo": "https://wild-cake-b28f.pablomolina2956.workers.dev/3493.glb",
+    "poster": "https://wild-cake-b28f.pablomolina2956.workers.dev/3493-poster.jpg",
+    "qr": "https://wild-cake-b28f.pablomolina2956.workers.dev/3493-qr.png",
+    "ancho_cm": 126,
+    "alto_cm": 60,
+    "profundidad_cm": 2.5,
+    "piezas": 3
   }
 }

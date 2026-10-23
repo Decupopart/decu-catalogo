@@ -28,9 +28,24 @@
     return cargaModelos;
   }
 
+  const elegidas = {};
   function obtener(codigo) {
-    return modelos[String(codigo)] || null;
+    const base = modelos[String(codigo)];
+    const query = new URLSearchParams(location.search);
+    const variant = elegidas[codigo] ?? (query.get('producto') === String(codigo) ? query.get('variante') : null);
+    return (variant === 'triptico' && base?.variantes?.triptico) ? base.variantes.triptico : (base || null);
   }
+  function seleccionar(codigo, variante) {
+    elegidas[codigo] = variante;
+    const model = obtener(codigo), viewer = document.getElementById(`decu-modelo-${codigo}`);
+    if (!model || !viewer) return;
+    viewer.src = model.modelo; viewer.poster = model.poster;
+    const poster = viewer.querySelector('[slot="poster"]');
+    if (poster) poster.style.backgroundImage = `url("${model.poster}")`;
+    document.querySelectorAll(`[data-variante-codigo="${codigo}"]`).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.variante===variante)));
+    activar360(codigo);
+  }
+
 
   function galeria(producto) {
     const modelo = obtener(producto.codigo);
@@ -77,6 +92,9 @@
     const codigo = escapar(producto.codigo);
     return `
       <div class="decu-accion-pared">
+        ${modelos[String(producto.codigo)]?.variantes?.triptico ? `<div role="group" aria-label="Presentación del cuadro" style="display:flex;gap:8px;margin-bottom:12px">
+        <button type="button" class="decu-boton-ar" data-variante-codigo="${codigo}" data-variante="una" onclick="DecuVisor3D.seleccionar('${codigo}','una')">Una pieza</button>
+        <button type="button" class="decu-boton-ar" data-variante-codigo="${codigo}" data-variante="triptico" onclick="DecuVisor3D.seleccionar('${codigo}','triptico')">Tres piezas · 126 × 80 cm</button></div>` : ''}
         <button class="decu-boton-ar" type="button" onclick="DecuVisor3D.verEnAmbiente('${codigo}')">
           <span aria-hidden="true">▣</span> Ver en mi pared
         </button>
@@ -192,6 +210,7 @@
   // las funciones de galería deciden si ese código ya tiene un GLB generado.
   cargar();
   window.DecuVisor3D = {
+    seleccionar,
     cargar,
     obtener,
     galeria,
