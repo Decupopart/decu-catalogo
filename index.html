@@ -791,7 +791,7 @@ const SUBCATEGORIAS_INDEPENDIENTES = [
   { id: "Rostros étnicos",  categoriaBase: "Mujer",    subcategoria: "Rostros étnicos" },
 ];
 
-const ORIENTACIONES_FILTRO = ["horizontal", "vertical"];
+const ORIENTACIONES_FILTRO = ["horizontal", "vertical", "triptico"];
 
 // Chip especial para los productos marcados como más vendidos (campo MAS_VENDIDO del CSV).
 // A diferencia de SUBCATEGORIAS_INDEPENDIENTES, este chip cruza todas las categorías,
@@ -890,7 +890,7 @@ function normalizarProducto(producto){
     categoria: textoSeguro(p.categoria),
     subcategoria: textoSeguro(p.subcategoria),
     tonalidad: textoSeguro(p.tonalidad),
-    orientacion: textoSeguro(p.orientacion).toLowerCase(),
+    orientacion: textoSeguro(p.orientacion).toLowerCase().replace("tríptico", "triptico"),
     ambiente: textoSeguro(p.ambiente),
     estilo: textoSeguro(p.estilo),
     emocion: textoSeguro(p.emocion),
@@ -1002,7 +1002,6 @@ function coincideTexto(p, consulta){
 
 function productoCoincide(p, ignorarCampo=null, valorAlternativo=null){
   if(!p.imagen) return false;
-  if(p.orientacion === "triptico" || p.orientacion === "tríptico") return false;
 
   const categoria = ignorarCampo === "categoria" ? valorAlternativo : estado.categoria;
   if(!coincideCategoria(p, categoria)) return false;
@@ -1417,7 +1416,7 @@ function htmlProductosRelacionados(producto){
 function imagenesGaleriaProducto(producto){
   const nuevas = window.DecuImagenes.galeria(producto);
   if(nuevas) return nuevas;
-  const orientacion = producto.orientacion === "horizontal" ? "horizontal" : "vertical";
+  const orientacion = producto.orientacion === "triptico" ? "completa" : producto.orientacion === "horizontal" ? "horizontal" : "vertical";
   return [
     { imagen:producto.imagen, etiqueta:"Obra", alt:`Vista principal de ${producto.nombre}`, modo:orientacion },
     ...(GALERIAS_PRODUCTO[producto.codigo] || []),
