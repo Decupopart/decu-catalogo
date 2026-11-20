@@ -933,7 +933,7 @@ const estado = {
   emocion:null,
   impacto_visual:null,
   tecnica_visual:null,
-  orientacion:null,
+  orientacion:paramsLocal.get("orientacion") === "triptico" ? "triptico" : null,
   texto:"",
 };
 
