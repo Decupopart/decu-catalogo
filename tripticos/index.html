@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuadros trípticos | Decu</title>
+  <script>
+    const destino = new URL("../", window.location.href);
+    destino.search = window.location.search;
+    destino.searchParams.set("orientacion", "triptico");
+    destino.hash = "catalogo";
+    window.location.replace(destino.href);
+  </script>
+</head>
+<body>
+  <a href="../?orientacion=triptico#catalogo">Ver cuadros trípticos de Decu</a>
+</body>
+</html>
