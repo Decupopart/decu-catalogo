@@ -404,13 +404,15 @@ header:after{display:none;}
 .living-hero svg{display:block;width:100%;height:100%;position:absolute;inset:0;}
 .collection-card,.collection-card:nth-child(2),.collection-card:nth-child(3){background:#fff;padding:0;overflow:hidden;min-height:0;justify-content:flex-start;}
 .collection-image{display:block;width:100%;height:auto;aspect-ratio:900/539;object-fit:cover;flex-shrink:0;}
+.collection-image--tripticos{object-fit:contain;object-position:center;background:#ece9e2;}
+a.collection-card{text-decoration:none;}
 .collection-copy{padding:18px;}
 .collection-card h3,.collection-card p{background:rgba(255,255,255,.95);margin:0;padding:12px 14px;color:var(--cream);}
 .collection-card h3{border-radius:8px 8px 0 0;padding-bottom:4px;}
 .collection-card p{border-radius:0 0 8px 8px;padding-top:4px;}
-.collection-card[data-categoria-destino]{cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
-.collection-card[data-categoria-destino]:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(16,35,62,.12);border-color:var(--wood);}
-.collection-card[data-categoria-destino]:focus-visible{outline:3px solid rgba(22,133,248,.35);outline-offset:4px;}
+.collection-card:is([data-categoria-destino],a){cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+.collection-card:is([data-categoria-destino],a):hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(16,35,62,.12);border-color:var(--wood);}
+.collection-card:is([data-categoria-destino],a):focus-visible{outline:3px solid rgba(22,133,248,.35);outline-offset:4px;}
 .step{border-top:2px solid #cdebff;}
 main{min-width:0;}
 @media(max-width:860px){
@@ -621,6 +623,10 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   <p class="section-copy">Una selección simple para ayudarte a encontrar la obra que mejor dialoga con tu espacio.</p>
   <div class="collection-carousel" role="region" aria-roledescription="carrusel" aria-label="Colecciones para cada ambiente">
   <div class="collection-grid" id="collection-track">
+    <a class="collection-card" href="tripticos/">
+      <img class="collection-image collection-image--tripticos" src="media/colecciones/cuadros-tripticos.png" alt="Tríptico abstracto en verde, blanco y dorado" width="588" height="441" loading="eager" decoding="async">
+      <div class="collection-copy"><h3>Cuadros trípticos</h3><p>Tres piezas que cuentan una misma historia.</p></div>
+    </a>
     <article class="collection-card" data-categoria-destino="Abstracto" role="button" tabindex="0" aria-label="Ver cuadros de abstractos">
       <img class="collection-image" srcset="media/colecciones/1437-480.webp 480w, media/colecciones/1437-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 48px), (max-width: 1372px) calc((86vw - 44px) / 3), 379px" src="media/colecciones/1437.webp" alt="Abstractos" width="1200" height="800" loading="eager" decoding="async">
       <div class="collection-copy"><h3>Abstractos</h3><p>Formas y color que transforman espacios.</p></div>
@@ -660,18 +666,8 @@ body.ficha-abierta{overflow:hidden;position:fixed;inset-inline:0;width:100%;}
   </div>
   <div class="collection-controls" hidden>
     <button class="collection-control" type="button" data-collection-prev aria-label="Colección anterior" aria-controls="collection-track"><span aria-hidden="true">←</span></button>
-    <span class="collection-count" aria-hidden="true">1 / 9</span>
-    <div class="collection-indicators" aria-label="Elegir colección">
-      <button class="collection-dot" type="button" data-collection-index="0" aria-label="Mostrar Abstractos, 1 de 9" aria-controls="collection-track" aria-current="true"></button>
-      <button class="collection-dot" type="button" data-collection-index="1" aria-label="Mostrar Bodegas, 2 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="2" aria-label="Mostrar Rostros étnicos, 3 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="3" aria-label="Mostrar Animales, 4 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="4" aria-label="Mostrar Cristianismo, 5 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="5" aria-label="Mostrar Paisajes, 6 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="6" aria-label="Mostrar Alas, 7 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="7" aria-label="Mostrar Budismo, 8 de 9" aria-controls="collection-track" aria-current="false"></button>
-      <button class="collection-dot" type="button" data-collection-index="8" aria-label="Mostrar Naturaleza, 9 de 9" aria-controls="collection-track" aria-current="false"></button>
-    </div>
+    <span class="collection-count" aria-hidden="true">1 / 10</span>
+    <div class="collection-indicators" aria-label="Elegir colección"></div>
     <button class="collection-control" type="button" data-collection-next aria-label="Colección siguiente" aria-controls="collection-track"><span aria-hidden="true">→</span></button>
   </div>
   <p class="collection-status" aria-live="polite" aria-atomic="true"></p>
@@ -1243,13 +1239,14 @@ function activarCarruselColecciones(){
   let ultimaVista = -1;
   let indicadores = [];
   const paginas = () => Math.ceil(tarjetas.length / porVista);
-  const posicion = indice => tarjetas[indice].getBoundingClientRect().left - pista.getBoundingClientRect().left + pista.scrollLeft - 4;
+  const primerIndice = pagina => Math.min(pagina * porVista, Math.max(0, tarjetas.length - porVista));
+  const posicion = pagina => tarjetas[primerIndice(pagina)].getBoundingClientRect().left - pista.getBoundingClientRect().left + pista.scrollLeft - 4;
   function actualizar(){
     actual = Array.from({length:paginas()}, (_, indice) => indice).reduce((mejor, indice) =>
-      Math.abs(posicion(indice * porVista) - pista.scrollLeft) < Math.abs(posicion(mejor * porVista) - pista.scrollLeft) ? indice : mejor, 0);
+      Math.abs(posicion(indice) - pista.scrollLeft) < Math.abs(posicion(mejor) - pista.scrollLeft) ? indice : mejor, 0);
     if(actual === ultimaVista) return;
     ultimaVista = actual;
-    const inicio = actual * porVista;
+    const inicio = primerIndice(actual);
     const fin = Math.min(inicio + porVista, tarjetas.length);
     contador.textContent = (porVista === 1 ? inicio + 1 : (inicio + 1) + '–' + fin) + ' / ' + tarjetas.length;
     anterior.disabled = actual === 0;
@@ -1257,14 +1254,14 @@ function activarCarruselColecciones(){
     indicadores.forEach((boton, indice) => boton.setAttribute('aria-current', String(indice === actual)));
   }
   function anunciar(){
-    const inicio = actual * porVista;
+    const inicio = primerIndice(actual);
     const fin = Math.min(inicio + porVista, tarjetas.length);
     const nombres = tarjetas.slice(inicio, fin).map(tarjeta => tarjeta.querySelector('h3').textContent).join(', ');
     estadoCarrusel.textContent = nombres + '. ' + contador.textContent;
   }
   function irA(indice, comportamiento){
     indice = Math.max(0, Math.min(paginas() - 1, indice));
-    pista.scrollTo({left:posicion(indice * porVista), behavior:comportamiento || (movimientoReducido.matches ? 'auto' : 'smooth')});
+    pista.scrollTo({left:posicion(indice), behavior:comportamiento || (movimientoReducido.matches ? 'auto' : 'smooth')});
   }
   function crearIndicadores(){
     ultimaVista = -1;
@@ -1275,7 +1272,7 @@ function activarCarruselColecciones(){
       boton.type = 'button';
       boton.dataset.collectionIndex = indice;
       boton.setAttribute('aria-controls', 'collection-track');
-      const nombres = tarjetas.slice(indice * porVista, (indice + 1) * porVista).map(tarjeta => tarjeta.querySelector('h3').textContent).join(', ');
+      const nombres = tarjetas.slice(primerIndice(indice), primerIndice(indice) + porVista).map(tarjeta => tarjeta.querySelector('h3').textContent).join(', ');
       boton.setAttribute('aria-label', 'Mostrar ' + nombres + ', vista ' + (indice + 1) + ' de ' + paginas());
       boton.addEventListener('click', () => irA(indice));
       grupoIndicadores.append(boton);
